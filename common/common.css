@@ -112,6 +112,10 @@ footer ul li.active a i {
 }
 /* 모바일 가로 ~ 태블릿 세로 / 481px~768px / 12, 14, 16, 18 */
 @media screen and (min-width: 481px) and (max-width: 768px) {
+  main {
+    height: calc(100vh - 100px);
+  }
+
   main > .wrap {
     padding: 60px 40px 160px;
   }
@@ -126,6 +130,10 @@ footer ul li.active a i {
 }
 /* 태블릿 가로 / 769px~ / 14, 16, 18, 20 */
 @media screen and (min-width: 769px) {
+  main {
+    height: calc(100vh - 100px);
+  }
+  
   main > .wrap {
     padding: 80px 60px 180px;
   }
