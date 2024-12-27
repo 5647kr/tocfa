@@ -34,7 +34,7 @@ main .wrap .calculate > div {
 .resultWrap .prevResult ul {
   display: flex;
   flex-direction: column;
-  /* justify-content: flex-end; */
+  justify-content: flex-end;
   align-items: flex-end;
   overflow-y: auto;
   padding: 0 10px;
@@ -43,14 +43,26 @@ main .wrap .calculate > div {
 .resultWrap .prevResult ul li {
   width: 100%;
   text-align: right;
+  color: var(--border-color);
 }
 
 .resultWrap .result {
-  flex-grow: 1;
   display: flex;
+  flex-direction: column;
   justify-content: flex-end;
   align-items: flex-end;
   padding: 10px 10px 0;
+}
+
+.resultWrap .result p {
+  color: var(--border-color);
+}
+
+.resultWrap .result strong {
+  color: var(--sub-color);
+}
+
+.resultWrap .result p, strong {
   font-size: var(--font-mz);
   font-weight: var(--font-ebw);
 }
@@ -110,6 +122,9 @@ main .wrap .calculate > div {
   
   .resultWrap .result {
     padding: 20px 20px 0;
+  }
+
+  .resultWrap .result p, strong {
     font-size: var(--font-mlz);
   }
 
@@ -149,6 +164,9 @@ main .wrap .calculate > div {
   
   .resultWrap .result {
     padding: 20px 20px 0;
+  }
+
+  .resultWrap .result p, strong {
     font-size: var(--font-lz);
   }
   
