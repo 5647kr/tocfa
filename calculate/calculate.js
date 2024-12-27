@@ -1,8 +1,9 @@
 class Calculate {
   constructor() {
     const article = document.querySelector("article");
-    this.prevResult = article.querySelector(".prevResult ul");
+    this.recordResult = article.querySelector(".prevResult ul");
     this.result = article.querySelector(".result strong");
+    this.formula = article.querySelector(".result p");
     this.btnList = article.querySelectorAll(".btnWrap ul li button");
   }
 
@@ -10,16 +11,14 @@ class Calculate {
     this.btnList.forEach((btn) => {
       btn.addEventListener("click", (e) => {
         const value = e.target.textContent;
-        const prevValue = this.result.textContent;
+        const resultValue = this.result.textContent;
 
-        this.result.textContent = prevValue === "0" ? value : prevValue + value;
-
-        if (prevValue === "0" && ["+", "−", "×", "÷", "x²", "√"].includes(value)) {
+        if (resultValue === "0" && ["+", "−", "×", "÷", "x²"].includes(value)) {
           this.clear();
           return;
         }
 
-        if(prevValue.length > 19) {
+        if(resultValue.length > 19) {
           this.result.textContent = this.result.textContent.slice(0, -1)
         }
 
@@ -28,20 +27,32 @@ class Calculate {
           return;
         }
 
-        if(value === "x²") {
-          this.result.textContent = prevValue + "^2"
-        }
-
-        if(value === ".") {
-          this.result.textContent = prevValue + value;
+        if(resultValue === "0" && value !== ".") {
+          this.result.textContent = value;
+        } else if(value === ".") {
+          const lastNumber = this.result.textContent.split(/[+\−×÷]/).pop();
+          if (!lastNumber.includes(".")) {
+            this.result.textContent += value;
+          }
+        } else if(value === "x²") {
+          this.result.textContent = resultValue + "^2"
+        } else {
+          this.result.textContent = resultValue + value
         }
 
         if (value === "=") {
-          if (prevValue === "0" || prevValue === "") {
+          if(!/[+\−×÷^√]/.test(resultValue)) {
+            window.alert("연산자를 입력해주세요.");
+            this.result.textContent = this.result.textContent.slice(0, -1);
+            return;
+          }
+
+          if(resultValue === "0" || resultValue === "") {
             window.alert("값을 입력해주세요.");
             this.clear();
           } else {
             this.operate();
+            this.record();
           }
           return;
         }
@@ -50,6 +61,8 @@ class Calculate {
   }
 
   operate() {
+    this.result.textContent = this.result.textContent.slice(0, -1);
+
     let operators = this.result.textContent.match(/[+\−×÷x^√]/g);
     let numbers = this.result.textContent.split(/[+\−×÷=^√]/g).map(Number); 
 
@@ -61,7 +74,7 @@ class Calculate {
           operators.splice(i, 1);
           break;
         } else if (operators[i] === "√") {
-          numbers[i] = Math.sqrt(numbers[i + 1]);
+          numbers[i] = Math.sqrt(numbers[i + 1]) * numbers[i];
           numbers.splice(i + 1, 1);
           operators.splice(i, 1);
           break;
@@ -73,13 +86,13 @@ class Calculate {
       for (let i = 0; i < operators.length; i++) {
         if (operators[i] === "×") {
           numbers[i] = numbers[i] * numbers[i + 1];
-          numbers.splice(i + 1, 1); // 다음 숫자를 제거
-          operators.splice(i, 1);   // 해당 연산자를 제거
+          numbers.splice(i + 1, 1);
+          operators.splice(i, 1);
           break;
         } else if (operators[i] === "÷") {
           numbers[i] = numbers[i] / numbers[i + 1];
-          numbers.splice(i + 1, 1); // 다음 숫자를 제거
-          operators.splice(i, 1);   // 해당 연산자를 제거
+          numbers.splice(i + 1, 1);
+          operators.splice(i, 1); 
           break;
         }
       }
@@ -89,27 +102,42 @@ class Calculate {
       for (let i = 0; i < operators.length; i++) {
         if (operators[i] === "+") {
           numbers[i] = numbers[i] + numbers[i + 1];
-          numbers.splice(i + 1, 1); // 다음 숫자를 제거
-          operators.splice(i, 1);   // 해당 연산자를 제거
+          numbers.splice(i + 1, 1);
+          operators.splice(i, 1);
           break;
         } else if (operators[i] === "−") {
           numbers[i] = numbers[i] - numbers[i + 1];
-          numbers.splice(i + 1, 1); // 다음 숫자를 제거
-          operators.splice(i, 1);   // 해당 연산자를 제거
+          numbers.splice(i + 1, 1);
+          operators.splice(i, 1);
           break;
         }
       }
     };
 
-
+    this.formula.textContent = this.result.textContent;
     let resultNum = numbers[0] + "";
-    this.result.innerText = resultNum;
-    return resultNum
+    this.result.textContent = resultNum;
   }
 
   clear() {
     this.result.textContent = 0;
-    this.prevResult.innerHTML = "";
+    this.formula.textContent = "";
+    this.recordResult.textContent = "";
+  }
+
+  record() {
+    const formula = this.formula.textContent;
+    const answer = this.result.textContent;
+
+
+    const formulaLi = document.createElement("li");
+    const answerLi = document.createElement("li");
+
+    formulaLi.innerText = formula;
+    answerLi.innerText = "=" + answer;
+
+    this.recordResult.appendChild(formulaLi);
+    this.recordResult.appendChild(answerLi);
   }
 }
 
