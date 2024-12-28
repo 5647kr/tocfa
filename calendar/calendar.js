@@ -69,7 +69,11 @@ class Calendar {
 
     this.days.forEach((day) => {
       day.addEventListener("click", (e) => {
-        regScheduleForm.classList.add("active");
+        if(e.target.textContent.trim() === "") {
+          return;
+        } else {
+          regScheduleForm.classList.add("active");
+        }
 
         let clickYear = props.todayYear;
         let clickMonth = props.todayMonth;
