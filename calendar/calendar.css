@@ -182,6 +182,17 @@ table th, td {
   margin-bottom: 10px;
 }
 
+.scheduleList ul li {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.scheduleList ul li button i {
+  font-size: var(--font-smz);
+}
+
 .scheduleList form {
   width: 100%;
   height: 10%;
@@ -296,6 +307,10 @@ form button i {
     height: calc(80% - 40px);
     margin-bottom: 20px;
   }
+
+  .scheduleList ul li button i {
+    font-size: var(--font-mz);
+  }
   
   form button {
     width: 22px;
@@ -380,6 +395,10 @@ form button i {
   .scheduleList ul {
     height: calc(80% - 40px);
     margin-bottom: 20px;
+  }
+
+  .scheduleList ul li button i {
+    font-size: var(--font-mlz);
   }
   
   .scheduleList form {
