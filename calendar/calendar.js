@@ -4,99 +4,151 @@ class Calendar {
     this.time = calendar.querySelector(".year");
     this.year = calendar.querySelector(".year h2");
     this.month = calendar.querySelector(".year p");
+    this.prevMonth = calendar.querySelector(".prevMonth");
+    this.nextMonth = calendar.querySelector(".nextMonth");
     this.days = calendar.querySelectorAll("table tbody tr td");
 
+    const main = document.querySelector("main .wrap");
+    this.schedule = main.querySelector(".scheduleBg");
+    this.scheduleDate = this.schedule.querySelector(".title h3");
+    this.scheduleList = this.schedule.querySelector(".scheduleList ul");
+    this.closeBtn = this.schedule.querySelector(".closeBtn");
+    this.regForm = this.schedule.querySelector("form")
+    this.regInput = this.schedule.querySelector("input");
+    this.regBtn = this.schedule.querySelector(".regBtn");
+
     const date = new Date();
-    this.yearValue = date.getFullYear();
-    this.monthValue = date.getMonth() + 1
+    this.currentYear = date.getFullYear();
+    this.currentMonth = date.getMonth() + 1;
+
+    // 일정 목록 불러오기
+    this.schedules = JSON.parse(localStorage.getItem("schedules")) || [];
+    this.id = JSON.parse(localStorage.getItem("id")) || 0;
   }
 
   generateCalendar(year, month) {
     const startMonth = new Date(year, month - 1, 1);
     const monthLength = new Date(year, month, 0).getDate();
   
-    let todayYear = startMonth.getFullYear();
-    let todayMonth = startMonth.getMonth();
-    let todayDate = startMonth.getDate();
-    let todayDay = startMonth.getDay();
+    let calendarYear = startMonth.getFullYear();
+    let calendarMonth = startMonth.getMonth();
+    let calendarDate = startMonth.getDate();
+    let calendarDay = startMonth.getDay();
 
     for (let i = 0; i < this.days.length; i++) {
       this.days[i].innerHTML = "&nbsp;";
     }
 
-    for (let i = todayDay; i < todayDay + monthLength; i++) {
-      this.days[i].textContent = todayDate++;
+    for (let i = calendarDay; i < calendarDay + monthLength; i++) {
+      this.days[i].textContent = calendarDate++;
     }
 
-    this.year.textContent = todayYear;
-    this.month.textContent = todayMonth + 1;
-    this.time.dateTime = `${todayYear}-${todayMonth + 1}`;
+    this.year.textContent = calendarYear;
+    this.month.textContent = calendarMonth + 1;
+    this.time.dateTime = `${calendarYear}-${calendarMonth + 1}`;
 
-    this.regScheduleEvent({todayYear, todayMonth});
+    this.generateSchedule(calendarYear, calendarMonth);
   }
 
   moveMonthEvent() {
-    const prevBtn = document.querySelector(".prevMonth");
-    const nextBtn = document.querySelector(".nextMonth");
-
     // 이전 달로 이동
-    prevBtn.addEventListener("click", () => {
-      this.monthValue--;
-      if (this.monthValue < 1) {
-        this.monthValue = 12;
-        this.yearValue--;
-      }
-      this.generateCalendar(this.yearValue, this.monthValue);
+    this.prevMonth.addEventListener("click", () => {
+      this.generateCalendar(this.currentYear, this.currentMonth--);
     });
 
     // 다음 달로 이동
-    nextBtn.addEventListener("click", () => {
-      this.monthValue++;
-      if (this.monthValue > 12) {
-        this.monthValue = 1;
-        this.yearValue++;
-      }
-      this.generateCalendar(this.yearValue, this.monthValue);
+    this.nextMonth.addEventListener("click", () => {
+      this.generateCalendar(this.currentYear, this.currentMonth++);
     });
 
-    this.generateCalendar(this.yearValue, this.monthValue);
+    this.generateCalendar(this.currentYear, this.currentMonth);
   }
 
-  regScheduleEvent(props) {
-    const regScheduleForm = document.querySelector(".scheduleBg");
-    this.today = regScheduleForm.querySelector(".title h3");
-    this.closeBtn = regScheduleForm.querySelector(".closeBtn");
-
-    this.days.forEach((day) => {
-      day.addEventListener("click", (e) => {
-        if(e.target.textContent.trim() === "") {
+  generateSchedule(year, month) {
+    this.days.forEach((today) => {
+      today.addEventListener("click", (e) => {
+        if (!e.target.textContent) {
           return;
         } else {
-          regScheduleForm.classList.add("active");
+          this.schedule.classList.add("active");
         }
 
-        let clickYear = props.todayYear;
-        let clickMonth = props.todayMonth;
+        let clickYear = year;
+        let clickMonth = month;
         let clickDay = e.target.textContent;
         let clickDate = new Date(clickYear, clickMonth, clickDay);
 
-        const clickWeek = clickDate.getDay();
-        const week = ["일", "월", "화", "수", "목", "금", "토"];
-        const weekDay = week[clickWeek];
+        this.regSchedule(clickDate);
 
-        this.today.textContent = `${e.target.textContent} ${weekDay}요일`;
+        this.scheduleDate.textContent = `${clickDay}일`;
       });
-    });
 
-    // 닫기 버튼 클릭 시 팝업 숨기기
-    this.closeBtn.addEventListener("click", () => {
-      regScheduleForm.classList.remove("active");
+      this.closeBtn.addEventListener("click", () => {
+        this.schedule.classList.remove("active");
+      });
     });
   }
 
-  calendarEvent () {
+  regSchedule(clickDate) {
+    this.regBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      const title = this.regInput.value;
+      const date = clickDate;
+      
+      // 일정 객체 만들기
+      const scheduleItem = {
+        id: this.id++,
+        title: title,
+        date: date,
+      };
+
+      // 일정 목록에 새 일정 추가
+      this.schedules.push(scheduleItem);
+      
+      // localStorage에 일정 저장
+      localStorage.setItem("schedules", JSON.stringify(this.schedules));
+      localStorage.setItem("id", JSON.stringify(this.id));
+
+      // 일정 리스트에 표시하기
+      // this.renderSchedules();
+
+      // 입력 필드 초기화
+      this.regInput.value = "";
+    });
+  }
+
+  // renderSchedules() {
+  //   // 일정 목록을 새로 고침
+  //   this.scheduleList.innerHTML = "";
+
+  //   // selectedDate의 날짜와 일치하는 일정만 필터링
+  //   const filteredSchedules = this.schedules.filter(schedule => {
+  //     const scheduleDate = new Date(schedule.date);
+  //     return scheduleDate.toDateString() === selectedDate.toDateString();  // 날짜 비교
+  //   });
+
+  //   filteredSchedules.forEach(schedule => {
+  //     const scheduleItem = document.createElement("li");
+  //     scheduleItem.innerHTML = `
+  //       <h4>${schedule.title}</h4>
+  //       <div>
+  //         <button>
+  //           <i class="fa-solid fa-pencil"></i>
+  //         </button>
+  //         <button>
+  //           <i class="fa-solid fa-trash"></i>
+  //         </button>
+  //       </div>
+  //     `;
+
+  //     this.scheduleList.append(scheduleItem);
+  //   });
+  // }
+
+  calendarEvent() {
     this.moveMonthEvent();
-    this.regScheduleEvent({todayYear: this.yearValue, todayMonth: this.monthValue});
+    this.renderSchedules(new Date());
   }
 }
 
