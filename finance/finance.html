@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/common/common.css">
+  <link rel="stylesheet" href="finance.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>Finance</title>
+</head>
+<body>
+  <main>
+    <div class="wrap">
+      <article class="finance">
+        <div class="totalFinanceWrap">
+          <h2>820,000</h2>
+        </div>
+        <div class="financeInputWrap">
+          <form>
+            <div class="financeType">
+              <select>
+                <option value="earn">소득</option>
+                <option value="paid">지출</option>
+              </select>
+            </div>
+            <div class="financePrice">
+              <div>
+                <label class="a11y-hidden">금액유형</label>
+                <input type="text" placeholder="유형을 입력해주세요">
+                <label class="a11y-hidden">금액입력</label>
+                <input type="text" placeholder="금액을 입력해주세요">
+              </div>
+              <button>
+                <i class="fa-solid fa-plus"></i>
+              </button>
+            </div>
+
+          </form>
+        </div>
+        <div class="financeListWrap">
+          <div class="monthFinance">
+            <div class="earnFinance">
+              <h3>소득</h3>
+              <strong>금액</strong>
+            </div>
+            <div class="paidFinance">
+              <h3>지출</h3>
+              <strong>금액</strong>
+            </div>
+          </div>
+          <div class="monthFinanceList">
+            <ul class="earnList">
+              <li>
+                <div class="date">12/9</div>
+                <div class="name">급여</div>
+                <div class="date">820000</div>
+              </li>
+            </ul>
+            <ul class="paidList">
+              List2
+            </ul>
+          </div>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <ul>
+        <li>
+          <a href="/todo/todo.html">
+            <i class="fa-solid fa-list"></i>
+          </a>
+        </li>
+        <li>
+          <a href="/calculate/calculate.html">
+            <i class="fa-solid fa-calculator"></i>
+          </a>
+        </li>
+        <li>
+          <a href="/calendar/calendar.html">
+            <i class="fa-solid fa-calendar-days"></i>
+          </a>
+        </li>
+        <li class="active">
+          <a href="/finance/finance.html">
+            <i class="fa-solid fa-file-invoice-dollar"></i>
+          </a>
+        </li>
+        <li>
+          <a href="/analyze/analyze.html">
+            <i class="fa-solid fa-chart-pie"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+
+</body>
+</html>
