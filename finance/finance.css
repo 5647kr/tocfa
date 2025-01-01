@@ -13,24 +13,30 @@ main > .wrap > article > div ~ div {
   height: 100%;
 }
 
-.totalFinanceWrap {
+.totalFinance {
   height: 80px;
-  padding: 20px;
   background-color: #FFFFFF;
   border-radius: 30px;
-  text-align: center;
-  line-height: 40px;
-  font-size: var(--font-mz);
 }
 
-.financeInputWrap {
+.totalFinance h2 {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: var(--font-mz);
+  font-weight: var(--font-ebw);
+}
+
+.financeInput {
   height: 120px;
   border-radius: 30px;
   padding: 20px;
   background-color: var(--main-color);
 }
 
-.financeInputWrap form {
+.financeInput form {
   width: 100%;
   height: 100%;
   border-radius: 10px;
@@ -39,7 +45,7 @@ main > .wrap > article > div ~ div {
   justify-content: space-between;
 }
 
-.financeInputWrap form .financeType {
+.financeInput form .financeType {
   width: 20%;
   display: flex;
   justify-content: center;
@@ -48,6 +54,8 @@ main > .wrap > article > div ~ div {
 
 .financeType select {
   width: 100%;
+  font-size: var(--font-smz);
+  font-weight: var(--font-bw);
   border: none;
 }
 
@@ -61,12 +69,7 @@ main > .wrap > article > div ~ div {
   background-color: #FFFFFF;
 }
 
-.financeType select option:active {
-  background-color: var(--main-color);
-}
-
-
-.financeInputWrap form .financePrice {
+.financeInput form .financePrice {
   width: 80%;
   display: flex;
   justify-content: space-between;
@@ -80,6 +83,8 @@ main > .wrap > article > div ~ div {
   width: 100%;
   height: 50%;
   padding: 0 20px;
+  font-size: var(--font-smz);
+  font-weight: var(--font-bw);
   border: none;
 }
 
@@ -91,7 +96,7 @@ main > .wrap > article > div ~ div {
   width: 20%;
   height: 100%;
   background-color: var(--bg-color);
-  border-radius: 10px;
+  border-radius: 0 10px 10px 0;
 }
 
 .financePrice button i {
@@ -99,15 +104,14 @@ main > .wrap > article > div ~ div {
   font-weight: var(--font-ebw);
 }
 
-.financeListWrap {
-  box-shadow: inset 0 0 10px blue;
+.financeList {
   height: calc(100% - 280px);
   background-color: var(--main-color);
   border-radius: 30px;
   padding: 20px;
 }
 
-.financeListWrap .monthFinance {
+.financeList .monthFinance {
   height: 80px;
   margin-bottom: 20px;
   border-radius: 10px;
@@ -138,65 +142,99 @@ main > .wrap > article > div ~ div {
 .monthFinance strong {
   width: 100%;
   font-size: var(--font-mz);
+  font-weight: var(--font-rw);
   text-align: center;
 }
 
 
-.financeListWrap .monthFinanceList {
+.financeList .monthFinanceList {
   height: calc(100% - 100px);
-  margin-bottom: 20px;
+  padding: 20px;
   border-radius: 10px;
   background-color: #FFFFFF;
-  display: flex;
 }
 
 .monthFinanceList ul {
-  width: 50%;
   overflow-y: auto;
-}
-
-.monthFinanceList ul:first-child {
-  border-right: 1px solid var(--border-color);
 }
 
 .monthFinanceList ul li {
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid var(--border-color);
+  font-size: var(--font-smz);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.monthFinanceList ul li button i {
+  font-size: var(--font-smz);
+}
 
 /* 모바일 가로 ~ 태블릿 세로 / 481px~768px / 12, 14, 16, 18 */
 @media screen and (min-width: 481px) and (max-width: 768px) {
   main > .wrap {
     padding: 60px 40px;
+  }
+
+  main > .wrap > article > div ~ div {
+    margin-top: 60px;
+  }
+  
+  .totalFinance {
+    height: 100px;
+  }
+  
+  .totalFinance h2 {
+    font-size: var(--font-mlz);
+  }
+  
+  .financeInput {
+    height: 140px;
+  }
+  
+  .financeType select {
+    font-size: var(--font-mz);
+  }
+  
+  .financePrice input {
+    font-size: var(--font-mz);
+  }
+  
+  .financePrice button i {
+    font-size: var(--font-mz);
+  }
+  
+  .financeList {
+    height: calc(100% - 360px);
+  }
+  
+  .financeList .monthFinance {
+    height: 100px;
+  }
+  
+  .monthFinance h3 {
+    font-size: var(--font-mlz);
+    padding-bottom: 8px;
+  }
+  
+  .monthFinance strong {
+    font-size: var(--font-mlz);
+  }
+  
+  
+  .financeList .monthFinanceList {
+    height: calc(100% - 120px);
+  }
+  
+  .monthFinanceList ul {
+    overflow-y: auto;
+  }
+  
+  .monthFinanceList ul li {
+    font-size: var(--font-mz);
+  }
+  
+  .monthFinanceList ul li button i {
+    font-size: var(--font-smz);
   }
 }
 
@@ -205,5 +243,68 @@ main > .wrap > article > div ~ div {
 @media screen and (min-width: 769px) {
   main > .wrap {
     padding: 80px 60px;
+  }
+
+  main > .wrap > article > div ~ div {
+    margin-top: 80px;
+  }
+  
+  .totalFinance {
+    height: 100px;
+  }
+  
+  .totalFinance h2 {
+    font-size: var(--font-lz);
+  }
+  
+  .financeInput {
+    height: 160px;
+    padding: 40px;
+  }
+  
+  .financeType select {
+    font-size: var(--font-mlz);
+  }
+
+  .financePrice input {
+    padding: 0 40px;
+    font-size: var(--font-mlz);
+  }
+  
+  .financePrice button i {
+    font-size: var(--font-mlz);
+  }
+  
+  .financeList {
+    height: calc(100% - 420px);
+    padding: 40px;
+  }
+  
+  .financeList .monthFinance {
+    height: 100px;
+    margin-bottom: 40px;
+  }
+  
+  .monthFinance h3 {
+    font-size: var(--font-lz);
+    padding-bottom: 10px;
+  }
+  
+  .monthFinance strong {
+    font-size: var(--font-lz);
+  }
+  
+  
+  .financeList .monthFinanceList {
+    height: calc(100% - 140px);
+    padding: 40px;
+  }
+  
+  .monthFinanceList ul li {
+    font-size: var(--font-mlz);
+  }
+  
+  .monthFinanceList ul li button i {
+    font-size: var(--font-mlz);
   }
 }
