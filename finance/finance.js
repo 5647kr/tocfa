@@ -79,11 +79,23 @@ class Finance {
   }
 
   displayFinanceList() {
-    this.financeList.innerHTML = ""
-
-    this.financeArr.forEach((financeItem) => {
-      this.createListItem(financeItem)
-    })
+    this.financeList.innerHTML = "";  // 기존 리스트 초기화
+    const today = new Date();
+    const newMonth = today.getMonth() + 1;
+  
+    // 이번 달의 financeItem들만 필터링
+    const thisMonthFinance = this.financeArr.filter((financeItem) => {
+      const monthFinance = parseInt(financeItem.date.split("/")[0]);
+      return monthFinance === newMonth;
+    });
+  
+    // 필터링된 항목들을 리스트에 추가
+    thisMonthFinance.forEach((financeItem) => {
+      this.createListItem(financeItem);
+    });
+  
+    // 이번 달 항목들만을 전달하여 재정 상태 계산
+    this.calculateFinance(thisMonthFinance);
   }
 
   manageFinanceItem(financeItem) {
@@ -94,6 +106,7 @@ class Finance {
     deleteBtn.addEventListener("click", () => this.deleteFinanceItem(financeItem.id))
   }
 
+  // financeItem 수정 준비 함수
   deleteFinanceItem(id) {
     this.financeArr = this.financeArr.filter(item => item.id !== parseInt(id))
 
@@ -103,8 +116,11 @@ class Finance {
     if(li) {
       li.remove();
     }
+
+    this.displayFinanceList();
   }
 
+  // financeItem 수정 준비 함수
   editFinanceItem(id) {
     const editItem = this.financeArr.find(item => item.id === parseInt(id));
 
@@ -120,10 +136,9 @@ class Finance {
     }
   }
 
+  // 수정한 finance 로컬 스토리지에 저장하여 반영
   updateFinanceEvent(id) {
     const updateItem = this.financeArr.find(item => item.id === parseInt(id));
-
-    console.log(updateItem)
 
     if(updateItem) {
       updateItem.type = this.financeType.value;
@@ -146,6 +161,33 @@ class Finance {
   resetInputForm() {
     this.financeName.value = "";
     this.financePrice.value = "";
+  }
+
+  // financeItem 계산하여 총값 표시하는 함수
+  calculateFinance(filteredItems) {
+    const earnPrices = [];
+    const paidPrices = [];
+  
+    // 필터링된 항목들을 순회하며 수입과 지출 가격을 구분하여 배열에 담음
+    filteredItems.forEach(item => {
+      if (item.type === "earn") {
+        earnPrices.push(parseFloat(item.price));  // 수입은 양수로
+      } else if (item.type === "paid") {
+        paidPrices.push(parseFloat(item.price));  // 지출은 음수로
+      }
+    });
+  
+    // 수입과 지출 각각의 합 계산
+    const totalEarn = earnPrices.reduce((acc, price) => acc + price, 0);
+    const totalPaid = paidPrices.reduce((acc, price) => acc + price, 0);
+  
+    // 총 재정 상태 계산
+    const totalFinance = totalEarn - totalPaid;
+  
+    // 화면에 출력
+    this.earnFinance.textContent = `+${totalEarn}`;
+    this.paidFinance.textContent = `-${totalPaid}`;
+    this.totalFinance.textContent = `${totalFinance}`;
   }
 }
 
