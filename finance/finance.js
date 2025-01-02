@@ -20,11 +20,28 @@ class Finance {
 
   financeEvent() {
     this.displayFinanceList();
+    this.validateInput();
 
     this.regFinance.addEventListener("click", (e) => {
       e.preventDefault();
       
       this.regFinance.value === "register" ? this.regFinanceEvent() : this.updateFinanceEvent(this.editFinanceId);
+    })
+  }
+
+  validateInput() {
+    this.financeName.addEventListener("input", (e) => {
+      if(this.financeName.value.length > 10) {
+        this.financeName.value = this.financeName.value.slice(0, 10)
+      }
+    })
+
+    this.financePrice.addEventListener("input", () => {
+      this.financePrice.value = this.financePrice.value.replace(/[^0-9]/g, "")
+
+      if(this.financePrice.value.length > 10) {
+        this.financePrice.value = this.financePrice.value.slice(0, 10)
+      }
     })
   }
   
@@ -33,8 +50,26 @@ class Finance {
     const month = date.getMonth() + 1;
     const day = date.getDate();
     const type = this.financeType.value;
-    const name = this.financeName.value;
-    const price = this.financePrice.value;
+    const name = this.financeName.value.trim();
+    const price = this.financePrice.value.trim();
+
+    // validation: financeName이 비어있거나 10글자 이상일 경우
+    if (name === "" || name.length > 10) {
+      alert("이름은 1자 이상 10자 이하로 입력해주세요.");
+      return; // 입력값이 유효하지 않으면 함수 종료
+    }
+
+    // validation: financePrice가 비어있거나 숫자가 아닐 경우
+    if (price === "" || isNaN(price)) {
+      alert("가격은 숫자로 입력해주세요.");
+      return; // 입력값이 유효하지 않으면 함수 종료
+    }
+
+    // validation: 가격은 음수나 0을 허용하지 않도록
+    if (parseFloat(price) <= 0) {
+      alert("가격은 0보다 큰 숫자여야 합니다.");
+      return;
+    }
 
     const financeItem = {
       id: this.financeId,
@@ -59,7 +94,7 @@ class Finance {
       <time class="date">${item.date}</time>
       <p class="name">${item.name}</p>
       <p class="price">
-        ${item.type === "earn" ? `+${item.price}` : `-${item.price}`}
+        ${item.type === "earn" ? `+${parseInt(item.price).toLocaleString()}` : `-${parseInt(item.price).toLocaleString()}`}
       </p>
       <div>
         <button class="editBtn">
@@ -185,9 +220,9 @@ class Finance {
     const totalFinance = totalEarn - totalPaid;
   
     // 화면에 출력
-    this.earnFinance.textContent = `+${totalEarn}`;
-    this.paidFinance.textContent = `-${totalPaid}`;
-    this.totalFinance.textContent = `${totalFinance}`;
+    this.earnFinance.textContent = `+${parseInt(totalEarn).toLocaleString()}`;
+    this.paidFinance.textContent = `-${parseInt(totalPaid).toLocaleString()}`;
+    this.totalFinance.textContent = `${parseInt(totalFinance).toLocaleString()}`;
   }
 }
 
