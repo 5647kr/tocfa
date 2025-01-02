@@ -159,7 +159,6 @@ class Finance {
   editFinanceItem(id) {
     const editItem = this.financeArr.find(item => item.id === parseInt(id));
 
-    console.log(editItem)
     if(editItem) {
       this.financeType.value = editItem.type;
       this.financeName.value = editItem.name;
@@ -218,6 +217,8 @@ class Finance {
   
     // 총 재정 상태 계산
     const totalFinance = totalEarn - totalPaid;
+
+    totalFinance >= 0 ? this.totalFinance.style.color = "var(--sub-color)" : this.totalFinance.style.color = "var(--error-color)"
   
     // 화면에 출력
     this.earnFinance.textContent = `+${parseInt(totalEarn).toLocaleString()}`;
