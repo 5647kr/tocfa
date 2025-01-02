@@ -69,17 +69,17 @@ main > .wrap > article > div ~ div {
   background-color: #FFFFFF;
 }
 
-.financeInput form .financePrice {
+.financeInput form .financeInputWrap {
   width: 80%;
   display: flex;
   justify-content: space-between;
 }
 
-.financePrice div {
+.financeInputWrap div {
   width: 80%;
 }
 
-.financePrice input {
+.financeInputWrap input {
   width: 100%;
   height: 50%;
   padding: 0 20px;
@@ -88,18 +88,18 @@ main > .wrap > article > div ~ div {
   border: none;
 }
 
-.financePrice input:focus {
+.financeInputWrap input:focus {
   outline: none;
 }
 
-.financePrice button {
+.financeInputWrap button {
   width: 20%;
   height: 100%;
   background-color: var(--bg-color);
   border-radius: 0 10px 10px 0;
 }
 
-.financePrice button i {
+.financeInputWrap button i {
   font-size: var(--font-smz);
   font-weight: var(--font-ebw);
 }
@@ -144,6 +144,11 @@ main > .wrap > article > div ~ div {
   font-size: var(--font-mz);
   font-weight: var(--font-rw);
   text-align: center;
+  color: var(--sub-color);
+}
+
+.monthFinance .paidFinance strong {
+  color: var(--error-color);
 }
 
 
@@ -195,11 +200,11 @@ main > .wrap > article > div ~ div {
     font-size: var(--font-mz);
   }
   
-  .financePrice input {
+  .financeInputWrap input {
     font-size: var(--font-mz);
   }
   
-  .financePrice button i {
+  .financeInputWrap button i {
     font-size: var(--font-mz);
   }
   
@@ -266,12 +271,12 @@ main > .wrap > article > div ~ div {
     font-size: var(--font-mlz);
   }
 
-  .financePrice input {
+  .financeInputWrap input {
     padding: 0 40px;
     font-size: var(--font-mlz);
   }
   
-  .financePrice button i {
+  .financeInputWrap button i {
     font-size: var(--font-mlz);
   }
   
