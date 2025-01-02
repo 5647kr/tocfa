@@ -13,24 +13,24 @@
     <div class="wrap">
       <article class="finance">
         <div class="totalFinance">
-          <h2>820,000</h2>
+          <h2></h2>
         </div>
         <div class="financeInput">
-          <form>
+          <form> 
             <div class="financeType">
               <select>
                 <option value="earn">소득</option>
                 <option value="paid">지출</option>
               </select>
             </div>
-            <div class="financePrice">
+            <div class="financeInputWrap">
               <div>
                 <label class="a11y-hidden">금액유형</label>
-                <input type="text" placeholder="유형을 입력해주세요" class="financeName">
+                <input type="text" placeholder="유형을 입력해주세요" class="financeName" required>
                 <label class="a11y-hidden">금액입력</label>
-                <input type="text" placeholder="금액을 입력해주세요" class="financePrice">
+                <input type="text" placeholder="금액을 입력해주세요" class="financePrice" required>
               </div>
-              <button>
+              <button class="regBtn" value="register" type="submit">
                 <i class="fa-solid fa-plus"></i>
               </button>
             </div>
@@ -41,28 +41,15 @@
           <div class="monthFinance">
             <div class="earnFinance">
               <h3>소득</h3>
-              <strong>금액</strong>
+              <strong></strong>
             </div>
             <div class="paidFinance">
               <h3>지출</h3>
-              <strong>금액</strong>
+              <strong></strong>
             </div>
           </div>
           <div class="monthFinanceList">
             <ul class="list">
-              <li>
-                <time class="date">12/9</time>
-                <p class="name">급여</p>
-                <p class="price">+820000</p>
-                <div>
-                  <button>
-                    <i class="fa-solid fa-pencil"></i>
-                  </button>
-                  <button>
-                    <i class="fa-solid fa-trash"></i>
-                  </button>
-                </div>
-              </li>
             </ul>
           </div>
         </div>
