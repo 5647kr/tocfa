@@ -107,6 +107,7 @@ article .todoListWrap {
   padding: 20px;
   border-radius: 10px;
   background-color: #FFFFFF;
+  overflow-y: auto;
 }
 
 article .todoListWrap li {
@@ -116,12 +117,21 @@ article .todoListWrap li {
   gap: 20px;
 }
 
+article .todoListWrap  li ~ li {
+  margin-top: 10px;
+}
+
 article .todoListWrap li input {
   width: var(--font-smz);
   accent-color: var(--main-color);
 }
 
-article .todoListWrap li strong {
+article .todoListWrap li input:checked + label {
+  text-decoration: line-through;
+  color: var(--border-color);
+}
+
+article .todoListWrap li label {
   font-size: var(--font-smz);
   font-weight: var(--font-ebw);
   flex-grow: 1;
@@ -133,16 +143,152 @@ article .todoListWrap li button i {
 
 /* 모바일 가로 ~ 태블릿 세로 / 481px~768px / 12, 14, 16, 18 */
 @media screen and (min-width: 481px) and (max-width: 768px) {
-  main > .wrap {
-    padding: 60px 40px;
+  .wrap > div ~ div {
+    margin-top: 60px;
+  }
+  
+  .dateListWrap {
+    height: 80px;
+  }
+  
+  .dateListWrap ul li button {
+    width: 80px;
+    font-size: var(--font-smz);
+  }
+  
+  .stateWrap {
+    height: 100px;
+  }
+  
+  .todoWrap article ~ article {
+    margin-top: 60px;
+  }
+  
+  
+  article .todoTitle {
+    font-size: var(--font-mlz);
+  }
+  
+  article .editTitleBtn i {
+    font-size: var(--font-mlz);
+  }
+  
+  article form {
+    margin-top: 20px;
+  }
+  
+  article form .formWrap input {
+    padding: 14px;
+    font-size: var(--font-mz);
+  }
+  
+  article form .formWrap button {
+    width: 49px;
+  }
+  
+  article form .formWrap button i {
+    font-size: var(--font-mz);
+  }
+  
+  article .todoListWrap  li ~ li {
+    margin-top: 20px;
+  }
+
+  article .todoListWrap {
+    height: 320px;
+  }
+  
+  article .todoListWrap li input {
+    width: var(--font-mz);
+  }
+  
+  article .todoListWrap li label {
+    font-size: var(--font-mz);
+  }
+  
+  article .todoListWrap li button i {
+    font-size: var(--font-mz);
   }
 }
 
 
 /* 태블릿 가로 / 769px~ / 14, 16, 18, 20 */
 @media screen and (min-width: 769px) {
-  main > .wrap {
-    padding: 80px 60px;
+  .wrap > div ~ div {
+    margin-top: 80px;
+  }
+  
+  .dateListWrap {
+    height: 100px;
+  }
+  
+  .dateListWrap ul li button {
+    width: 100px;
+    font-size: var(--font-mz);
+  }
+  
+  .stateWrap {
+    height: 120px;
+  }
+  
+  .todoWrap article {
+    padding: 40px;
+  }
+  
+  .todoWrap article ~ article {
+    margin-top: 80px;
+  }
+  
+  
+  article .todoTitle {
+    font-size: var(--font-lz);
+  }
+  
+  article .editTitleBtn i {
+    font-size: var(--font-lz);
+  }
+  
+  article form {
+    margin-top: 40px;
+  }
+  
+  article form .formWrap input {
+    padding: 16px;
+    font-size: var(--font-mlz);
+  }
+  
+  article form .formWrap button {
+    width: 55px;
+  }
+  
+  article form .formWrap button i {
+    font-size: var(--font-mlz);
+  }
+  
+  article .todoListWrap {
+    height: 340px;
+    margin-top: 40px;
+    padding: 40px;
+  }
+  
+  article .todoListWrap li {
+    gap: 20px;
+  }
+  
+  article .todoListWrap  li ~ li {
+    margin-top: 20px;
+  }
+  
+  article .todoListWrap li input {
+    width: var(--font-mlz);
   }
 
+  
+  article .todoListWrap li label {
+    font-size: var(--font-mlz);
+  }
+  
+  article .todoListWrap li button i {
+    font-size: var(--font-mlz);
+  }
 }
