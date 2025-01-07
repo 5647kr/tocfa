@@ -7,7 +7,7 @@ class Calculate {
     this.btnList = article.querySelectorAll(".btnWrap ul li button");
   }
 
-  handleBtn() {
+  calculateEvent() {
     this.btnList.forEach((btn) => {
       btn.addEventListener("click", (e) => {
         const value = e.target.textContent;
@@ -64,7 +64,7 @@ class Calculate {
     this.result.textContent = this.result.textContent.slice(0, -1);
 
     let operators = this.result.textContent.match(/[+\−×÷x^√]/g);
-    let numbers = this.result.textContent.split(/[+\−×÷=^√]/g).map(Number); 
+    let numbers = this.result.textContent.split(/[+\−×÷=^√]/g).map(Number);
 
     while (operators.includes("^") || operators.includes("√")) {
       for (let i = 0; i < operators.length; i++) {
@@ -74,10 +74,17 @@ class Calculate {
           operators.splice(i, 1);
           break;
         } else if (operators[i] === "√") {
-          numbers[i] = Math.sqrt(numbers[i + 1]) * numbers[i];
-          numbers.splice(i + 1, 1);
-          operators.splice(i, 1);
-          break;
+          if(numbers[i] === 0) {
+            numbers[i] = Math.sqrt(numbers[i + 1]);
+            numbers.splice(i + 1, 1);
+            operators.splice(i, 1);
+            break;
+          } else {
+            numbers[i] = Math.sqrt(numbers[i + 1]) * numbers[i];
+            numbers.splice(i + 1, 1);
+            operators.splice(i, 1);
+            break;
+          }
         }
       }
     }
@@ -121,7 +128,7 @@ class Calculate {
 
   clear() {
     this.result.textContent = 0;
-    this.formula.textContent = "";
+    this.formula.textContent = 0;
     this.recordResult.textContent = "";
   }
 
@@ -136,10 +143,15 @@ class Calculate {
     formulaLi.innerText = formula;
     answerLi.innerText = "=" + answer;
 
-    this.recordResult.appendChild(formulaLi);
-    this.recordResult.appendChild(answerLi);
+    if (this.recordResult.firstChild) {
+      this.recordResult.insertBefore(formulaLi, this.recordResult.firstChild);
+      this.recordResult.insertBefore(answerLi, this.recordResult.firstChild);
+    } else {
+      this.recordResult.appendChild(answerLi);
+      this.recordResult.appendChild(formulaLi);
+    }
   }
 }
 
 const calculate = new Calculate();
-calculate.handleBtn();
+calculate.calculateEvent();
