@@ -18,12 +18,11 @@ main .wrap .calculate > div {
 
 .calculate .resultWrap {
   height: 30%;
-  font-size: var(--font-mz);
-  font-weight: var(--font-bw);
+  font-weight: var(--font-ebw);
   display: flex;
   flex-direction: column;
   background-color: #FFFFFF;
-  border-radius: 30px;
+  border-radius: 20px;
 }
 
 .resultWrap .prevResult {
@@ -32,45 +31,31 @@ main .wrap .calculate > div {
 }
 
 .resultWrap .prevResult ul {
+  height: 100%;
+  text-align: right;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: flex-end;
+  flex-direction: column-reverse;
   overflow-y: auto;
-  padding: 0 10px;
 }
 
 .resultWrap .prevResult ul li {
-  width: 100%;
-  text-align: right;
   color: var(--border-color);
 }
 
 .resultWrap .result {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: flex-end;
-  padding: 10px 10px 0;
-}
-
-.resultWrap .result p {
-  color: var(--border-color);
-}
-
-.resultWrap .result strong {
-  color: var(--sub-color);
+  text-align: right;
+  margin-top: 10px;
 }
 
 .resultWrap .result p, strong {
-  font-size: var(--font-mz);
+  font-size: var(--font-mlz);
   font-weight: var(--font-ebw);
 }
 
 .calculate .btnWrap {
   height: calc(100% - 30% - 40px);
   background-color: var(--main-color);
-  border-radius: 30px;
+  border-radius: 20px;
 }
 
 .btnWrap ul {
@@ -85,13 +70,14 @@ main .wrap .calculate > div {
   width: 100%;
   height: 100%;
   border-radius: 10px;
-  font-size: var(--font-mz);
+  font-size: var(--font-mlz);
   font-weight: var(--font-ebw);
   background-color: var(--bg-color);
+  box-shadow: 0 4px 4px var(--sub-color);
 }
 
 .btnWrap ul li button:active {
-  box-shadow: inset 10px 10px 20px var(--border-color);
+  box-shadow: inset 0 4px 4px var(--sub-color);
 }
 
 .btnWrap ul li:last-child {
@@ -111,29 +97,35 @@ main .wrap .calculate > div {
   main .wrap .calculate > div ~ div {
     margin-top: 60px;
   }
-  
+
   main .wrap .calculate > div {
-    padding: 20px;
+    padding: 25px;
   }
   
   .calculate .resultWrap {
+    border-radius: 25px;
+  }
+
+  .resultWrap .prevResult ul li {
     font-size: var(--font-mlz);
   }
   
-  .resultWrap .result {
-    padding: 20px 20px 0;
-  }
-
   .resultWrap .result p, strong {
-    font-size: var(--font-mlz);
+    font-size: var(--font-lz);
+    font-weight: var(--font-ebw);
   }
-
+  
   .calculate .btnWrap {
     height: calc(100% - 30% - 60px);
+    border-radius: 25px;
+  }
+  
+  .btnWrap ul {
+    gap: 15px;
   }
   
   .btnWrap ul li button {
-    font-size: var(--font-mlz);
+    font-size: var(--font-lz);
   }
 }
 
@@ -142,39 +134,45 @@ main .wrap .calculate > div {
   main > .wrap {
     padding: 80px 60px;
   }
-
+  
   main .wrap .calculate {
     display: flex;
-    gap: 80px;
+    gap: 60px;
   }
 
   main .wrap .calculate > div ~ div {
     margin-top: 0;
   }
-
+  
   main .wrap .calculate > div {
     height: 100%;
-    padding: 40px;
+    padding: 30px;
   }
   
   .calculate .resultWrap {
-    width: 40%;
-    font-size: var(--font-lz);
+    width: 30%;
+    border-radius: 30px;
   }
-  
-  .resultWrap .result {
-    padding: 20px 20px 0;
+
+  .resultWrap .prevResult ul li {
+    font-size: var(--font-lz);
   }
 
   .resultWrap .result p, strong {
-    font-size: var(--font-lz);
+    font-size: var(--font-xlz);
   }
   
   .calculate .btnWrap {
-    width: calc(100% - 40% - 80px);
+    width: calc(100% - 60px - 30%);
+    background-color: var(--main-color);
+    border-radius: 30px;
   }
-
+  
+  .btnWrap ul {
+    gap: 20px;
+  }
+  
   .btnWrap ul li button {
-    font-size: var(--font-lz);
+    font-size: var(--font-xlz);
   }
 }
