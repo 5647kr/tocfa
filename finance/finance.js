@@ -3,7 +3,7 @@ class Finance {
     const finance = document.querySelector(".finance");
     this.totalFinance = finance.querySelector(".totalFinance h2");
     this.financeForm = finance.querySelector(".financeInput form");
-    this.financeType = this.financeForm.querySelector(".financeType select");
+    this.financeType = this.financeForm.querySelector(".financeType input");
     this.financeName = this.financeForm.querySelector(".financeInputWrap .financeName")
     this.financePrice = this.financeForm.querySelector(".financeInputWrap .financePrice")
     this.regFinance = this.financeForm.querySelector(".regBtn");
@@ -30,7 +30,7 @@ class Finance {
   }
 
   validateInput() {
-    this.financeName.addEventListener("input", (e) => {
+    this.financeName.addEventListener("input", () => {
       if(this.financeName.value.length > 10) {
         this.financeName.value = this.financeName.value.slice(0, 10)
       }
@@ -78,6 +78,8 @@ class Finance {
       name: name,
       price: price
     }
+
+    console.log(financeItem)
 
     this.financeArr.push(financeItem);
 
