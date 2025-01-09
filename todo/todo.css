@@ -1,294 +1,263 @@
-/* 모바일 세로 / ~480px / 10, 12, 14, 16 */
+/* 모바일 세로 / ~767px / 10, 12, 14, 16 */
 .wrap > div ~ div {
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
 .dateListWrap {
-  width: 100%;
-  height: 60px;
+  height: 80px;
+  background-color: var(--white-color);
+  border-radius: 20px;
+  
 }
 
 .dateListWrap ul {
   height: 100%;
-  overflow-x: auto;
-  border-radius: 30px;
   display: flex;
-  background-color: #FFFFFF;
+  overflow-x: auto;
 }
 
 .dateListWrap ul li button {
-  width: 60px;
+  width: 80px;
   height: 100%;
-  font-size: var(--font-sz);
+  font-size: var(--font-mlz);
   font-weight: var(--font-bw);
 }
 
 .dateListWrap ul li.active {
   background-color: var(--main-color);
-  border-radius: 30px;
+  border-radius: 20px;
 }
 
 .dateListWrap ul li.active button {
-  color: #FFFFFF;
-}
-
-.stateWrap {
-  width: 100%;
-  height: 80px;
-  background-color: #FFFFFF;
-  border-radius: 30px;
-  padding: 20px;
+  color: var(--white-color);
 }
 
 .todoWrap {
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .todoWrap article {
-  width: 100%;
   background-color: var(--main-color);
-  border-radius: 30px;
   padding: 20px;
+  border-radius: 20px;
 }
 
-.todoWrap article ~ article {
-  margin-top: 40px;
+.todoWrap article :where(form, ul) {
+  margin-top: 20px;
 }
 
 article .todoTitleWrap {
   display: flex;
   justify-content: space-between;
-  color: #FFFFFF;
 }
 
-article .todoTitle {
-  font-size: var(--font-mz);
+.todoTitleWrap :where(h2, i) {
+  font-size: var(--font-mlz);
+  color: var(--white-color);
 }
 
-article .editTitleBtn i {
-  font-size: var(--font-mz);
-  color: #FFFFFF;
-}
-
-article form {
-  margin-top: 20px;
-}
-
-article form .formWrap {
-  background-color: #FFFFFF;
+article .formWrap {
+  background-color: var(--white-color);
+  padding: 12px;
   border-radius: 10px;
   display: flex;
   justify-content: space-between;
 }
 
-article form .formWrap input {
-  border: none;
-  padding: 12px;
-  border-radius: 10px;
+.formWrap :where(input, i) {
   font-size: var(--font-smz);
-  flex-grow: 1;
+  font-weight: var(--font-bw);
+  border: none;
 }
 
-article form .formWrap input:focus {
+.formWrap input:focus {
   outline: none;
 }
 
-article form .formWrap button {
-  width: 42px;
-}
-
-article form .formWrap button i {
-  font-size: var(--font-smz);
-}
-
 article .todoListWrap {
-  height: 300px;
-  margin-top: 20px;
-  padding: 20px;
+  height: 240px;
+  background-color: var(--white-color);
   border-radius: 10px;
-  background-color: #FFFFFF;
+  padding: 20px;
   overflow-y: auto;
 }
 
-article .todoListWrap li {
+.todoListWrap li {
+  padding: 4px;
+  border-bottom: 1px solid var(--border-color);
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid var(--sub-color);
+  align-items: center;
   gap: 20px;
 }
 
-article .todoListWrap  li ~ li {
-  margin-top: 10px;
-}
-
-article .todoListWrap li input {
-  width: var(--font-smz);
+.todoListWrap li input {
+  width: 14px;
+  height: 14px;
+  border-radius: 2px;
+  border: 1px solid var(--border-color);
   accent-color: var(--main-color);
 }
 
-article .todoListWrap li input:checked + label {
-  text-decoration: line-through;
+.todoListWrap li label {
+  flex-grow: 1;
+  font-size: var(--font-smz);
+}
+
+.todoListWrap li input:checked + label {
+  text-decoration: 1px line-through var(--border-color);
   color: var(--border-color);
 }
 
-article .todoListWrap li label {
-  font-size: var(--font-smz);
-  font-weight: var(--font-ebw);
-  flex-grow: 1;
-}
-
-article .todoListWrap li button i {
+.todoListWrap li button i {
   font-size: var(--font-smz);
 }
 
-/* 모바일 가로 ~ 태블릿 세로 / 481px~768px / 12, 14, 16, 18 */
-@media screen and (min-width: 481px) and (max-width: 768px) {
+
+
+
+
+
+
+
+
+
+
+/* 모바일 가로 ~ 태블릿 세로 / 768px ~ 991px / 12, 14, 16, 18 */
+@media screen and (min-width: 768px) and (max-width: 991px) {
   .wrap > div ~ div {
-    margin-top: 60px;
+    margin-top: 40px;
   }
   
   .dateListWrap {
-    height: 80px;
+    height: 90px;
+    border-radius: 25px;
   }
   
   .dateListWrap ul li button {
-    width: 80px;
-    font-size: var(--font-smz);
+    width: 90px;
+    font-size: var(--font-lz);
   }
   
-  .stateWrap {
-    height: 100px;
+  .dateListWrap ul li.active {
+    border-radius: 25px;
   }
   
-  .todoWrap article ~ article {
-    margin-top: 60px;
+  .todoWrap {
+    gap: 40px;
   }
   
-  
-  article .todoTitle {
-    font-size: var(--font-mlz);
+  .todoWrap article {
+    padding: 25px;
+    border-radius: 25px;
   }
   
-  article .editTitleBtn i {
-    font-size: var(--font-mlz);
+  .todoWrap article :where(form, ul) {
+    margin-top: 25px;
   }
   
-  article form {
-    margin-top: 20px;
+  .todoTitleWrap :where(h2, i) {
+    font-size: var(--font-lz);
   }
   
-  article form .formWrap input {
-    padding: 14px;
+  .formWrap :where(input, i) {
     font-size: var(--font-mz);
   }
   
-  article form .formWrap button {
-    width: 49px;
-  }
-  
-  article form .formWrap button i {
-    font-size: var(--font-mz);
-  }
-  
-  article .todoListWrap  li ~ li {
-    margin-top: 20px;
-  }
-
   article .todoListWrap {
-    height: 320px;
+    height: 260px;
+    border-radius: 10px;
+    padding: 25px;
   }
   
-  article .todoListWrap li input {
-    width: var(--font-mz);
+  .todoListWrap li input {
+    width: 16px;
+    height: 16px;
   }
   
-  article .todoListWrap li label {
+  .todoListWrap li label {
+    flex-grow: 1;
     font-size: var(--font-mz);
   }
   
-  article .todoListWrap li button i {
+  .todoListWrap li button i {
     font-size: var(--font-mz);
   }
 }
 
 
-/* 태블릿 가로 / 769px~ / 14, 16, 18, 20 */
-@media screen and (min-width: 769px) {
+
+
+
+
+
+
+
+
+
+/* 태블릿 가로 / 992px ~ 1199px / 14, 16, 18, 20 */
+@media screen and (min-width: 992px) and (max-width: 1199px) {
   .wrap > div ~ div {
-    margin-top: 80px;
+    margin-top: 60px;
   }
   
   .dateListWrap {
     height: 100px;
+    border-radius: 30px;
+    
   }
   
   .dateListWrap ul li button {
     width: 100px;
-    font-size: var(--font-mz);
+    font-size: var(--font-xlz);
   }
   
-  .stateWrap {
-    height: 120px;
+  .dateListWrap ul li.active {
+    background-color: var(--main-color);
+    border-radius: 30px;
+  }
+  
+  .todoWrap {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 60px;
   }
   
   .todoWrap article {
-    padding: 40px;
+    padding: 30px;
+    border-radius: 30px;
   }
   
-  .todoWrap article ~ article {
-    margin-top: 80px;
+  .todoWrap article :where(form, ul) {
+    margin-top: 30px;
   }
   
-  
-  article .todoTitle {
-    font-size: var(--font-lz);
+  .todoTitleWrap :where(h2, i) {
+    font-size: var(--font-xlz);
   }
   
-  article .editTitleBtn i {
-    font-size: var(--font-lz);
-  }
-  
-  article form {
-    margin-top: 40px;
-  }
-  
-  article form .formWrap input {
-    padding: 16px;
-    font-size: var(--font-mlz);
-  }
-  
-  article form .formWrap button {
-    width: 55px;
-  }
-  
-  article form .formWrap button i {
+  .formWrap :where(input, i) {
     font-size: var(--font-mlz);
   }
   
   article .todoListWrap {
-    height: 340px;
-    margin-top: 40px;
-    padding: 40px;
+    height: 280px;
+    padding: 30px;
   }
   
-  article .todoListWrap li {
-    gap: 20px;
+  .todoListWrap li input {
+    width: 18px;
+    height: 18px;
   }
   
-  article .todoListWrap  li ~ li {
-    margin-top: 20px;
-  }
-  
-  article .todoListWrap li input {
-    width: var(--font-mlz);
-  }
-
-  
-  article .todoListWrap li label {
+  .todoListWrap li label {
+    flex-grow: 1;
     font-size: var(--font-mlz);
   }
   
-  article .todoListWrap li button i {
+  .todoListWrap li button i {
     font-size: var(--font-mlz);
   }
 }
