@@ -1,0 +1,103 @@
+/* 모바일 세로 / ~480px / 10, 12, 14, 16 */
+main {
+  height: 100vh;
+  padding: 40px 20px 40px;
+  text-align: center;
+  font-weight: var(--font-bw);
+}
+
+main .wrap {
+  height: 100%;
+}
+
+main h1 {
+  margin: 100px auto 0;
+}
+
+main h1 img {
+  display: block;
+  margin: 0 auto 30px;
+}
+
+main h2 {
+  font-size: var(--font-sz);
+  margin-bottom: 40px;
+}
+
+main p {
+  font-size: var(--font-ssz);
+}
+
+main p:not(:last-child) {
+  margin-bottom: 200px;
+}
+
+main .linkWrap a {
+  display: block;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--border-color);
+  font-size: 24px;
+  color: var(--sub-color);
+  border-radius: 50%;
+  text-align: center;
+  line-height: 40px;
+  margin: 0 auto 8px;
+}
+
+main .linkWrap p {
+  font-size: var(--font-ssz);
+  font-weight: var(--font-bw);
+}
+
+footer strong {
+  font-size: var(--font-ssz);
+  font-weight: var(--font-rw);
+  text-align: center;
+  display: block;
+}
+
+/* 모바일 가로 ~ 태블릿 세로 / 481px~768px / 12, 14, 16, 18 */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  main {
+    padding: 60px 40px 60px;
+  }
+  
+  main h2 {
+    font-size: var(--font-smz);
+  }
+  
+  main p {
+    font-size: var(--font-sz);
+  }
+  
+  main .linkWrap p {
+    font-size: var(--font-sz);
+  }
+  
+  footer strong {
+    font-size: var(--font-sz);
+  }
+}
+/* 태블릿 가로 / 769px~ / 14, 16, 18, 20 */
+@media screen and (min-width: 769px) {
+  main {
+    padding: 80px 60px 80px;
+  }
+  
+  main h2 {
+    font-size: var(--font-mz);
+  }
+  
+  main p {
+    font-size: var(--font-smz);
+  }
+  
+  main .linkWrap p {
+    font-size: var(--font-smz);
+  }
+  
+  footer strong {
+    font-size: var(--font-smz);
+  }
+}
