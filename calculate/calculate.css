@@ -90,6 +90,14 @@ main .wrap .calculate > div {
 }
 
 
+
+
+
+
+
+
+
+/* 모바일 가로 ~ 태블릿 세로 / 12, 14, 16, 18 */
 @media screen and (min-width: 768px) and (max-width: 991px) {
   main > .wrap {
     padding: 40px 40px 120px;
@@ -144,7 +152,7 @@ main .wrap .calculate > div {
 
 
 /* 태블릿 가로 / 769px~ / 14, 16, 18, 20 */
-
+@media screen and (min-width: 992px) and (max-width: 1199px) {
   main > .wrap {
     padding: 60px 60px 140px;
   }
