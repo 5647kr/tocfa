@@ -3,7 +3,7 @@ class Finance {
     const finance = document.querySelector(".finance");
     this.totalFinance = finance.querySelector(".totalFinance h2");
     this.financeForm = finance.querySelector(".financeInput form");
-    this.financeType = this.financeForm.querySelector(".financeType input");
+    this.financeType = this.financeForm.querySelectorAll(".financeType input[type=radio]");
     this.financeName = this.financeForm.querySelector(".financeInputWrap .financeName")
     this.financePrice = this.financeForm.querySelector(".financeInputWrap .financePrice")
     this.regFinance = this.financeForm.querySelector(".regBtn");
@@ -49,9 +49,11 @@ class Finance {
     const date = new Date();
     const month = date.getMonth() + 1;
     const day = date.getDate();
-    const type = this.financeType.value;
+    let type;
     const name = this.financeName.value.trim();
     const price = this.financePrice.value.trim();
+
+
 
     // validation: financeName이 비어있거나 10글자 이상일 경우
     if (name === "" || name.length > 10) {
@@ -71,6 +73,9 @@ class Finance {
       return;
     }
 
+    const selectedType = Array.from(this.financeType).find((item) => item.checked);
+    type = selectedType ? selectedType.value : null;
+
     const financeItem = {
       id: this.financeId,
       date: `${month}/${day}`,
@@ -78,8 +83,6 @@ class Finance {
       name: name,
       price: price
     }
-
-    console.log(financeItem)
 
     this.financeArr.push(financeItem);
 
