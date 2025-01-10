@@ -1,7 +1,7 @@
 /* 모바일 세로 / ~480px / 10, 12, 14, 16 */
 main > .wrap {
   height: 100%;
-  padding: 40px 20px;
+  padding: 20px;
 }
 
 main .wrap .calculate {
@@ -9,7 +9,7 @@ main .wrap .calculate {
 }
 
 main .wrap .calculate > div ~ div {
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
 main .wrap .calculate > div {
@@ -21,7 +21,7 @@ main .wrap .calculate > div {
   font-weight: var(--font-ebw);
   display: flex;
   flex-direction: column;
-  background-color: #FFFFFF;
+  background-color: var(--white-color);
   border-radius: 20px;
 }
 
@@ -40,6 +40,7 @@ main .wrap .calculate > div {
 
 .resultWrap .prevResult ul li {
   color: var(--border-color);
+  font-size: var(--font-mz);
 }
 
 .resultWrap .result {
@@ -53,7 +54,7 @@ main .wrap .calculate > div {
 }
 
 .calculate .btnWrap {
-  height: calc(100% - 30% - 40px);
+  height: calc(100% - 30% - 20px);
   background-color: var(--main-color);
   border-radius: 20px;
 }
@@ -85,19 +86,31 @@ main .wrap .calculate > div {
 }
 
 .btnWrap ul li:last-child button {
-  background-color: #FFFFFF;
+  background-color: var(--white-color);
 }
 
-/* 모바일 가로 ~ 태블릿 세로 / 481px~768px / 12, 14, 16, 18 */
-@media screen and (min-width: 481px) and (max-width: 768px) {
+
+
+
+
+
+
+
+
+/* 모바일 가로 ~ 태블릿 세로 / 12, 14, 16, 18 */
+@media screen and (min-width: 768px) and (max-width: 991px) {
   main > .wrap {
-    padding: 60px 40px;
+    padding: 40px 40px 120px;
   }
-
+  
+  main .wrap .calculate {
+    height: 100%;
+  }
+  
   main .wrap .calculate > div ~ div {
-    margin-top: 60px;
+    margin-top: 40px;
   }
-
+  
   main .wrap .calculate > div {
     padding: 25px;
   }
@@ -105,18 +118,17 @@ main .wrap .calculate > div {
   .calculate .resultWrap {
     border-radius: 25px;
   }
-
+  
   .resultWrap .prevResult ul li {
     font-size: var(--font-mlz);
   }
   
   .resultWrap .result p, strong {
     font-size: var(--font-lz);
-    font-weight: var(--font-ebw);
   }
   
   .calculate .btnWrap {
-    height: calc(100% - 30% - 60px);
+    height: calc(100% - 30% - 40px);
     border-radius: 25px;
   }
   
@@ -129,42 +141,53 @@ main .wrap .calculate > div {
   }
 }
 
+
+
+
+
+
+
+
+
+
+
 /* 태블릿 가로 / 769px~ / 14, 16, 18, 20 */
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 992px) and (max-width: 1199px) {
   main > .wrap {
-    padding: 80px 60px;
+    padding: 60px 60px 140px;
   }
   
   main .wrap .calculate {
+    height: 100%;
     display: flex;
     gap: 60px;
   }
-
+  
   main .wrap .calculate > div ~ div {
     margin-top: 0;
   }
   
   main .wrap .calculate > div {
-    height: 100%;
     padding: 30px;
   }
   
   .calculate .resultWrap {
     width: 30%;
+    height: 100%;
     border-radius: 30px;
   }
-
+  
   .resultWrap .prevResult ul li {
     font-size: var(--font-lz);
   }
-
+  
   .resultWrap .result p, strong {
     font-size: var(--font-xlz);
   }
   
   .calculate .btnWrap {
-    width: calc(100% - 60px - 30%);
-    background-color: var(--main-color);
+    width: calc(100% - 30% - 60px);
+    height: 100%;
     border-radius: 30px;
   }
   
