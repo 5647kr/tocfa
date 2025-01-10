@@ -67,7 +67,7 @@ main {
 }
 
 main > .wrap {
-  padding: 40px 20px 120px;
+  padding: 20px 20px 100px;
 }
 
 footer > .wrap {
@@ -112,39 +112,17 @@ footer ul li.active {
 footer ul li.active a i {
   color: var(--bg-color);
 }
+
 /* 모바일 가로 ~ 태블릿 세로 / 481px~768px / 12, 14, 16, 18 */
-@media screen and (min-width: 481px) and (max-width: 768px) {
-  main {
-    height: calc(100vh - 100px);
-  }
-
+@media screen and (min-width: 768px) and (max-width: 991px) {
   main > .wrap {
-    padding: 60px 40px 160px;
-  }
-
-  footer > .wrap {
-    height: 100px;
-  }
-
-  footer ul li a i {
-    font-size: 40px;
+    padding: 40px 40px 120px;
   }
 }
+
 /* 태블릿 가로 / 769px~ / 14, 16, 18, 20 */
-@media screen and (min-width: 769px) {
-  main {
-    height: calc(100vh - 100px);
-  }
-  
+@media screen and (min-width: 992px) and (max-width: 1199px) {
   main > .wrap {
-    padding: 80px 60px 180px;
-  }
-
-  footer > .wrap {
-    height: 100px;
-  }
-
-  footer ul li a i {
-    font-size: 40px;
+    padding: 60px 60px 140px;
   }
 }
