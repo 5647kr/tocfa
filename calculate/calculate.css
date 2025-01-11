@@ -1,0 +1,201 @@
+/* 모바일 세로 / ~480px / 10, 12, 14, 16 */
+main > .wrap {
+  height: 100%;
+  padding: 20px;
+}
+
+main .wrap .calculate {
+  height: 100%;
+}
+
+main .wrap .calculate > div ~ div {
+  margin-top: 20px;
+}
+
+main .wrap .calculate > div {
+  padding: 20px;
+}
+
+.calculate .resultWrap {
+  height: 30%;
+  font-weight: var(--font-ebw);
+  display: flex;
+  flex-direction: column;
+  background-color: var(--white-color);
+  border-radius: 20px;
+}
+
+.resultWrap .prevResult {
+  flex-grow: 2;
+  overflow-y: auto;
+}
+
+.resultWrap .prevResult ul {
+  height: 100%;
+  text-align: right;
+  display: flex;
+  flex-direction: column-reverse;
+  overflow-y: auto;
+}
+
+.resultWrap .prevResult ul li {
+  color: var(--border-color);
+  font-size: var(--font-mz);
+}
+
+.resultWrap .result {
+  text-align: right;
+  margin-top: 10px;
+}
+
+.resultWrap .result p, strong {
+  font-size: var(--font-mlz);
+  font-weight: var(--font-ebw);
+}
+
+.calculate .btnWrap {
+  height: calc(100% - 30% - 20px);
+  background-color: var(--main-color);
+  border-radius: 20px;
+}
+
+.btnWrap ul {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.btnWrap ul li button {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  font-size: var(--font-mlz);
+  font-weight: var(--font-ebw);
+  background-color: var(--bg-color);
+  box-shadow: 0 4px 4px var(--sub-color);
+}
+
+.btnWrap ul li button:active {
+  box-shadow: inset 0 4px 4px var(--sub-color);
+}
+
+.btnWrap ul li:last-child {
+  grid-column: 3 / 5;
+}
+
+.btnWrap ul li:last-child button {
+  background-color: var(--white-color);
+}
+
+
+
+
+
+
+
+
+
+/* 모바일 가로 ~ 태블릿 세로 / 12, 14, 16, 18 */
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  main > .wrap {
+    padding: 40px;
+  }
+  
+  main .wrap .calculate {
+    height: 100%;
+  }
+  
+  main .wrap .calculate > div ~ div {
+    margin-top: 40px;
+  }
+  
+  main .wrap .calculate > div {
+    padding: 25px;
+  }
+  
+  .calculate .resultWrap {
+    border-radius: 25px;
+  }
+  
+  .resultWrap .prevResult ul li {
+    font-size: var(--font-mlz);
+  }
+  
+  .resultWrap .result p, strong {
+    font-size: var(--font-lz);
+  }
+  
+  .calculate .btnWrap {
+    height: calc(100% - 30% - 40px);
+    border-radius: 25px;
+  }
+  
+  .btnWrap ul {
+    gap: 15px;
+  }
+  
+  .btnWrap ul li button {
+    font-size: var(--font-lz);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+/* 태블릿 가로 / 769px~ / 14, 16, 18, 20 */
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+  main > .wrap {
+    padding: 60px;
+  }
+  
+  main .wrap .calculate {
+    height: 100%;
+    display: flex;
+    gap: 60px;
+  }
+  
+  main .wrap .calculate > div ~ div {
+    margin-top: 0;
+  }
+  
+  main .wrap .calculate > div {
+    padding: 30px;
+  }
+  
+  .calculate .resultWrap {
+    width: 30%;
+    height: 100%;
+    border-radius: 30px;
+  }
+  
+  .resultWrap .prevResult ul li {
+    font-size: var(--font-lz);
+  }
+  
+  .resultWrap .result p, strong {
+    font-size: var(--font-xlz);
+  }
+  
+  .calculate .btnWrap {
+    width: calc(100% - 30% - 60px);
+    height: 100%;
+    border-radius: 30px;
+  }
+  
+  .btnWrap ul {
+    gap: 20px;
+  }
+  
+  .btnWrap ul li button {
+    font-size: var(--font-xlz);
+  }
+}
