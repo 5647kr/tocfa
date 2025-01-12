@@ -20,10 +20,6 @@ class Calendar {
     const date = new Date();
     this.currentYear = date.getFullYear();
     this.currentMonth = date.getMonth() + 1;
-
-    // 일정 목록 불러오기
-    this.schedules = JSON.parse(localStorage.getItem("schedules")) || [];
-    this.id = JSON.parse(localStorage.getItem("id")) || 0;
   }
 
   generateCalendar(year, month) {
@@ -40,115 +36,43 @@ class Calendar {
     }
 
     for (let i = calendarDay; i < calendarDay + monthLength; i++) {
-      this.days[i].textContent = calendarDate++;
+      this.days[i].innerHTML = `
+        <span>${calendarDate++}</span>
+        <ul class="scheduleitem"></ul>
+      `;
     }
 
     this.year.textContent = calendarYear;
     this.month.textContent = calendarMonth + 1;
     this.time.dateTime = `${calendarYear}-${calendarMonth + 1}`;
-
-    this.generateSchedule(calendarYear, calendarMonth);
   }
 
   moveMonthEvent() {
     // 이전 달로 이동
     this.prevMonth.addEventListener("click", () => {
-      this.generateCalendar(this.currentYear, this.currentMonth--);
+      this.currentMonth--;
+      if (this.currentMonth < 1) {
+        this.currentMonth = 12;
+        this.currentYear--;
+      }
+      this.generateCalendar(this.currentYear, this.currentMonth);
     });
 
     // 다음 달로 이동
     this.nextMonth.addEventListener("click", () => {
-      this.generateCalendar(this.currentYear, this.currentMonth++);
+      this.currentMonth++;
+      if (this.currentMonth > 12) {
+        this.currentMonth = 1;
+        this.currentYear++;
+      }
+      this.generateCalendar(this.currentYear, this.currentMonth);
     });
 
     this.generateCalendar(this.currentYear, this.currentMonth);
   }
 
-  generateSchedule(year, month) {
-    this.days.forEach((today) => {
-      today.addEventListener("click", (e) => {
-        if (!e.target.textContent) {
-          return;
-        } else {
-          this.schedule.classList.add("active");
-        }
-
-        let clickYear = year;
-        let clickMonth = month;
-        let clickDay = e.target.textContent;
-        let clickDate = new Date(clickYear, clickMonth, clickDay);
-
-        this.regSchedule(clickDate);
-
-        this.scheduleDate.textContent = `${clickDay}일`;
-      });
-
-      this.closeBtn.addEventListener("click", () => {
-        this.schedule.classList.remove("active");
-      });
-    });
-  }
-
-  regSchedule(clickDate) {
-    this.regBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-
-      const title = this.regInput.value;
-      const date = clickDate;
-      
-      // 일정 객체 만들기
-      const scheduleItem = {
-        id: this.id++,
-        title: title,
-        date: date,
-      };
-
-      // 일정 목록에 새 일정 추가
-      this.schedules.push(scheduleItem);
-      
-      // localStorage에 일정 저장
-      localStorage.setItem("schedules", JSON.stringify(this.schedules));
-      localStorage.setItem("id", JSON.stringify(this.id));
-
-      // 일정 리스트에 표시하기
-      // this.renderSchedules();
-
-      // 입력 필드 초기화
-      this.regInput.value = "";
-    });
-  }
-
-  // renderSchedules() {
-  //   // 일정 목록을 새로 고침
-  //   this.scheduleList.innerHTML = "";
-
-  //   // selectedDate의 날짜와 일치하는 일정만 필터링
-  //   const filteredSchedules = this.schedules.filter(schedule => {
-  //     const scheduleDate = new Date(schedule.date);
-  //     return scheduleDate.toDateString() === selectedDate.toDateString();  // 날짜 비교
-  //   });
-
-  //   filteredSchedules.forEach(schedule => {
-  //     const scheduleItem = document.createElement("li");
-  //     scheduleItem.innerHTML = `
-  //       <h4>${schedule.title}</h4>
-  //       <div>
-  //         <button>
-  //           <i class="fa-solid fa-pencil"></i>
-  //         </button>
-  //         <button>
-  //           <i class="fa-solid fa-trash"></i>
-  //         </button>
-  //       </div>
-  //     `;
-
-  //     this.scheduleList.append(scheduleItem);
-  //   });
-  // }
-
   calendarEvent() {
     this.moveMonthEvent();
-    this.renderSchedules(new Date());
   }
 }
 
