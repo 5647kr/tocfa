@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/common/common.css">
-  <link rel="stylesheet" href="calendar.css">
+  <link rel="stylesheet" href="../common/common.css">
+  <link rel="stylesheet" href="./calendar.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <title>Calendar</title>
 </head>
@@ -17,13 +17,14 @@
             <i class="fa-solid fa-caret-left"></i>
           </button>
           <time class="year" datetime="">
-            <h2></h2>
-            <p></p>
+            <h2>2020</h2>
+            <p>1</p>
           </time>
           <button class="nextMonth">
             <i class="fa-solid fa-caret-right"></i>
           </button>
         </div>
+
         <div class="monthWrap">
           <table>
             <thead>
@@ -39,58 +40,72 @@
             </thead>
             <tbody>
               <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>
+                  <span>2</span>
+                  <ul>
+                    <li>일정1</li>
+                    <li>일정2일정2일정2일정2332432432</li>
+                    <li>일정3</li>
+                    <li>일정1</li>
+                    <li>일정1</li>
+                    <li>일정1</li>
+                    <li>일정1</li>
+                    <li>일정1</li>
+                    <li>일정1</li>
+                    <li>일정1</li>
+                  </ul>
+                </td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
               </tr>
               <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
               </tr>
               <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
               </tr>
               <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
               </tr>
               <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
               </tr>
               <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
               </tr>
             </tbody>
           </table>
@@ -101,18 +116,26 @@
         <article class="scheduleWrap">
           <div class="scheduleList">
             <div class="title">
-              <h3></h3>
+              <h3>13 금요일</h3>
               <button class="closeBtn">
                 <i class="fa-solid fa-xmark"></i>
               </button>
             </div>
             <ul>
+              <li>
+                <h4>일정1</h4>
+                <div class="btnWrap">
+                  <button>
+                    <i class="fa-solid fa-pencil"></i>
+                  </button>
+                  <button>
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                </div>
+              </li>
             </ul>
             <form>
-              <div class="inputWrap">
-                <label></label>
-                <input type="text">
-              </div>
+              <input type="text" placeholder="일정을 작성해주세요.">
               <button class="regBtn">
                 <i class="fa-solid fa-plus"></i>
               </button>
@@ -120,6 +143,7 @@
           </div>
         </article>
       </div>
+      
     </div>
   </main>
 

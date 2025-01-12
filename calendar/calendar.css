@@ -1,134 +1,129 @@
 /* 모바일 세로 / ~480px / 10, 12, 14, 16 */
 main > .wrap {
   height: 100%;
-  padding: 40px 20px;
-  position: relative;
+  padding: 20px;
 }
 
 .calendar {
   height: 100%;
 }
 
-.calendar > .calendarWrap {
-  height: 100%;
+.calendar > div ~ div {
+  margin-top: 20px;
 }
 
-.calendar .yearWrap {
-  width: 100%;
+.yearWrap {
   height: 80px;
+  background-color: var(--white-color);
+  border-radius: 20px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 40px;
 }
 
 .yearWrap button {
   width: 80px;
   height: 100%;
   background-color: var(--main-color);
-  color: var(--bg-color);
 }
 
 .yearWrap button i {
   font-size: var(--font-mz);
-  font-weight: var(--font-ebw);
+  color: var(--white-color);
 }
 
-.yearWrap > .prevMonth {
-  border-radius: 30px 0 0 30px;
+.yearWrap .prevMonth {
+  border-radius: 20px 0 0 20px;
 }
 
-.yearWrap > .nextMonth {
-  border-radius: 0 30px 30px 0;
+.yearWrap .nextMonth {
+  border-radius: 0 20px 20px 0;
 }
 
 .yearWrap .year {
-  color: var(--sub-color);
-  width: calc(100% - 160px);
-  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #FFFFFF;
 }
 
-.yearWrap .year h2 {
-  font-size: var(--font-mz);
+.year h2 {
+  font-size: var(--font-mlz);
   font-weight: var(--font-ebw);
 }
 
-.yearWrap .year p {
-  font-size: var(--font-smz);
+.year p {
+  font-size: var(--font-mz);
   font-weight: var(--font-bw);
 }
 
 .calendar .monthWrap {
-  width: 100%;
-  height: calc(100% - 80px - 40px);
+  height: calc(100% - 80px - 20px);
   background-color: var(--main-color);
-  border-radius: 30px;
   padding: 20px;
+  border-radius: 20px;
 }
 
 .monthWrap table {
-  background-color: var(--bg-color);
   width: 100%;
   height: 100%;
   border-radius: 10px;
+  background-color: var(--bg-color);
   border-collapse: collapse;
-  
+  overflow: hidden;
 }
 
-table thead, tbody {
-  height: calc(100% / 7);
+table :where(th, td) {
+  border: 1px solid var(--border-color);
 }
 
-table thead th:first-child,
-table tbody tr td:first-child {
-  color: var(--error-color);
-}
-
-table thead {
-  font-size: var(--font-smz);
+table th {
+  padding: 20px 0;
+  font-size: var(--font-mlz);
   font-weight: var(--font-ebw);
 }
 
-table tbody td {
+table td {
   position: relative;
+  height: calc(100% / 6);
 }
 
-table tbody td {
-  text-align: left;
-  vertical-align: 0;
-  font-size: var(--font-sz);
+table td span {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  font-size: var(--font-smz);
   font-weight: var(--font-bw);
 }
 
-table tbody td ul {
+table th:first-child, table td:first-child span {
+  color: var(--error-color);
+}
+
+table td ul {
   position: absolute;
-  top: 14px;
-  left: 0;
-  width: 100%;
-  height: calc(100% - 14px);
+  top: 20px;
+  left: 4px;
+  width: calc(100% - 4px);
+  height: calc(100% - 20px);
   overflow-y: auto;
 }
 
-table tbody td ul li {
-  font-size: var(--font-ssz);
-}
-
-table th, td {
-  border: 1px solid var(--border-color);
+table td ul li {
+  font-size: var(--font-sz);
+  font-weight: var(--font-rw);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .scheduleBg {
   position: fixed;
-  width: 100%;
-  height: 100%;
   top: 0;
   left: 0;
+  width: 100%;
+  height: 100%;
   z-index: 2;
+  padding: 20px;
   background-color: rgba(0, 0, 0, 0.5);
   display: none;
 }
@@ -139,200 +134,206 @@ table th, td {
 
 .scheduleWrap {
   width: calc(100% - 40px);
+  background-color: var(--main-color);
+  border-radius: 20px;
+  padding: 20px;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: var(--main-color);
-  padding: 20px;
-  border-radius: 30px;
 }
 
 .scheduleList {
-  width: 100%;
-  height: 400px;
-  background-color: #FFFFFF;
+  background-color: var(--white-color);
   border-radius: 10px;
   padding: 20px;
-}
-
-.scheduleList .title {
-  width: 100%;
-  height: 10%;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px dashed var(--border-color);
-  margin-bottom: 10px;
-}
-
-.title h3 {
-  font-size: var(--font-mz);
-  font-weight: var(--font-ebw);
-}
-
-.title button i {
-  font-size: var(--font-mz);
-  font-weight: var(--font-ebw);
-}
-
-.scheduleList ul {
-  width: 100%;
-  height: calc(80% - 20px);
-  overflow-y: auto;
-  margin-bottom: 10px;
-}
-
-.scheduleList ul li {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 0;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.scheduleList ul li button i {
-  font-size: var(--font-smz);
-}
-
-.scheduleList form {
-  width: 100%;
-  height: 10%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
   gap: 20px;
 }
 
-form .inputWrap {
-  flex-grow: 2;
-  height: 100%;
+.scheduleList .title {
+  padding: 4px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dashed var(--border-color);
 }
 
-form .inputWrap input {
-  width: 100%;
-  height: 100%;
-  padding: 0 10px;
-  border: 1px solid var(--border-color);
-  border-radius: 10px;
+.title h3, .title button i {
+  font-size: var(--font-mlz);
+  font-weight: var(--font-bw);
 }
 
-form .inputWrap input:focus {
+.scheduleList ul {
+  height: 240px;
+  overflow-y: auto;
+}
+
+.scheduleList ul li {
+  padding: 4px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.scheduleList ul li h4 {
+  font-size: var(--font-sz);
+  font-weight: var(--font-rw);
+}
+
+.scheduleList ul li button i {
+  font-size: var(--font-sz);
+}
+
+.scheduleList form {
+  padding: 12px;
+  border-top: 1px dashed var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+form :where(input, i) {
+  flex-grow: 1;
+  border: none;
+  font-size: var(--font-smz);
+  font-weight: var(--font-bw);
+}
+
+form input:focus {
   outline: none;
 }
 
-form button {
-  width: 20px;
-  height: 20px;
-  padding: 14px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  background-color: #FFFFFF;
-  box-shadow: 2px 2px 10px var(--border-color);
-}
 
-form button i {
-  font-size: var(--font-mz);
-  font-weight: var(--font-ebw);
-}
 
-/* 모바일 가로 ~ 태블릿 세로 / 481px~768px / 12, 14, 16, 18 */
-@media screen and (min-width: 481px) and (max-width: 768px) {
+
+
+
+
+
+
+
+/* 모바일 가로 ~ 태블릿 세로 / 12, 14, 16, 18 */
+@media screen and (min-width: 768px) and (max-width: 991px) {
   main > .wrap {
-    padding: 60px 40px;
+    padding: 40px;
   }
-
-  .calendar .yearWrap {
-    height: 100px;
+  
+  .calendar > div ~ div {
+    margin-top: 40px;
+  }
+  
+  .yearWrap {
+    height: 90px;
+    border-radius: 25px;
   }
   
   .yearWrap button {
-    width: 100px;
+    width: 90px;
   }
   
   .yearWrap button i {
     font-size: var(--font-mlz);
   }
   
-  .yearWrap .year {
-    width: calc(100% - 200px);
+  .yearWrap .prevMonth {
+    border-radius: 25px 0 0 25px;
   }
   
-  .yearWrap .year h2 {
+  .yearWrap .nextMonth {
+    border-radius: 0 25px 25px 0;
+  }
+  
+  .year h2 {
+    font-size: var(--font-lz);
+  }
+  
+  .year p {
     font-size: var(--font-mlz);
-  }
-  
-  .yearWrap .year p {
-    font-size: var(--font-mz);
   }
   
   .calendar .monthWrap {
-    height: calc(100% - 100px - 40px);
-  }
-
-  table thead {
-    font-size: var(--font-mlz);
+    height: calc(100% - 90px - 40px);
+    padding: 25px;
+    border-radius: 25px;
   }
   
-  table tbody td {
+  table th {
+    font-size: var(--font-lz);
+  }
+  
+  table td span {
+    font-size: var(--font-mz);
+  }
+  
+  table td ul {
+    top: 22px;
+    height: calc(100% - 22px);
+  }
+  
+  table td ul li {
     font-size: var(--font-smz);
   }
   
-  table tbody td ul {
-    top: 16px;
-    height: calc(100% - 16px);
+  .scheduleBg {
+    padding: 25px;
   }
   
-  table tbody td ul li {
-    font-size: var(--font-sz);
-  }
-
   .scheduleWrap {
     width: calc(100% - 80px);
+    border-radius: 25px;
+    padding: 25px;
   }
   
-  .scheduleList .title {
-    margin-bottom: 20px;
+  .scheduleList {
+    padding: 25px;
+    gap: 25px;
   }
   
-  .title h3 {
-    font-size: var(--font-mlz);
-  }
-  
-  .title button i {
-    font-size: var(--font-mlz);
+  .title h3, .title button i {
+    font-size: var(--font-lz);
   }
   
   .scheduleList ul {
-    height: calc(80% - 40px);
-    margin-bottom: 20px;
+    height: 260px;
   }
-
+  
+  .scheduleList ul li h4 {
+    font-size: var(--font-smz);
+  }
+  
   .scheduleList ul li button i {
+    font-size: var(--font-smz);
+  }
+  
+  form :where(input, i) {
     font-size: var(--font-mz);
-  }
-  
-  form button {
-    width: 22px;
-    height: 22px;
-    padding: 16px;
-  }
-  
-  form button i {
-    font-size: var(--font-mlz);
   }
 }
 
-/* 태블릿 가로 / 769px~ / 14, 16, 18, 20 */
-@media screen and (min-width: 769px) {
+
+
+
+
+
+
+
+
+
+/* 태블릿 가로 / 14, 16, 18, 20 */
+@media screen and (min-width: 992px) {
   main > .wrap {
-    padding: 80px 60px;
+    padding: 60px;
   }
   
-  .calendar .yearWrap {
+  .calendar > div ~ div {
+    margin-top: 60px;
+  }
+  
+  .yearWrap {
     height: 100px;
-    margin-bottom: 60px;
+    border-radius: 30px;
   }
   
   .yearWrap button {
@@ -343,78 +344,75 @@ form button i {
     font-size: var(--font-lz);
   }
   
-  .yearWrap .year {
-    width: calc(100% - 200px);
+  .yearWrap .prevMonth {
+    border-radius: 30px 0 0 30px;
   }
   
-  .yearWrap .year h2 {
+  .yearWrap .nextMonth {
+    border-radius: 0 30px 30px 0;
+  }
+  
+  .year h2 {
+    font-size: var(--font-xlz);
+  }
+  
+  .year p {
     font-size: var(--font-lz);
   }
   
-  .yearWrap .year p {
-    font-size: var(--font-mlz);
-  }
-  
   .calendar .monthWrap {
-    width: 100%;
-    padding: 40px;
     height: calc(100% - 100px - 60px);
+    padding: 30px;
+    border-radius: 30px;
+  }
+
+  table th {
+    font-size: var(--font-xlz);
   }
   
-  table thead {
+  table td span {
     font-size: var(--font-mlz);
   }
   
-  table tbody td {
+  table td ul {
+    top: 24px;
+    height: calc(100% - 24px);
+  }
+  
+  table td ul li {
     font-size: var(--font-mz);
-  }
-  
-  table tbody td ul {
-    top: 16px;
-    height: calc(100% - 16px);
-  }
-  
-  table tbody td ul li {
-    font-size: var(--font-smz);
   }
   
   .scheduleWrap {
     width: calc(100% - 120px);
+    border-radius: 30px;
+    padding: 30px;
   }
   
-  .scheduleList .title {
-    margin-bottom: 20px;
+  .scheduleList {
+    padding: 30px;
+    gap: 30px;
   }
   
-  .title h3 {
-    font-size: var(--font-lz);
-  }
-  
-  .title button i {
-    font-size: var(--font-lz);
+  .title h3, .title button i {
+    font-size: var(--font-xlz);
   }
   
   .scheduleList ul {
-    height: calc(80% - 40px);
-    margin-bottom: 20px;
+    height: 280px;
   }
-
+  
+  .scheduleList ul li h4 {
+    font-size: var(--font-mz);
+  }
+  
   .scheduleList ul li button i {
+    font-size: var(--font-mz);
+  }
+  
+  form :where(input, i) {
+    flex-grow: 1;
+    border: none;
     font-size: var(--font-mlz);
-  }
-  
-  .scheduleList form {
-    gap: 40px;
-  }
-  
-  form button {
-    width: 24px;
-    height: 24px;
-    padding: 18px;
-    box-shadow: 4px 4px 10px var(--border-color);
-  }
-  
-  form button i {
-    font-size: var(--font-lz);
   }
 }
