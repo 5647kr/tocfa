@@ -11,7 +11,7 @@ class Todo {
     this.todoArr = JSON.parse(localStorage.getItem("todoArr")) || [];
     this.todoId = JSON.parse(localStorage.getItem("todoId")) || 0;
     this.editTodoId = null;
-    this.currentDate = null; // 현재 선택된 날짜
+    this.currentDate = null;
   }
 
   TodoEvent() {
@@ -60,7 +60,6 @@ class Todo {
   
       this.dateList.appendChild(dateItem);
     }
-
   }
   
   manageTodoData() {
@@ -76,7 +75,11 @@ class Todo {
 
         const props = { key, title, done, date, id }
 
-        this.regTodo(props)
+        if(this.editTodoId === null) {
+          this.regTodo(props);
+        } else {
+          this.updateTodo(this.editTodoId)
+        }
       })
     })
   }
@@ -105,18 +108,21 @@ class Todo {
       <input type="checkbox" id="${todoItemData.id}">
       <label for="${todoItemData.id}">${todoItemData.title}</label>
       <div class="btnWrap">
-        <button>
+        <button class="editBtn">
           <i class="fa-solid fa-pencil"></i>
         </button>
-        <button>
+        <button class="deleteBtn">
           <i class="fa-solid fa-trash"></i>
         </button>
       </div>
     `;
 
     todoItem.innerHTML = todoItemContent;
-    todoItem.id = todoItemData.key
-    
+    todoItem.id = todoItemData.id;
+
+    const checkbox = todoItem.querySelector("input[type=checkbox]");
+    checkbox.checked = todoItemData.done;
+
     this.manageTodoItem(todoItem);
 
     this.todoList.forEach((list) => {
@@ -140,6 +146,80 @@ class Todo {
     todayTodo.forEach((todoItemData) => {
       this.createTodoItem(todoItemData)
     })
+  }
+
+  manageTodoItem(todoItem) {
+    const check = todoItem.querySelector("input[type=checkbox]");
+    const editBtn = todoItem.querySelector(".btnWrap .editBtn");
+    const delBtn = todoItem.querySelector(".btnWrap .deleteBtn");
+
+    check.addEventListener("click", () => this.checkTodo(todoItem))
+    editBtn.addEventListener("click", () => this.editTodo(todoItem))
+    delBtn.addEventListener("click", () => this.deleteTodo(todoItem.id))
+  }
+
+  checkTodo(todoItem) {
+    const checkItem = this.todoArr.find(item => item.id === parseInt(todoItem.id));
+
+    checkItem.done = !checkItem.done;
+
+    localStorage.setItem("todoArr", JSON.stringify(this.todoArr));
+  }
+
+  editTodo(todoItem) {
+    const editItem = this.todoArr.find(item => item.id === parseInt(todoItem.id));
+    const editInput = Array.from(this.todoInput).find((input) => {
+      return editItem.key === input.id;
+    })
+
+    const editBtn = editInput.nextElementSibling;
+
+    if(editItem) {
+      editInput.value = editItem.title;
+  
+      this.editTodoId = editItem.id;
+    }
+  }
+
+  updateTodo(id) {
+    const updateTodo = this.todoArr.find(item => item.id === parseInt(id));
+
+    const editInput = Array.from(this.todoInput).find((input) => {
+      return updateTodo.key === input.id;
+    })
+
+    console.log
+
+    const editBtn = editInput.nextElementSibling;
+
+    if(updateTodo) {
+      updateTodo.title = editInput.value;
+
+      localStorage.setItem("todoArr", JSON.stringify(this.todoArr));
+
+      this.displayTodoList();
+
+      this.editTodoId = null;
+
+      this.resetInput();
+
+    }
+  }
+
+
+
+
+  deleteTodo(id) {
+    this.todoArr = this.todoArr.filter(item => item.id !== parseInt(id));
+
+    localStorage.setItem("todoArr", JSON.stringify(this.todoArr));
+
+    const li = document.getElementById(id);
+    if(li) {
+      li.remove();
+    }
+
+    this.displayTodoList();
   }
 
   resetInput() {
