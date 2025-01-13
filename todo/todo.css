@@ -76,7 +76,7 @@ article .formWrap {
   outline: none;
 }
 
-article .todoListWrap {
+article [class^= todoListWrap] {
   height: 240px;
   background-color: var(--white-color);
   border-radius: 10px;
@@ -84,7 +84,7 @@ article .todoListWrap {
   overflow-y: auto;
 }
 
-.todoListWrap li {
+[class^= todoListWrap] li {
   padding: 4px;
   border-bottom: 1px solid var(--border-color);
   display: flex;
@@ -93,7 +93,7 @@ article .todoListWrap {
   gap: 20px;
 }
 
-.todoListWrap li input {
+[class^= todoListWrap] li input {
   width: 14px;
   height: 14px;
   border-radius: 2px;
@@ -101,17 +101,17 @@ article .todoListWrap {
   accent-color: var(--main-color);
 }
 
-.todoListWrap li label {
+[class^= todoListWrap] li label {
   flex-grow: 1;
   font-size: var(--font-smz);
 }
 
-.todoListWrap li input:checked + label {
+[class^= todoListWrap] li input:checked + label {
   text-decoration: 1px line-through var(--border-color);
   color: var(--border-color);
 }
 
-.todoListWrap li button i {
+[class^= todoListWrap] li button i {
   font-size: var(--font-smz);
 }
 
@@ -166,23 +166,23 @@ article .todoListWrap {
     font-size: var(--font-mz);
   }
   
-  article .todoListWrap {
+  article ul {
     height: 260px;
     border-radius: 10px;
     padding: 25px;
   }
   
-  .todoListWrap li input {
+  ul li input {
     width: 16px;
     height: 16px;
   }
   
-  .todoListWrap li label {
+  ul li label {
     flex-grow: 1;
     font-size: var(--font-mz);
   }
   
-  .todoListWrap li button i {
+  ul li button i {
     font-size: var(--font-mz);
   }
 }
@@ -242,22 +242,22 @@ article .todoListWrap {
     font-size: var(--font-mlz);
   }
   
-  article .todoListWrap {
+  article ul {
     height: 280px;
     padding: 30px;
   }
   
-  .todoListWrap li input {
+  ul li input {
     width: 18px;
     height: 18px;
   }
   
-  .todoListWrap li label {
+  ul li label {
     flex-grow: 1;
     font-size: var(--font-mlz);
   }
   
-  .todoListWrap li button i {
+  ul li button i {
     font-size: var(--font-mlz);
   }
 }
