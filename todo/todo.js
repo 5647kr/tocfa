@@ -4,20 +4,51 @@ class Todo {
     this.dateList = main.querySelector(".dateListWrap ul");
     this.todo = main.querySelectorAll(".todoWrap article");
     this.todoTitle = main.querySelectorAll(".todoTitleWrap h2");
+    this.editTitleBtn = main.querySelectorAll(".todoTitleWrap button");
     this.todoInput = main.querySelectorAll(".formWrap input");
     this.regBtn = main.querySelectorAll(".regBtn");
     this.todoList = main.querySelectorAll("[class^= todoListWrap]");
+
+    this.todoTitles = JSON.parse(localStorage.getItem("todoTitles")) || [
+      "할일 목록1", "할일 목록2", "할일 목록3", "할일 목록4"
+    ];
 
     this.todoArr = JSON.parse(localStorage.getItem("todoArr")) || [];
     this.todoId = JSON.parse(localStorage.getItem("todoId")) || 0;
     this.editTodoId = null;
     this.currentDate = null;
+
+    this.todoState = JSON.parse(localStorage.getItem("todoState")) || [];
+    this.todoStateId = JSON.parse(localStorage.getItem("todoStateId")) || 0;
   }
 
   TodoEvent() {
     this.dateGenerate();
+    this.displayTodoTitles();
     this.manageTodoData();
     this.displayTodoList();
+    this.saveTodoState();
+  }
+
+  displayTodoTitles() {
+    this.todoTitle.forEach((todoTitle, index) => {
+      todoTitle.textContent = this.todoTitles[index];
+    });
+
+    this.editTitleBtn.forEach((btn, index) => {
+      btn.addEventListener("click", () => this.editTodoTitle(index));
+    })
+  }
+
+  editTodoTitle(index) {
+    const currentTitle = this.todoTitles[index];
+    const newTitle = prompt("제목을 수정하세요", currentTitle);
+
+    if (newTitle !== null && newTitle.trim() !== "") {
+      this.todoTitles[index] = newTitle.trim();
+      localStorage.setItem("todoTitles", JSON.stringify(this.todoTitles));
+      this.displayTodoTitles();
+    }
   }
 
   dateGenerate() {
@@ -25,6 +56,13 @@ class Todo {
     const year = newDate.getFullYear();
     const month = newDate.getMonth();
     const date = newDate.getDate();
+
+    if (date === 1) {
+      this.saveTodoState();
+
+      // this.todoArr = [];
+      // localStorage.setItem("todoArr", JSON.stringify(this.todoArr));
+    }
     
     const startDate = new Date(year, month, 1).getDate();
     const endDate = new Date(year, month + 1, 0).getDate();
@@ -42,6 +80,7 @@ class Todo {
       
       if (i === date) {
         dateItem.classList.add("active");
+        dateItem.focus();
       }
       
       dateItem.appendChild(button);
@@ -59,6 +98,12 @@ class Todo {
       });
   
       this.dateList.appendChild(dateItem);
+    }
+
+    const todayLi = this.dateList.querySelector("li.active");
+    if (todayLi) {
+      // setTimeout(() => {
+      // }, 0);
     }
   }
   
@@ -80,6 +125,8 @@ class Todo {
         } else {
           this.updateTodo(this.editTodoId)
         }
+
+        this.saveTodoState() 
       })
     })
   }
@@ -164,6 +211,8 @@ class Todo {
     checkItem.done = !checkItem.done;
 
     localStorage.setItem("todoArr", JSON.stringify(this.todoArr));
+
+    this.saveTodoState();
   }
 
   editTodo(todoItem) {
@@ -171,8 +220,6 @@ class Todo {
     const editInput = Array.from(this.todoInput).find((input) => {
       return editItem.key === input.id;
     })
-
-    const editBtn = editInput.nextElementSibling;
 
     if(editItem) {
       editInput.value = editItem.title;
@@ -188,10 +235,6 @@ class Todo {
       return updateTodo.key === input.id;
     })
 
-    console.log
-
-    const editBtn = editInput.nextElementSibling;
-
     if(updateTodo) {
       updateTodo.title = editInput.value;
 
@@ -206,9 +249,6 @@ class Todo {
     }
   }
 
-
-
-
   deleteTodo(id) {
     this.todoArr = this.todoArr.filter(item => item.id !== parseInt(id));
 
@@ -220,7 +260,29 @@ class Todo {
     }
 
     this.displayTodoList();
+
+    this.saveTodoState();
   }
+
+  saveTodoState() {
+    // 기본 todoStateData 초기화
+    const todoStateData = {
+      "list1": "0/0", 
+      "list2": "0/0",
+      "list3": "0/0",
+      "list4": "0/0"
+    };
+
+    this.todoState.push(todoStateData);
+    
+    localStorage.setItem("todoState", JSON.stringify(this.todoState))
+    localStorage.setItem("todoStateId", JSON.stringify(++this.todoStateId)) 
+    // 로그로 최종 결과 확인
+    console.log('After Update:', todoStateData);
+  }
+  
+
+
 
   resetInput() {
     this.todoInput.forEach((input) => {
@@ -228,14 +290,35 @@ class Todo {
     })
   }
   /**
-   * 일단 로컬에 저장해야하는 데이터는
-   * title 할일 내용
-   * done 완료 여부
-   * date 날짜
-   * 어떤 article의 ul에 들어가야하는지 id값
-   * 할일 자체 아이디값
+   * 1. 매달 1일 todoArr 초기화
+   * 3. 완료한 todo count하여 로컬스토리지에 저장(삭제 또는 checkbox가 true 또는 false로 변경될때마다 업데이트 되어야 함)
    */
 }
 
 const todo = new Todo();
 todo.TodoEvent();
+
+
+  
+// console.log('Before Update:', todoStateData);
+  
+// // todoArr를 순회하면서 각 item의 상태를 업데이트
+// this.todoArr.forEach((item) => {
+//   // item의 key가 todoStateData의 key와 일치하면
+//   const key = item.key;  // 예: "list1", "list2" 등
+//   if (todoStateData[key]) {
+//     // 현재 "0/0" 형식의 데이터를 분해해서 숫자 추출
+//     let [completed, total] = todoStateData[key].split('/').map(Number);
+
+//     // 총 항목 수 증가
+//     total++;
+
+//     // 항목이 완료되었으면 완료된 항목 수 증가
+//     if (item.done) {
+//       completed++;
+//     }
+
+//     // 새로운 완료된 항목 수와 총 항목 수를 todoStateData에 반영
+//     todoStateData[key] = `${completed}/${total}`;
+//   }
+// });
