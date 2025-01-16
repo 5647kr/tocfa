@@ -112,14 +112,14 @@ class Todo {
 
         const props = { key, title, done, date, id }
 
+        this.todoState.length === 0 ? this.saveTodoState() : this.updateTodoState()
+
         if(this.editTodoId === null) {
           this.regTodo(props);
+          this.updateTodoState();
         } else {
           this.updateTodo(this.editTodoId);
         }
-
-        this.todoState.length === 0 ? this.saveTodoState() : this.updateTodoState()
-
       })
     })
   }
@@ -223,7 +223,6 @@ class Todo {
 
   updateTodo(id) { 
     const updateTodo = this.todoArr.find(item => item.id === parseInt(id));
-    console.log(updateTodo)
 
     const editInput = Array.from(this.todoInput).find((input) => {
       return updateTodo.key === input.id;
@@ -259,9 +258,6 @@ class Todo {
   }
 
   saveTodoState() {
-    // 등록할 때마다 todoState 초기화
-    this.todoState = [];
-
     const todoStateData = {
       "list1": "0/0", 
       "list2": "0/0",
