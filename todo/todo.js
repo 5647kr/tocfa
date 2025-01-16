@@ -53,7 +53,7 @@ class Todo {
   dateGenerate() {
     const newDate = new Date();
     const year = newDate.getFullYear();
-    const month = newDate.getMonth();
+    const month = newDate.getMonth() + 1;
     const date = newDate.getDate();
     
     const startDate = new Date(year, month, 1).getDate();
@@ -122,6 +122,12 @@ class Todo {
         }
       })
     })
+
+    if(this.todoArr.length !== 0 && this.currentDate.split("/")[1] === "1") {
+      this.manageTodoList();
+    } else {
+      return;
+    }
   }
 
   regTodo(props) {
@@ -306,6 +312,13 @@ class Todo {
 
       localStorage.setItem("todoState", JSON.stringify(this.todoState));
     }
+  }
+
+  manageTodoList() {
+    const newMonth = new Date().getMonth() + 1;
+    this.todoArr = this.todoArr.filter(item => parseInt(item.date.split("/")[0]) !== newMonth);
+
+    localStorage.setItem("todoArr", JSON.stringify(this.todoArr));
   }
 
 
