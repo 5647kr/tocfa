@@ -19,7 +19,7 @@ class Todo {
     this.currentDate = null;
 
     this.todoState = JSON.parse(localStorage.getItem("todoState")) || [];
-    this.todoStateId = JSON.parse(localStorage.getItem("todoStateId")) || 0;
+
   }
 
   TodoEvent() {
@@ -27,7 +27,6 @@ class Todo {
     this.displayTodoTitles();
     this.manageTodoData();
     this.displayTodoList();
-    this.saveTodoState();
   }
 
   displayTodoTitles() {
@@ -56,13 +55,6 @@ class Todo {
     const year = newDate.getFullYear();
     const month = newDate.getMonth();
     const date = newDate.getDate();
-
-    if (date === 1) {
-      this.saveTodoState();
-
-      // this.todoArr = [];
-      // localStorage.setItem("todoArr", JSON.stringify(this.todoArr));
-    }
     
     const startDate = new Date(year, month, 1).getDate();
     const endDate = new Date(year, month + 1, 0).getDate();
@@ -123,10 +115,11 @@ class Todo {
         if(this.editTodoId === null) {
           this.regTodo(props);
         } else {
-          this.updateTodo(this.editTodoId)
+          this.updateTodo(this.editTodoId);
         }
 
-        this.saveTodoState() 
+        this.todoState.length === 0 ? this.saveTodoState() : this.updateTodoState()
+
       })
     })
   }
@@ -212,7 +205,7 @@ class Todo {
 
     localStorage.setItem("todoArr", JSON.stringify(this.todoArr));
 
-    this.saveTodoState();
+    this.updateTodoState();
   }
 
   editTodo(todoItem) {
@@ -228,8 +221,9 @@ class Todo {
     }
   }
 
-  updateTodo(id) {
+  updateTodo(id) { 
     const updateTodo = this.todoArr.find(item => item.id === parseInt(id));
+    console.log(updateTodo)
 
     const editInput = Array.from(this.todoInput).find((input) => {
       return updateTodo.key === input.id;
@@ -261,11 +255,13 @@ class Todo {
 
     this.displayTodoList();
 
-    this.saveTodoState();
+    this.updateTodoState();
   }
 
   saveTodoState() {
-    // 기본 todoStateData 초기화
+    // 등록할 때마다 todoState 초기화
+    this.todoState = [];
+
     const todoStateData = {
       "list1": "0/0", 
       "list2": "0/0",
@@ -273,14 +269,48 @@ class Todo {
       "list4": "0/0"
     };
 
-    this.todoState.push(todoStateData);
+    for(let i = 0; i <= 11; i++) {
+      this.todoState.push({ ...todoStateData });
+    }
     
-    localStorage.setItem("todoState", JSON.stringify(this.todoState))
-    localStorage.setItem("todoStateId", JSON.stringify(++this.todoStateId)) 
-    // 로그로 최종 결과 확인
-    console.log('After Update:', todoStateData);
+    localStorage.setItem("todoState", JSON.stringify(this.todoState));
   }
   
+  updateTodoState() {
+    const date = new Date();
+    const stateMonth = date.getMonth();
+    let updateState = this.todoState[stateMonth];
+    
+    if(updateState) {
+      // 해당달 데이터 초기화
+      updateState = {
+        "list1": "0/0", 
+        "list2": "0/0",
+        "list3": "0/0",
+        "list4": "0/0"
+      };
+
+      this.todoArr.forEach((item) => {
+        const key = item.key
+        
+        if (updateState[key]) {
+          let [completed, total] = updateState[key].split('/').map(Number);
+          
+          total = this.todoArr.filter((todo) => todo.key === key).length;
+          
+          if (item.done) {
+            completed++;
+          }
+          
+          updateState[key] = `${completed}/${total}`;
+
+        }
+      })
+      this.todoState[stateMonth] = updateState;
+
+      localStorage.setItem("todoState", JSON.stringify(this.todoState));
+    }
+  }
 
 
 
@@ -290,35 +320,9 @@ class Todo {
     })
   }
   /**
-   * 1. 매달 1일 todoArr 초기화
-   * 3. 완료한 todo count하여 로컬스토리지에 저장(삭제 또는 checkbox가 true 또는 false로 변경될때마다 업데이트 되어야 함)
+   * 1. 매달 1일 todoArr 초기화 / 매년 1월 1일 todoState 초기화
    */
 }
 
 const todo = new Todo();
 todo.TodoEvent();
-
-
-  
-// console.log('Before Update:', todoStateData);
-  
-// // todoArr를 순회하면서 각 item의 상태를 업데이트
-// this.todoArr.forEach((item) => {
-//   // item의 key가 todoStateData의 key와 일치하면
-//   const key = item.key;  // 예: "list1", "list2" 등
-//   if (todoStateData[key]) {
-//     // 현재 "0/0" 형식의 데이터를 분해해서 숫자 추출
-//     let [completed, total] = todoStateData[key].split('/').map(Number);
-
-//     // 총 항목 수 증가
-//     total++;
-
-//     // 항목이 완료되었으면 완료된 항목 수 증가
-//     if (item.done) {
-//       completed++;
-//     }
-
-//     // 새로운 완료된 항목 수와 총 항목 수를 todoStateData에 반영
-//     todoStateData[key] = `${completed}/${total}`;
-//   }
-// });
