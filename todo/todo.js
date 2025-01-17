@@ -59,7 +59,7 @@ class Todo {
     const startDate = new Date(year, month, 1).getDate();
     const endDate = new Date(year, month + 1, 0).getDate();
 
-    this.currentDate = `${month + 1}/${date}`
+    this.currentDate = `${month + 1}/${date}`;
     
     this.dateList.innerHTML = "";
   
@@ -128,7 +128,7 @@ class Todo {
       })
     })
 
-    if(this.todoArr.length !== 0 && this.currentDate.split("/")[1] === "17") {
+    if(this.todoArr.length !== 0 && this.currentDate.split("/")[1] === "1") {
       const newMonthTodoArr = this.todoArr.some((item) => item.date.split("/")[0] !== this.currentDate.split(("/")[0]));
 
       if(newMonthTodoArr) {
@@ -332,15 +332,11 @@ class Todo {
   }
 
 
-
   resetInput() {
     this.todoInput.forEach((input) => {
       input.value = ""
     })
   }
-  /**
-   * 1. 매달 1일 todoArr 초기화 / 매년 1월 1일 todoState 초기화
-   */
 }
 
 const todo = new Todo();
