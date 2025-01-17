@@ -53,7 +53,7 @@ class Todo {
   dateGenerate() {
     const newDate = new Date();
     const year = newDate.getFullYear();
-    const month = newDate.getMonth() + 1;
+    const month = newDate.getMonth();
     const date = newDate.getDate();
     
     const startDate = new Date(year, month, 1).getDate();
@@ -94,8 +94,13 @@ class Todo {
 
     const todayLi = this.dateList.querySelector("li.active");
     if (todayLi) {
-      // setTimeout(() => {
-      // }, 0);
+      setTimeout(() => {
+        todayLi.scrollIntoView({
+          behavior: "smooth", // 스크롤 애니메이션
+          block: "center", // 화면 중앙으로 스크롤
+          inline: "center" // 수평 스크롤 시에도 중앙 정렬
+        });
+      }, 0);
     }
   }
   
@@ -123,8 +128,13 @@ class Todo {
       })
     })
 
-    if(this.todoArr.length !== 0 && this.currentDate.split("/")[1] === "1") {
-      this.manageTodoList();
+    if(this.todoArr.length !== 0 && this.currentDate.split("/")[1] === "17") {
+      const newMonthTodoArr = this.todoArr.some((item) => item.date.split("/")[0] !== this.currentDate.split(("/")[0]));
+
+      if(newMonthTodoArr) {
+        this.manageTodoList();
+      }
+
     } else {
       return;
     }
@@ -296,7 +306,7 @@ class Todo {
         const key = item.key
         
         if (updateState[key]) {
-          let [completed, total] = updateState[key].split('/').map(Number);
+          let [completed, total] = updateState[key].split("/").map(Number);
           
           total = this.todoArr.filter((todo) => todo.key === key).length;
           
