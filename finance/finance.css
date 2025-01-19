@@ -28,6 +28,10 @@ main > .wrap > article > div ~ div {
   font-weight: var(--font-ebw);
 }
 
+.totalFinance h2.minus {
+  color: var(--error-color);
+}
+
 .financeContent {
   height: calc(100% - 100px);
   display: flex;
@@ -326,7 +330,7 @@ main > .wrap > article > div ~ div {
 
 
 /* 태블릿 가로 / 14, 16, 18, 20 */
-@media screen and (min-width: 992px) and (max-width: 1199px) {
+@media screen and (min-width: 992px) {
   main > .wrap {
     padding: 60px;
   }
