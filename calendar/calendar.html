@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../common/common.css">
+  <link rel="stylesheet" href="./calendar.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>Calendar</title>
+</head>
+<body>
+  <main>
+    <div class="wrap">
+      <article class="calendar">
+        <div class="yearWrap">
+          <button class="prevMonth">
+            <i class="fa-solid fa-caret-left"></i>
+          </button>
+          <time class="year" datetime="">
+            <h2>2020</h2>
+            <p>1</p>
+          </time>
+          <button class="nextMonth">
+            <i class="fa-solid fa-caret-right"></i>
+          </button>
+        </div>
+
+        <div class="monthWrap">
+          <table>
+            <thead>
+              <tr>
+                <th>일</th>
+                <th>월</th>
+                <th>화</th>
+                <th>수</th>
+                <th>목</th>
+                <th>금</th>
+                <th>토</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <span>2</span>
+                  <ul>
+                    <li>일정1</li>
+                    <li>일정2일정2일정2일정2332432432</li>
+                    <li>일정3</li>
+                    <li>일정1</li>
+                    <li>일정1</li>
+                    <li>일정1</li>
+                    <li>일정1</li>
+                    <li>일정1</li>
+                    <li>일정1</li>
+                    <li>일정1</li>
+                  </ul>
+                </td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <div class="scheduleBg">
+        <article class="scheduleWrap">
+          <div class="scheduleList">
+            <div class="title">
+              <h3>13 금요일</h3>
+              <button class="closeBtn">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+            <ul>
+              <li>
+                <h4>일정1</h4>
+                <div class="btnWrap">
+                  <button>
+                    <i class="fa-solid fa-pencil"></i>
+                  </button>
+                  <button>
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                </div>
+              </li>
+            </ul>
+            <form>
+              <input type="text" placeholder="일정을 작성해주세요.">
+              <button class="regBtn">
+                <i class="fa-solid fa-plus"></i>
+              </button>
+            </form>
+          </div>
+        </article>
+      </div>
+      
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <ul>
+        <li>
+          <a href="/todo/todo.html">
+            <i class="fa-solid fa-list"></i>
+          </a>
+        </li>
+        <li>
+          <a href="/calculate/calculate.html">
+            <i class="fa-solid fa-calculator"></i>
+          </a>
+        </li>
+        <li class="active">
+          <a href="/calendar/calendar.html">
+            <i class="fa-solid fa-calendar-days"></i>
+          </a>
+        </li>
+        <li>
+          <a href="/finance/finance.html">
+            <i class="fa-solid fa-file-invoice-dollar"></i>
+          </a>
+        </li>
+        <li>
+          <a href="/analyze/analyze.html">
+            <i class="fa-solid fa-chart-pie"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="calendar.js"></script>
+</body>
+</html>
