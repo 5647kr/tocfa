@@ -198,7 +198,7 @@ article [class^= todoListWrap] {
 
 
 /* 태블릿 가로 / 992px ~ 1199px / 14, 16, 18, 20 */
-@media screen and (min-width: 992px) and (max-width: 1199px) {
+@media screen and (min-width: 992px) {
   .wrap > div ~ div {
     margin-top: 60px;
   }
