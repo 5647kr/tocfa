@@ -1,7 +1,7 @@
 /* 모바일 세로 / ~480px / 10, 12, 14, 16 */
 main {
   height: 100vh;
-  padding: 40px 20px 40px;
+  padding: 0;
   text-align: center;
   font-weight: var(--font-bw);
 }
@@ -11,25 +11,27 @@ main .wrap {
 }
 
 main h1 {
-  margin: 100px auto 0;
+  margin: 80px auto;
 }
 
 main h1 img {
   display: block;
-  margin: 0 auto 30px;
+  margin: 0 auto;
 }
 
 main h2 {
-  font-size: var(--font-sz);
-  margin-bottom: 40px;
+  font-size: var(--font-smz);
+  font-weight: var(--font-ebw);
+  margin-bottom: 80px;
 }
 
 main p {
-  font-size: var(--font-ssz);
+  font-size: var(--font-sz);
+  font-weight: var(--font-bw);
 }
 
 main p:not(:last-child) {
-  margin-bottom: 200px;
+  margin-bottom: 100px;
 }
 
 main .linkWrap a {
@@ -57,18 +59,35 @@ footer strong {
   display: block;
 }
 
+
+
+
+
+
+
+
+
+
+
 /* 모바일 가로 ~ 태블릿 세로 / 481px~768px / 12, 14, 16, 18 */
 @media screen and (min-width: 481px) and (max-width: 768px) {
-  main {
-    padding: 60px 40px 60px;
+
+  main h1 {
+    margin: 100px auto;
   }
+
   
   main h2 {
-    font-size: var(--font-smz);
+    font-size: var(--font-mz);
+    margin-bottom: 100px;
   }
   
   main p {
-    font-size: var(--font-sz);
+    font-size: var(--font-smz);
+  }
+  
+  main p:not(:last-child) {
+    margin-bottom: 120px;
   }
   
   main .linkWrap p {
@@ -79,22 +98,40 @@ footer strong {
     font-size: var(--font-sz);
   }
 }
+
+
+
+
+
+
+
+
+
+
+
 /* 태블릿 가로 / 769px~ / 14, 16, 18, 20 */
-@media screen and (min-width: 769px) {
-  main {
-    padding: 80px 60px 80px;
+@media screen and (min-width: 769px) {  
+  main h1 {
+    margin: 100px auto;
   }
   
   main h2 {
-    font-size: var(--font-mz);
+    font-size: var(--font-mlz);
+    margin-bottom: 100px;
   }
   
   main p {
-    font-size: var(--font-smz);
+    font-size: var(--font-mz);
   }
+  
+  main p:not(:last-child) {
+    margin-bottom: 100px;
+  }
+
   
   main .linkWrap p {
     font-size: var(--font-smz);
+    font-weight: var(--font-bw);
   }
   
   footer strong {
