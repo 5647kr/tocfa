@@ -152,7 +152,7 @@ main .wrap .calculate > div {
 
 
 /* 태블릿 가로 / 769px~ / 14, 16, 18, 20 */
-@media screen and (min-width: 992px) {
+@media screen and (min-width: 992px
   main > .wrap {
     padding: 60px;
   }

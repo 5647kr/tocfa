@@ -1,0 +1,263 @@
+/* 모바일 세로 / ~767px / 10, 12, 14, 16 */
+.wrap > div ~ div {
+  margin-top: 20px;
+}
+
+.dateListWrap {
+  height: 80px;
+  background-color: var(--white-color);
+  border-radius: 20px;
+  
+}
+
+.dateListWrap ul {
+  height: 100%;
+  display: flex;
+  overflow-x: auto;
+}
+
+.dateListWrap ul li button {
+  width: 80px;
+  height: 100%;
+  font-size: var(--font-mlz);
+  font-weight: var(--font-bw);
+}
+
+.dateListWrap ul li.active {
+  background-color: var(--main-color);
+  border-radius: 20px;
+}
+
+.dateListWrap ul li.active button {
+  color: var(--white-color);
+}
+
+.todoWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.todoWrap article {
+  background-color: var(--main-color);
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.todoWrap article :where(form, ul) {
+  margin-top: 20px;
+}
+
+article .todoTitleWrap {
+  display: flex;
+  justify-content: space-between;
+}
+
+.todoTitleWrap :where(h2, i) {
+  font-size: var(--font-mlz);
+  color: var(--white-color);
+}
+
+article .formWrap {
+  background-color: var(--white-color);
+  padding: 12px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.formWrap :where(input, i) {
+  font-size: var(--font-smz);
+  font-weight: var(--font-bw);
+  border: none;
+}
+
+.formWrap input:focus {
+  outline: none;
+}
+
+article [class^= todoListWrap] {
+  height: 240px;
+  background-color: var(--white-color);
+  border-radius: 10px;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+[class^= todoListWrap] li {
+  padding: 4px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+[class^= todoListWrap] li input {
+  width: 14px;
+  height: 14px;
+  border-radius: 2px;
+  border: 1px solid var(--border-color);
+  accent-color: var(--main-color);
+}
+
+[class^= todoListWrap] li label {
+  flex-grow: 1;
+  font-size: var(--font-smz);
+}
+
+[class^= todoListWrap] li input:checked + label {
+  text-decoration: 1px line-through var(--border-color);
+  color: var(--border-color);
+}
+
+[class^= todoListWrap] li button i {
+  font-size: var(--font-smz);
+}
+
+
+
+
+
+
+
+
+
+
+
+/* 모바일 가로 ~ 태블릿 세로 / 768px ~ 991px / 12, 14, 16, 18 */
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  .wrap > div ~ div {
+    margin-top: 40px;
+  }
+  
+  .dateListWrap {
+    height: 90px;
+    border-radius: 25px;
+  }
+  
+  .dateListWrap ul li button {
+    width: 90px;
+    font-size: var(--font-lz);
+  }
+  
+  .dateListWrap ul li.active {
+    border-radius: 25px;
+  }
+  
+  .todoWrap {
+    gap: 40px;
+  }
+  
+  .todoWrap article {
+    padding: 25px;
+    border-radius: 25px;
+  }
+  
+  .todoWrap article :where(form, ul) {
+    margin-top: 25px;
+  }
+  
+  .todoTitleWrap :where(h2, i) {
+    font-size: var(--font-lz);
+  }
+  
+  .formWrap :where(input, i) {
+    font-size: var(--font-mz);
+  }
+  
+  article ul {
+    height: 260px;
+    border-radius: 10px;
+    padding: 25px;
+  }
+  
+  ul li input {
+    width: 16px;
+    height: 16px;
+  }
+  
+  ul li label {
+    flex-grow: 1;
+    font-size: var(--font-mz);
+  }
+  
+  ul li button i {
+    font-size: var(--font-mz);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+/* 태블릿 가로 / 992px ~ 1199px / 14, 16, 18, 20 */
+@media screen and (min-width: 992px) {
+  .wrap > div ~ div {
+    margin-top: 60px;
+  }
+  
+  .dateListWrap {
+    height: 100px;
+    border-radius: 30px;
+    
+  }
+  
+  .dateListWrap ul li button {
+    width: 100px;
+    font-size: var(--font-xlz);
+  }
+  
+  .dateListWrap ul li.active {
+    background-color: var(--main-color);
+    border-radius: 30px;
+  }
+  
+  .todoWrap {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 60px;
+  }
+  
+  .todoWrap article {
+    padding: 30px;
+    border-radius: 30px;
+  }
+  
+  .todoWrap article :where(form, ul) {
+    margin-top: 30px;
+  }
+  
+  .todoTitleWrap :where(h2, i) {
+    font-size: var(--font-xlz);
+  }
+  
+  .formWrap :where(input, i) {
+    font-size: var(--font-mlz);
+  }
+  
+  article ul {
+    height: 280px;
+    padding: 30px;
+  }
+  
+  ul li input {
+    width: 18px;
+    height: 18px;
+  }
+  
+  ul li label {
+    flex-grow: 1;
+    font-size: var(--font-mlz);
+  }
+  
+  ul li button i {
+    font-size: var(--font-mlz);
+  }
+}
