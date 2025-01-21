@@ -48,7 +48,7 @@ class Finance {
 
   manageDate() {
     const newDate = new Date();
-    const month = newDate.getMonth();
+    const month = newDate.getMonth(); // 여기수정
     const date = newDate.getDate();
 
     this.currentDate = `${month + 1}/${date}`;
@@ -81,7 +81,7 @@ class Finance {
       }
     })
 
-    if(this.financeArr !== 0 && this.currentDate.split("/")[1] === "19") {
+    if(this.financeArr.length !== 0 && this.currentDate.split("/")[1] === "1") {
       const newMonthFinanceArr = this.financeArr.some((item) => item.date.split("/")[0] !== this.currentDate.split("/")[0]);
 
       if(newMonthFinanceArr) {
@@ -89,7 +89,7 @@ class Finance {
         this.updateFinanceState();
       }
     } else {
-      return;
+      this.updateFinanceState();
     }
   }
 
@@ -257,7 +257,7 @@ class Finance {
 
   updateFinanceState() {
     const newDate = new Date();
-    const stateMonth = newDate.getMonth();
+    const stateMonth = newDate.getMonth(); // 여기수정
     let updateState = this.financeState[stateMonth];
 
     if(updateState) {
@@ -286,7 +286,7 @@ class Finance {
 
   displayFinanceState() {
     const newDate = new Date();
-    const stateMonth = newDate.getMonth();
+    const stateMonth = newDate.getMonth(); // 여기수정
     let financeState = this.financeState[stateMonth];
 
     this.totalFinance.textContent = `${(financeState.totalAmount).toLocaleString()}`;
@@ -297,8 +297,8 @@ class Finance {
   }
 
   manageFinanceList() {
-    const newMonth = new Date().getMonth() + 1;
-    this.financeArr = this.financeArr.filter(item => parseInt(item.date.split("/")[0] !== newMonth))
+    const newMonth = new Date().getMonth() + 1; // 여기수정
+    this.financeArr = this.financeArr.filter(item => parseInt(item.date.split("/")[0] === newMonth))
 
     localStorage.setItem("financeArr", JSON.stringify(this.financeArr));
   }
