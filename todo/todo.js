@@ -138,7 +138,7 @@ class Todo {
       }
 
     } else {
-      return;
+      this.updateTodoState();
     }
   }
 
