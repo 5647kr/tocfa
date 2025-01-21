@@ -53,13 +53,13 @@ class Todo {
   dateGenerate() {
     const newDate = new Date();
     const year = newDate.getFullYear();
-    const month = newDate.getMonth();
+    const month = newDate.getMonth(); //여기수정
     const date = newDate.getDate();
     
     const startDate = new Date(year, month, 1).getDate();
     const endDate = new Date(year, month + 1, 0).getDate();
 
-    this.currentDate = `${month + 1}/${date}`;
+    this.currentDate = `${month + 1}/${date}`; 
     
     this.dateList.innerHTML = "";
   
@@ -128,11 +128,13 @@ class Todo {
       })
     })
 
+    // 초기화날 설정
     if(this.todoArr.length !== 0 && this.currentDate.split("/")[1] === "1") {
       const newMonthTodoArr = this.todoArr.some((item) => item.date.split("/")[0] !== this.currentDate.split(("/")[0]));
 
       if(newMonthTodoArr) {
         this.manageTodoList();
+        this.updateTodoState();
       }
 
     } else {
@@ -161,8 +163,8 @@ class Todo {
   createTodoItem(todoItemData) {
     const todoItem = document.createElement("li");
     const todoItemContent = `
-      <input type="checkbox" id="${todoItemData.id}">
-      <label for="${todoItemData.id}">${todoItemData.title}</label>
+      <input type="checkbox" id="todo-${todoItemData.id}">
+      <label for="todo-${todoItemData.id}">${todoItemData.title}</label>
       <div class="btnWrap">
         <button class="editBtn">
           <i class="fa-solid fa-pencil"></i>
@@ -290,7 +292,7 @@ class Todo {
   
   updateTodoState() {
     const date = new Date();
-    const stateMonth = date.getMonth();
+    const stateMonth = date.getMonth(); //여기수정
     let updateState = this.todoState[stateMonth];
     
     if(updateState) {
@@ -325,8 +327,8 @@ class Todo {
   }
 
   manageTodoList() {
-    const newMonth = new Date().getMonth() + 1;
-    this.todoArr = this.todoArr.filter(item => parseInt(item.date.split("/")[0]) !== newMonth);
+    const newMonth = new Date().getMonth() + 1; //여기수정
+    this.todoArr = this.todoArr.filter(item => parseInt(item.date.split("/")[0]) === newMonth);
 
     localStorage.setItem("todoArr", JSON.stringify(this.todoArr));
   }
