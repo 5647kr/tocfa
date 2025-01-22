@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../common/common.css">
+  <link rel="stylesheet" href="./analyze.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>Analyze</title>
+</head>
+<body>
+  <main>
+    <div class="wrap">
+      <article class="analyze">
+        <div class="totalState">
+          <div class="totalEarn">
+            <img src="../img/earn.svg" alt="총소득아이콘">
+            <strong class="earnPrice">1000</strong>
+          </div>
+          <div class="totalPaid">
+            <img src="../img/paid.svg" alt="총지출아이콘">
+            <strong class="paidPrice">0</strong>
+          </div>
+          <div class="progress">
+            <img src="../img/list.svg" alt="todo진행도아이콘">
+            <strong class="progress">0%</strong>
+          </div>
+        </div>
+        <div class="detailState">
+          <div class="todoState">
+            <ul class="month">
+              <li class="active">
+                <button>1</button>
+              </li>
+              <li class="disabled">
+                <button>2</button>
+              </li>
+              <li>
+                <button>3</button>
+              </li>
+              <li>
+                <button>4</button>
+              </li>
+              <li>
+                <button>5</button>
+              </li>
+              <li>
+                <button>6</button>
+              </li>
+              <li>
+                <button>7</button>
+              </li>
+              <li>
+                <button>8</button>
+              </li>
+              <li>
+                <button>9</button>
+              </li>
+              <li>
+                <button>10</button>
+              </li>
+              <li>
+                <button>11</button>
+              </li>
+              <li>
+                <button>12</button>
+              </li>
+            </ul>
+            <div class="monthState">
+              <div class="list1">
+                <strong>title</strong>
+                <div class="graph">도넛 그래프</div>
+              </div>
+              <div class="list2">
+                <strong>title</strong>
+                <div class="graph">도넛 그래프</div>
+              </div>
+              <div class="list3">
+                <strong>title</strong>
+                <div class="graph">도넛 그래프</div>
+              </div>
+              <div class="list4">
+                <strong>title</strong>
+                <div class="graph">도넛 그래프</div>
+              </div>
+            </div>
+          </div>
+          <div class="financeState">
+            <div class="canvas">
+              재정 그래프
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <ul>
+        <li>
+          <a href="../todo/todo.html">
+            <i class="fa-solid fa-list"></i>
+          </a>
+        </li>
+        <li>
+          <a href="../calculate/calculate.html">
+            <i class="fa-solid fa-calculator"></i>
+          </a>
+        </li>
+        <li>
+          <a href="../calendar/calendar.html">
+            <i class="fa-solid fa-calendar-days"></i>
+          </a>
+        </li>
+        <li>
+          <a href="../finance/finance.html">
+            <i class="fa-solid fa-file-invoice-dollar"></i>
+          </a>
+        </li>
+        <li class="active">
+          <a href="../analyze/analyze.html">
+            <i class="fa-solid fa-chart-pie"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="./analyze.js"></script>
+</body>
+</html>
