@@ -27,7 +27,7 @@ class Analyze {
   dateGenerate() {
     const newDate = new Date();
     const year = newDate.getFullYear();
-    const month = newDate.getMonth() + 1;
+    const month = newDate.getMonth();
 
     this.currentDate = `${year}/${month + 1}`
   }
@@ -69,15 +69,20 @@ class Analyze {
 
     this.financeState.map((item, index) => {
       if(index <= parseInt(this.currentDate.split("/")[1] - 1)) {
-        if(item.totalEarn) {
+        if(item.totalEarn > 0) {
           totalEarn.push(item.totalEarn)
-        } else {
+        }
+        if(item.totalPaid > 0) {
           totalPaid.push(item.totalPaid)
         }
       }
     })
 
-    console.log(totalEarn, totalPaid)
+    const EarnPrice = totalEarn.reduce((acc, price) => acc +  price, 0);
+    const paidPrice = totalPaid.reduce((acc, price) => acc +  price, 0);
+
+    this.totalEarn.textContent = EarnPrice;
+    this.totalPaid.textContent = paidPrice;
 
   }
 
