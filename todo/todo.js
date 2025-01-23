@@ -270,21 +270,6 @@ class Todo {
 
     this.updateTodoState();
   }
-
-  saveTodoState() {
-    const todoStateData = {
-      "list1": "0/0", 
-      "list2": "0/0",
-      "list3": "0/0",
-      "list4": "0/0"
-    };
-
-    for(let i = 0; i <= 11; i++) {
-      this.todoState.push({ ...todoStateData });
-    }
-    
-    localStorage.setItem("todoState", JSON.stringify(this.todoState));
-  }
   
   updateTodoState() {
     const date = new Date();
