@@ -9,16 +9,14 @@ class Todo {
     this.regBtn = main.querySelectorAll(".regBtn");
     this.todoList = main.querySelectorAll("[class^= todoListWrap]");
 
-    this.todoTitles = JSON.parse(localStorage.getItem("todoTitles")) || [
-      "할일 목록1", "할일 목록2", "할일 목록3", "할일 목록4"
-    ];
+    this.todoTitles = JSON.parse(localStorage.getItem("todoTitles"))
 
     this.todoArr = JSON.parse(localStorage.getItem("todoArr")) || [];
     this.todoId = JSON.parse(localStorage.getItem("todoId")) || 0;
     this.editTodoId = null;
     this.currentDate = null;
 
-    this.todoState = JSON.parse(localStorage.getItem("todoState")) || [];
+    this.todoState = JSON.parse(localStorage.getItem("todoState"));
 
   }
 
@@ -116,8 +114,6 @@ class Todo {
         const id = this.todoId;
 
         const props = { key, title, done, date, id }
-
-        this.todoState.length === 0 ? this.saveTodoState() : this.updateTodoState()
 
         if(this.editTodoId === null) {
           this.regTodo(props);
