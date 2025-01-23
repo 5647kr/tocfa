@@ -19,7 +19,7 @@ class Finance {
 
     this.currentDate = null;
 
-    this.financeState = JSON.parse(localStorage.getItem("financeState")) || []
+    this.financeState = JSON.parse(localStorage.getItem("financeState"))
   }
 
   financeEvent() {
@@ -70,8 +70,6 @@ class Finance {
       type = selectedType ? selectedType.value : null;
 
       const props = { id, date, type, title, price }
-
-      this.financeState.length === 0 ? this.saveFinanceState() : this.updateFinanceState();
 
       if(this.editFinanceId === null) {
         this.regFinance(props);
@@ -239,20 +237,6 @@ class Finance {
     const totalAmount = totalEarn - totalPaid;
 
     return { totalEarn, totalPaid, totalAmount }
-  }
-
-  saveFinanceState() {
-    const financeStateData = {
-      "totalEarn": 0,
-      "totalPaid": 0,
-      "totalAmount": 0
-    };
-
-    for(let i = 0; i <= 11; i++) {
-      this.financeState.push({ ... financeStateData });
-    }
-
-    localStorage.setItem("financeState", JSON.stringify(this.financeState));
   }
 
   updateFinanceState() {
