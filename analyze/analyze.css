@@ -1,0 +1,311 @@
+/* 모바일 세로 / ~480px / 10, 12, 14, 16 */
+main > .wrap {
+  height: 100%;
+  padding: 20px;
+}
+
+.analyze {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.analyze > div ~ div {
+  margin-top: 20px;
+}
+
+.analyze .totalState {
+  height: 80px;
+  display: flex;
+  gap: 20px;
+}
+
+.totalState > div {
+  width: calc(100% / 3);
+  height: 100%;
+  background-color: var(--main-color);
+  border-radius: 20px;
+  padding: 12px;
+  position: relative;
+}
+
+.totalState > div img {
+  width: 18px;
+  aspect-ratio: 1 / 1;
+}
+
+.totalState strong {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  font-size: var(--font-mlz);
+  font-weight: var(--font-ebw);
+  color: var(--white-color);
+}
+
+.totalState .paidPrice {
+  color: var(--error-color);
+}
+
+.detailState {
+  height: calc(100% - 80px - 20px);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.detailState > div {
+  height: calc(100% / 2);
+  background-color: var(--white-color);
+  border-radius: 20px;
+}
+
+.todoState {
+  display: flex;
+  flex-direction: column;
+}
+
+.todoState > .month {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.month li {
+  width: 100%;
+  height: 100%;
+}
+
+.month li button {
+  width: 100%;
+  height: 100%;
+  font-size: var(--font-smz);
+  font-weight: var(--font-ebw);
+}
+
+.month li.active {
+  background-color: var(--main-color);
+  border-radius: 20px 20px 0 0;
+}
+
+.month li.active button {
+  color: var(--white-color);
+}
+
+.month li.disabled button {
+  color: var(--border-color);
+}
+
+.monthState {
+  height: calc(100% - 40px);
+  border-radius: 0 0 20px 20px;
+}
+
+.monthState ul {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+}
+
+.monthState ul li {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.monthState ul li:nth-child(odd) {
+  border-right: 1px solid var(--border-color);
+}
+
+.monthState ul li:nth-child(1), .monthState ul li:nth-child(2) {
+  border-bottom: 1px solid var(--border-color);
+} 
+
+.monthState ul li strong {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  font-size: var(--font-mz);
+}
+
+.monthState ul li p {
+  position: absolute;
+  top: 53%;
+  left: 50%;
+  transform: translate(-50%, -53%);
+}
+
+.monthState ul li .graphWrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+}
+
+.graphWrap canvas {
+  width: 80%;
+  height: 80%;
+  max-width: 80%;
+  max-height: 80%;
+  display: block;
+}
+
+.financeState {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+
+
+
+
+
+
+
+/* 모바일 가로 ~ 태블릿 세로 / 12, 14, 16, 18 */
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  main > .wrap {
+    padding: 40px;
+  }
+  
+  .analyze > div ~ div {
+    margin-top: 40px;
+  }
+  
+  .analyze .totalState {
+    height: 90px;
+    gap: 40px;
+  }
+  
+  .totalState > div {
+    border-radius: 25px;
+  }
+  
+  .totalState > div img {
+    width: 20px;
+  }
+  
+  .totalState strong {
+    font-size: var(--font-lz);
+  }
+  
+  .totalState .paidPrice {
+    color: var(--error-color);
+  }
+  
+  .detailState {
+    height: calc(100% - 90px - 40px);
+    gap: 40px;
+  }
+  
+  .detailState > div {
+    border-radius: 25px;
+  }
+
+  .month li button {
+    font-size: var(--font-mz);
+  }
+  
+  .month li.active {
+    border-radius: 25px 25px 0 0;
+  }
+  
+  .monthState strong {
+    font-size: var(--font-mlz);
+    font-weight: var(--font-bw);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+/* 태블릿 가로 / 14, 16, 18, 20 */
+@media screen and (min-width: 992px) {
+  main > .wrap {
+    padding: 60px;
+  }
+  
+  .analyze > div ~ div {
+    margin-top: 60px;
+  }
+
+  .analyze .totalState {
+    height: 100px;
+    gap: 60px;
+  }
+  
+  .totalState > div {
+    border-radius: 30px;
+  }
+  
+  .totalState > div img {
+    width: 22px;
+  }
+  
+  .totalState strong {
+    font-size: var(--font-xlz);
+  }
+
+  
+  .detailState {
+    width: 100%;
+    height: calc(100% - 100px - 60px);
+    flex-direction: row;
+    gap: 40px;
+  }
+  
+  .detailState > div {
+    width: calc(100% / 2);
+    height: 100%;
+    border-radius: 30px;
+  }
+  
+  .todoState {
+    flex-direction: row;
+  }
+  
+  .todoState > .month {
+    width: 40px;
+    height: 100%;
+    flex-direction: column;
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  
+  .month li button {
+    font-size: var(--font-mlz);
+  }
+  
+  .month li.active {
+    border-radius: 30px 0 0 30px;
+  }
+
+  .monthState {
+    width: calc(100% - 40px);
+    height: 100%;
+    border-radius: 0 30px 30px 0;
+
+  }
+  
+  .monthState strong {
+    font-size: var(--font-lz);
+  }
+}
