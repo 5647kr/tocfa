@@ -31,7 +31,6 @@ class Calendar {
     this.displayRegForm();
     this.manageScheduleData();
     this.displayMonthSchedule();
-    this.displayMonthSchedule();
   }
 
   generateCalendar(year, month) {
@@ -58,7 +57,6 @@ class Calendar {
     this.year.textContent = calendarYear;
     this.month.textContent = calendarMonth + 1;
     this.time.dateTime = `${calendarYear}-${calendarMonth + 1}`;
-
   }
 
   moveMonthEvent() {
@@ -118,10 +116,11 @@ class Calendar {
         this.displayScheduleList();
       });
     })
-
+    
     // 모달창 닫기
     this.closeBtn.addEventListener("click", () => {
       this.schedule.classList.remove("active");
+      this.displayMonthSchedule();
     })
   }
 
