@@ -33,7 +33,7 @@ class Analyze {
   manageDateEvent() {
     const newDate = new Date();
     const year = newDate.getFullYear();
-    const month = newDate.getMonth() + 1;
+    const month = newDate.getMonth();
 
     this.currentDate = `${year}/${month + 1}`
 
