@@ -11,8 +11,12 @@ class MainPage {
 
   mainEvent() {
     this.start.addEventListener("click", () => {
-      this.generateTodoStorage();
-      this.generateFinanceStorage();
+      if(this.financeState.length === 0) {
+        this.generateTodoStorage();
+        this.generateFinanceStorage();
+      } else {
+        return;
+      }
     })
   }
 
