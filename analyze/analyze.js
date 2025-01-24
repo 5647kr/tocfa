@@ -65,7 +65,6 @@ class Analyze {
         dateItem.classList.add("active");
         
         this.currentDate = `${year}/${i + 1}`
-        console.log(this.currentDate)
         
         this.calculateTodoPercentage();
       })
@@ -146,11 +145,14 @@ class Analyze {
           total += totalCount;
         });
       }
-        console.log(`총 완료된 개수: ${totalCompleted}`);
-        console.log(`총 전체 개수: ${total}`);
     });
   
-    const totalPercentage = (totalCompleted / total) * 100;
+    let totalPercentage = 0;
+
+    if (total !== 0) {
+      totalPercentage = (totalCompleted / total) * 100;
+    }
+  
     this.todoProgress.textContent = `${totalPercentage.toFixed(0)}%`;
   }
 
