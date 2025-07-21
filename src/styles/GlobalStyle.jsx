@@ -1,11 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
-  html {
-    font-size: 10px;
-    font-family: "Noto Sans KR";
-  }
-
   :root {
     --main-color: #000;
     --shadow-color: rgba(0, 0, 0, 0.5);
@@ -13,6 +8,15 @@ const GlobalStyle = createGlobalStyle`
     --font-ssz: clamp(1.2rem, 1.3vw, 2rem);
     --font-rw: 400;
     --font-bw: 700;
+  }
+  
+  html {
+    font-size: 10px;
+    font-family: "Noto Sans KR";
+  }
+
+  main {
+    margin-top: 80px;
   }
 
   ul, li {
