@@ -36,10 +36,15 @@ function BackHeader() {
 }
 
 const HeaderWrap = styled.header`
+  width: 100%;
   height: 80px;
+  background-color: var(--bg-color);
   box-shadow: 0 2px 4px var(--shadow-color);
   padding: 0 40px;
-  position: relative;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 999;
   h1 {
     height: inherit;
     display: flex;
