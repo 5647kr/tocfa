@@ -65,8 +65,24 @@ const GlobalStyle = createGlobalStyle`
   h3, h4 {
     font-size: clamp(1.8rem, 2vw, 2.6rem);
   }
-  p, button, a, input, strong, span {
+  p, button, a, input, label, strong, span {
     font-size: clamp(1.4rem, 1.6vw, 2.2rem);
+  }
+
+  input {
+    border: 1px solid var(--shadow-color);
+    border-radius: 1rem;
+  }
+
+  button:focus {
+    outline: 1px solid var(--main-color);
+  }
+
+  button {
+    border-radius: 1rem;
+    box-shadow: 0 2px 4px var(--shadow-color);
+    font-weight: var(--font-rw);
+    color: var(--shadow-color);
   }
 
   
