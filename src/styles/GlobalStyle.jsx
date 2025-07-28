@@ -67,7 +67,7 @@ const GlobalStyle = createGlobalStyle`
   h3, h4 {
     font-size: clamp(1.8rem, 2vw, 2.6rem);
   }
-  p, button, a, input, label, strong, span {
+  p, button, a, input, label, strong, span, th {
     font-size: clamp(1.4rem, 1.6vw, 2.2rem);
   }
 
