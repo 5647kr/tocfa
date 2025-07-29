@@ -66,6 +66,11 @@ const BackButton = styled.button`
   left: 40px;
   top: 50%;
   transform: translateY(-50%);
+  box-shadow: none;
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 export { CommonHeader, BackHeader };
