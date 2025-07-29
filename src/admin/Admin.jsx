@@ -4,6 +4,8 @@ import styled from "styled-components";
 import { CommonHeader } from "../components/Header";
 import sessionStore from "../store/SessionStore";
 import LogoutApi from "../api/LogoutApi";
+import PostType from "../components/PostType";
+
 
 export default function Admin() {
   const { session } = sessionStore();
@@ -22,11 +24,7 @@ export default function Admin() {
     await LogoutApi();
     navigate(-1);
   };
-
-  const checkNotice = (e) => {
-    e === "notice" ? setIsNotice(true) : setIsNotice(false);
-  };
-
+  
   return (
     <>
       <CommonHeader />
@@ -40,30 +38,8 @@ export default function Admin() {
 
         <DataWrap>
           <InputWrap>
-            <div>
-              <input
-                className="a11y-hidden"
-                type="radio"
-                name="type"
-                id="notice"
-                onChange={(e) => {
-                  checkNotice(e.target.id);
-                }}
-                defaultChecked
-              />
-              <label htmlFor="notice">공지사항</label>
-              <input
-                className="a11y-hidden"
-                type="radio"
-                name="type"
-                id="laws"
-                onChange={(e) => {
-                  checkNotice(e.target.id);
-                }}
-              />
-              <label htmlFor="laws">법률정보</label>
-            </div>
-            <Link to={""}>새 글 작성</Link>
+            <PostType isNotice={isNotice} setIsNotice={setIsNotice} />
+            <Link to={"/admin/post"}>새 글 작성</Link>
           </InputWrap>
 
           <DataTable>
@@ -139,21 +115,6 @@ const DataWrap = styled.section`
 const InputWrap = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  & label {
-    padding: 5px 10px;
-    border: 1px solid var(--main-color);
-    cursor: pointer;
-  }
-
-  & label:nth-child(2) {
-    border-right: none;
-  }
-
-  & input:checked + label {
-    background-color: var(--shadow-color);
-    color: var(--bg-color);
-  }
 
   & > a {
     color: var(--main-color);
