@@ -40,6 +40,10 @@ const GlobalStyle = createGlobalStyle`
     outline: none;
   }
 
+  textarea:focus {
+    outline: none;
+  }
+
   * {
     padding: 0;
     margin: 0;
@@ -67,11 +71,11 @@ const GlobalStyle = createGlobalStyle`
   h3, h4 {
     font-size: clamp(1.8rem, 2vw, 2.6rem);
   }
-  p, button, a, input, label, strong, span, th {
+  p, button, a, input, textarea, label, strong, span, th {
     font-size: clamp(1.4rem, 1.6vw, 2.2rem);
   }
 
-  input {
+  input, textarea {
     border: 1px solid var(--shadow-color);
     border-radius: 1rem;
   }
