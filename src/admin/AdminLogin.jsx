@@ -5,15 +5,14 @@ import LoginApi from "../api/LoginApi";
 import MainWrap from "../components/Main";
 import { TextInput } from "../components/Input";
 
-
-export default function Login() {
+export default function AdminLogin() {
   const [isError, setIsError] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsError("");
-    
+
     const formData = new FormData(e.currentTarget);
     const loginData = Object.fromEntries(formData.entries());
 
@@ -33,11 +32,25 @@ export default function Login() {
             <img src="/assets/img/logo.png" alt="tocfa logo" />
           </h2>
           <LoginForm onSubmit={handleSubmit}>
-            <TextInput id="email" type="email" name="email" placeholder="이메일을 입력하세요" >이메일</TextInput>
-            <TextInput id="password" type="password" name="password" placeholder="비밀번호를 입력하세요" >비밀번호</TextInput>
+            <TextInput
+              id="email"
+              type="email"
+              name="email"
+              placeholder="이메일을 입력하세요"
+            >
+              이메일
+            </TextInput>
+            <TextInput
+              id="password"
+              type="password"
+              name="password"
+              placeholder="비밀번호를 입력하세요"
+            >
+              비밀번호
+            </TextInput>
             <button type="submit">로그인</button>
           </LoginForm>
-          {isError? <strong>{isError}</strong> : null}
+          {isError ? <strong>{isError}</strong> : null}
         </div>
       </LoginWrap>
     </MainWrap>
@@ -77,4 +90,4 @@ const LoginForm = styled.form`
   & button {
     margin-top: 20px;
   }
-`
+`;
