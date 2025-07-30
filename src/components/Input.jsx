@@ -15,11 +15,11 @@ export function RadioInput({ id, name, checked, children }) {
   );
 }
 
-export function TextInput({ id, type, placeholder, children }) {
+export function TextInput({ id, type, name, placeholder, children }) {
   return (
     <TextInputWrap>
       <label htmlFor={id}>{children}</label>
-      <input type={type} id={id} placeholder={placeholder} required />
+      <input type={type} id={id} name={name} placeholder={placeholder} autoComplete="off" required />
     </TextInputWrap>
   );
 }
