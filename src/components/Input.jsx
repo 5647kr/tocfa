@@ -15,7 +15,7 @@ export function RadioInput({ id, name, checked, children }) {
   );
 }
 
-export function textInput({ id, type, children }) {
+export function TextInput({ id, type, children }) {
   return (
     <TextInputWrap>
       <label htmlFor={id}>{children}</label>
