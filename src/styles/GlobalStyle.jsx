@@ -5,6 +5,7 @@ const GlobalStyle = createGlobalStyle`
     --main-color: #000;
     --shadow-color: rgba(0, 0, 0, 0.5);
     --bg-color: #fff;
+    --error-color: #ff0000;
     --font-ssz: clamp(1.2rem, 1.3vw, 2rem);
     --font-rw: 400;
     --font-bw: 700;
@@ -23,12 +24,6 @@ const GlobalStyle = createGlobalStyle`
 
   ul, li {
     list-style: none;
-  }
-
-  button {
-    border: none;
-    background-color: var(--bg-color);
-    cursor: pointer;
   }
 
   a {
@@ -80,17 +75,19 @@ const GlobalStyle = createGlobalStyle`
     border-radius: 1rem;
   }
 
-  button:focus {
-    outline: 1px solid var(--main-color);
+  button:active {
+    box-shadow: inset 0 2px 4px var(--shadow-color);
   }
 
   button {
     border-radius: 1rem;
     box-shadow: 0 2px 4px var(--shadow-color);
-    font-weight: var(--font-rw);
-    color: var(--shadow-color);
+    border: none;
+    padding: 10px 0;
+    background-color: var(--bg-color);
+    color: var(--main-color);
+    cursor: pointer;
   }
-
   
   @media screen and (max-width: 480px) {
     section {
