@@ -15,11 +15,11 @@ export function RadioInput({ id, name, checked, children }) {
   );
 }
 
-export function TextInput({ id, type, children }) {
+export function TextInput({ id, type, placeholder, children }) {
   return (
     <TextInputWrap>
       <label htmlFor={id}>{children}</label>
-      <input type={type} id={id} required />
+      <input type={type} id={id} placeholder={placeholder} required />
     </TextInputWrap>
   );
 }
@@ -38,6 +38,8 @@ const RadioInputWrap = styled.div`
 `;
 
 const TextInputWrap = styled.div`
+  display: flex;
+  flex-direction: column;
   & > input {
     padding: 10px;
   }
