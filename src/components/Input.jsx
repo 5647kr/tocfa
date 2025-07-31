@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export function RadioInput({ id, name, checked, children }) {
+export function RadioInput({ id, name, checked, onChange, children }) {
   return (
     <RadioInputWrap>
       <input
@@ -9,6 +9,7 @@ export function RadioInput({ id, name, checked, children }) {
         id={id}
         name={name}
         defaultChecked={checked}
+        onChange={onChange}
       />
       <label htmlFor={id}>{children}</label>
     </RadioInputWrap>
