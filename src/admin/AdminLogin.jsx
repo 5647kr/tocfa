@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import sessionStore from "../store/SessionStore";
 import LoginApi from "../api/LoginApi";
 import MainWrap from "../components/Main";
 import { TextInput } from "../components/Input";
@@ -17,7 +18,8 @@ export default function AdminLogin() {
     const loginData = Object.fromEntries(formData.entries());
 
     try {
-      await LoginApi(loginData);
+      const data = await LoginApi(loginData);
+      sessionStore.setState({session: data});
       navigate("/admin");
     } catch (error) {
       setIsError("이메일 또는 비밀번호가 잘못되었습니다.");
