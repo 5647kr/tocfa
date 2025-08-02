@@ -1,21 +1,47 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import sessionStore from "../store/SessionStore";
 import LogoutApi from "../api/LogoutApi";
 import { CommonHeader } from "../components/Header";
 import { RadioInput } from "../components/Input";
+import ReadApi from "../api/ReadApi";
+import DeleteApi from "../api/DeleteApi";
 
 export default function AdminHome() {
   const navigate = useNavigate();
-  const [selectType, setSelectType] = useState("notice");
+  const [typeSelected, setTypeSelected] = useState("notice");
   const { session } = sessionStore();
+  const [data, setData] = useState([]);
   const adminName = session.user.email.split("@")[0];
 
-  console.log(selectType);
   const logOut = async () => {
     await LogoutApi();
     navigate("/login");
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setData([]);
+      try {
+        const response = await ReadApi(typeSelected);
+        setData(response);
+      } catch (error) {}
+    };
+    fetchData();
+  }, [typeSelected]);
+
+  const handleDelete = async (id) => {
+    console.log(id);
+    const confirmDel = window.confirm("정말 삭제하시겠습니까?");
+    if (!confirmDel) return;
+
+    try {
+      await DeleteApi({ id, typeSelected });
+      setData((prev) => prev.filter((item) => item.id !== id));
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -33,9 +59,9 @@ export default function AdminHome() {
               <RadioInput
                 id="notice"
                 name="type"
-                checked={selectType === "notice"}
+                checked={typeSelected === "notice"}
                 onChange={(e) => {
-                  setSelectType(e.target.id);
+                  setTypeSelected(e.target.id);
                 }}
               >
                 공지사항
@@ -43,9 +69,9 @@ export default function AdminHome() {
               <RadioInput
                 id="laws"
                 name="type"
-                checked={selectType === "laws"}
+                checked={typeSelected === "laws"}
                 onChange={(e) => {
-                  setSelectType(e.target.id);
+                  setTypeSelected(e.target.id);
                 }}
               >
                 법률정보
@@ -59,33 +85,51 @@ export default function AdminHome() {
               <tr>
                 <th>ID</th>
                 <th>Title</th>
-                <th>{selectType === "notice" ? "Content" : "Category"}</th>
+                <th>{typeSelected === "notice" ? "Content" : "Category"}</th>
                 <th>Edit</th>
                 <th>Delete</th>
               </tr>
             </thead>
             <tbody>
-              {selectType === "notice" ? (
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td>
-                    <Link to="/admin/update/:id">Edit</Link>
-                  </td>
-                  <td>
-                    <button>Delete</button>
-                  </td>
-                </tr>
-              ) : (
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-              )}
+              {typeSelected === "notice"
+                ? data.map((v) => {
+                    return (
+                      <tr key={v.id}>
+                        <td>{v.id}</td>
+                        <td>{v.noticeTitle}</td>
+                        <td>{v.content}</td>
+                        <td>
+                          <Link to={`/admin/update/${v.id}`}>Edit</Link>
+                        </td>
+                        <td>
+                          <button onClick={() => handleDelete(v.id)}>
+                            Delete
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  })
+                : data.map((v) => {
+                    return (
+                      <tr key={v.id}>
+                        <td>{v.id}</td>
+                        <td>{v.lawTitle}</td>
+                        <td>{v.category}</td>
+                        <td>
+                          <Link to={`/admin/update/${v.id}`}>Edit</Link>
+                        </td>
+                        <td>
+                          <button
+                            onClick={() => {
+                              handleDelete(v.id);
+                            }}
+                          >
+                            Delete
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  })}
             </tbody>
           </TableWrap>
         </section>
@@ -133,6 +177,15 @@ const TableWrap = styled.table`
     width: calc(100% / 5);
     border: 1px solid var(--main-color);
   }
+  & td {
+    font-size: var(--font-ssz);
+    text-align: center;
+  }
+  & td > a,
+  & td > button {
+    font-size: var(--font-ssz);
+  }
+
   & td > a {
     text-align: center;
     color: var(--main-color);
