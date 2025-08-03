@@ -71,6 +71,10 @@ const BackButton = styled.button`
   &:focus {
     outline: none;
   }
+
+  &:active {
+    box-shadow: none;
+  }
 `;
 
 export { CommonHeader, BackHeader };
