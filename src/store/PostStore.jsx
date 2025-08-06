@@ -28,7 +28,9 @@ const usePostStore = create((set, get) => ({
 
     const data = await ReadApi(typeSelected);
 
-    typeSelected === "notice" ? set({ notice: data }) : set({ laws: data });
+    const sortData = data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+
+    typeSelected === "notice" ? set({ notice: sortData }) : set({ laws: sortData });
   },
 
   // 글 수정
