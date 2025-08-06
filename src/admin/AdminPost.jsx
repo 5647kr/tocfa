@@ -1,12 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import usePostStore from "../store/PostStore";
 import { BackHeader } from "../components/Header";
 import { RadioInput, TextArea, TextInput } from "../components/Input";
-import PostApi from "../api/PostApi";
-import { useNavigate } from "react-router-dom";
 
 export default function AdminPost() {
-  const [typeSelected, setTypeSelected] = useState("notice");
+  const { typeSelected, setType, createPost } = usePostStore();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -16,8 +16,8 @@ export default function AdminPost() {
     const data = Object.fromEntries(formData.entries());
 
     try {
-      await PostApi({ data, typeSelected });
-      navigate(-1)
+      createPost(data);
+      navigate(-1);
     } catch (error) {
       console.error(error);
     }
@@ -34,7 +34,7 @@ export default function AdminPost() {
               name="type"
               checked={typeSelected === "notice"}
               onChange={(e) => {
-                setTypeSelected(e.target.id);
+                setType(e.target.id);
               }}
             >
               공지사항
@@ -44,7 +44,7 @@ export default function AdminPost() {
               name="type"
               checked={typeSelected === "laws"}
               onChange={(e) => {
-                setTypeSelected(e.target.id);
+                setType(e.target.id);
               }}
             >
               법률정보
@@ -179,15 +179,6 @@ const FormWrap = styled.div`
     gap: 20px;
   }
   & > form button {
-    margin-top: 20px;
-  }
-`;
-
-const NoticeForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  button {
     margin-top: 20px;
   }
 `;

@@ -1,18 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import sessionStore from "../store/SessionStore";
 import LogoutApi from "../api/LogoutApi";
+import sessionStore from "../store/SessionStore";
+import usePostStore from "../store/PostStore";
 import { CommonHeader } from "../components/Header";
 import { RadioInput } from "../components/Input";
-import ReadApi from "../api/ReadApi";
-import DeleteApi from "../api/DeleteApi";
 
 export default function AdminHome() {
   const navigate = useNavigate();
-  const [typeSelected, setTypeSelected] = useState("notice");
   const { session } = sessionStore();
-  const [data, setData] = useState([]);
+  const { typeSelected, setType, readPost, deletePost, notice, laws } =
+    usePostStore();
   const adminName = session.user.email.split("@")[0];
 
   const logOut = async () => {
@@ -20,25 +19,18 @@ export default function AdminHome() {
     navigate("/login");
   };
 
+  // zustand를 이용한 글 목록 조회
   useEffect(() => {
-    const fetchData = async () => {
-      setData([]);
-      try {
-        const response = await ReadApi(typeSelected);
-        setData(response);
-      } catch (error) {}
-    };
-    fetchData();
+    readPost();
   }, [typeSelected]);
 
+  // zustand를 이용한 글 목록 삭제
   const handleDelete = async (id) => {
-    console.log(id);
     const confirmDel = window.confirm("정말 삭제하시겠습니까?");
     if (!confirmDel) return;
 
     try {
-      await DeleteApi({ id, typeSelected });
-      setData((prev) => prev.filter((item) => item.id !== id));
+      deletePost(id);
     } catch (error) {
       console.error(error);
     }
@@ -61,7 +53,7 @@ export default function AdminHome() {
                 name="type"
                 checked={typeSelected === "notice"}
                 onChange={(e) => {
-                  setTypeSelected(e.target.id);
+                  setType(e.target.id);
                 }}
               >
                 공지사항
@@ -71,7 +63,7 @@ export default function AdminHome() {
                 name="type"
                 checked={typeSelected === "laws"}
                 onChange={(e) => {
-                  setTypeSelected(e.target.id);
+                  setType(e.target.id);
                 }}
               >
                 법률정보
@@ -92,14 +84,19 @@ export default function AdminHome() {
             </thead>
             <tbody>
               {typeSelected === "notice"
-                ? data.map((v) => {
+                ? notice.map((v) => {
                     return (
                       <tr key={v.id}>
                         <td>{v.id}</td>
                         <td>{v.noticeTitle}</td>
                         <td>{v.content}</td>
                         <td>
-                          <Link to={`/admin/update/${v.id}`}>Edit</Link>
+                          <Link
+                            to={`/admin/update/${v.id}`}
+                            state={{ v, typeSelected }}
+                          >
+                            Edit
+                          </Link>
                         </td>
                         <td>
                           <button onClick={() => handleDelete(v.id)}>
@@ -109,21 +106,22 @@ export default function AdminHome() {
                       </tr>
                     );
                   })
-                : data.map((v) => {
+                : laws.map((v) => {
                     return (
                       <tr key={v.id}>
                         <td>{v.id}</td>
                         <td>{v.lawTitle}</td>
                         <td>{v.category}</td>
                         <td>
-                          <Link to={`/admin/update/${v.id}`}>Edit</Link>
+                          <Link
+                            to={`/admin/update/${v.id}`}
+                            state={{ v, typeSelected }}
+                          >
+                            Edit
+                          </Link>
                         </td>
                         <td>
-                          <button
-                            onClick={() => {
-                              handleDelete(v.id);
-                            }}
-                          >
+                          <button onClick={() => handleDelete(v.id)}>
                             Delete
                           </button>
                         </td>

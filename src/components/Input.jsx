@@ -9,7 +9,7 @@ export function RadioInput({ id, name, checked, onChange, children }) {
         id={id}
         value={id}
         name={name}
-        defaultChecked={checked}
+        checked={checked}
         onChange={onChange}
         required
       />
@@ -18,7 +18,15 @@ export function RadioInput({ id, name, checked, onChange, children }) {
   );
 }
 
-export function TextInput({ id, type, name, placeholder, children }) {
+export function TextInput({
+  id,
+  type,
+  name,
+  value,
+  onChange,
+  placeholder,
+  children,
+}) {
   return (
     <TextInputWrap>
       <label htmlFor={id}>{children}</label>
@@ -26,6 +34,8 @@ export function TextInput({ id, type, name, placeholder, children }) {
         type={type}
         id={id}
         name={name}
+        value={value}
+        onChange={onChange}
         placeholder={placeholder}
         autoComplete="off"
         required
@@ -34,13 +44,15 @@ export function TextInput({ id, type, name, placeholder, children }) {
   );
 }
 
-export function TextArea({ id, name, placeholder, children }) {
+export function TextArea({ id, name, value, onChange, placeholder, children }) {
   return (
     <TextAreaWrap>
       <label htmlFor={id}>{children}</label>
       <textarea
         name={name}
         id={id}
+        value={value}
+        onChange={onChange}
         placeholder={placeholder}
         required
       ></textarea>
