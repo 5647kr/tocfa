@@ -45,7 +45,6 @@ export async function UpdateApi({ id, data, typeSelected }) {
     if (error) {
       throw new Error(error.message);
     }
-    // console.log(updatePost[0]);
     return updatePost[0];
   } catch (error) {
     throw error;

@@ -14,9 +14,6 @@ export default function AdminHome() {
     usePostStore();
   const adminName = session.user.email.split("@")[0];
 
-  console.log("notice:", notice)
-  console.log("laws:", laws)
-
   const logOut = async () => {
     await LogoutApi();
     navigate("/login");
@@ -94,7 +91,10 @@ export default function AdminHome() {
                         <td>{v.noticeTitle}</td>
                         <td>{v.content}</td>
                         <td>
-                          <Link to={`/admin/update/${v.id}`} state={{v, typeSelected}}>
+                          <Link
+                            to={`/admin/update/${v.id}`}
+                            state={{ v, typeSelected }}
+                          >
                             Edit
                           </Link>
                         </td>
@@ -113,7 +113,10 @@ export default function AdminHome() {
                         <td>{v.lawTitle}</td>
                         <td>{v.category}</td>
                         <td>
-                          <Link to={`/admin/update/${v.id}`} state={{v, typeSelected}}>
+                          <Link
+                            to={`/admin/update/${v.id}`}
+                            state={{ v, typeSelected }}
+                          >
                             Edit
                           </Link>
                         </td>
