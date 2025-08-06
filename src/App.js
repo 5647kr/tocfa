@@ -8,6 +8,9 @@ import AdminPost from "./admin/AdminPost";
 import AdminUpdate from "./admin/AdminUpdate";
 import Protected from "./components/Protected";
 import UserHome from "./pages/Home/UserHome";
+import UserNotice from "./pages/Notice/UserNotice";
+import UserNoticeDetail from "./pages/Notice/UserNoticeDetail";
+
 
 
 function App() {
@@ -18,7 +21,6 @@ function App() {
       <GlobalStyle />
       <Routes>
         <Route path="/login" element={<AdminLogin />} />
-
         <Route
           path="/admin/*"
           element={
@@ -31,7 +33,11 @@ function App() {
           <Route path="post" element={<AdminPost />} />
           <Route path="update/:id" element={<AdminUpdate />} />
         </Route>
+
+
         <Route path="/" element={<UserHome />} />
+        <Route path="/notice" element={<UserNotice />} />
+        <Route path="/notice/:id" element={<UserNoticeDetail />} />
       </Routes>
     </BrowserRouter>
   );
