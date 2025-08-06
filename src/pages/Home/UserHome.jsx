@@ -1,9 +1,24 @@
-import styled from "styled-components";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
+import usePostStore from "../../store/PostStore";
 import { CommonHeader } from "../../components/Header";
 import { FaExternalLinkAlt } from "react-icons/fa";
 
 export default function UserHome() {
+  const [recentNotice, setRecentNotice] = useState([]);
+  const { readPost, notice } = usePostStore();
+
+  useEffect(() => {
+    readPost();
+  }, []);
+
+  useEffect(() => {
+    if (notice.length > 0) {
+      setRecentNotice([...notice].slice(0, 5));
+    }
+  }, [notice]);
+
   return (
     <>
       <CommonHeader />
@@ -25,7 +40,7 @@ export default function UserHome() {
             <h3>실생활에 도움이 되는 법률 지식</h3>
             <ul>
               <li>
-                <Link to="#">
+                <Link to="/laws/house">
                   <img src="/assets/img/house.webp" alt="부동산/임대차" />
                   <div>
                     <p>부동산 / 임대차</p>
@@ -34,46 +49,46 @@ export default function UserHome() {
                 </Link>
               </li>
               <li>
-                <Link to="#">
-                  <img src="/assets/img/house.webp" alt="부동산/임대차" />
+                <Link to="/laws/contract">
+                  <img src="/assets/img/contract.webp" alt="계약" />
                   <div>
-                    <p>부동산 / 임대차</p>
+                    <p>계약</p>
                     <StyledIcon />
                   </div>
                 </Link>
               </li>
               <li>
-                <Link to="#">
-                  <img src="/assets/img/house.webp" alt="부동산/임대차" />
+                <Link to="/laws/work">
+                  <img src="/assets/img/work.webp" alt="근로/노동" />
                   <div>
-                    <p>부동산 / 임대차</p>
+                    <p>근로 / 노동</p>
                     <StyledIcon />
                   </div>
                 </Link>
               </li>
               <li>
-                <Link to="#">
-                  <img src="/assets/img/house.webp" alt="부동산/임대차" />
+                <Link to="/laws/transport">
+                  <img src="/assets/img/transport.webp" alt="교통" />
                   <div>
-                    <p>부동산 / 임대차</p>
+                    <p>교통</p>
                     <StyledIcon />
                   </div>
                 </Link>
               </li>
               <li>
-                <Link to="#">
-                  <img src="/assets/img/house.webp" alt="부동산/임대차" />
+                <Link to="/laws/rights">
+                  <img src="/assets/img/rights.webp" alt="권리/명예" />
                   <div>
-                    <p>부동산 / 임대차</p>
+                    <p>권리 / 명예</p>
                     <StyledIcon />
                   </div>
                 </Link>
               </li>
               <li>
-                <Link to="#">
-                  <img src="/assets/img/house.webp" alt="부동산/임대차" />
+                <Link to="/laws/finance">
+                  <img src="/assets/img/finance.webp" alt="금전/사기" />
                   <div>
-                    <p>부동산 / 임대차</p>
+                    <p>금전 / 사기</p>
                     <StyledIcon />
                   </div>
                 </Link>
@@ -81,13 +96,20 @@ export default function UserHome() {
             </ul>
           </LawsWrap>
           <NoticeWrap>
-            <h3>공지사항</h3>
+            <div>
+              <h3>공지사항</h3>
+              <Link to={"/notice"}>전체 보기</Link>
+            </div>
             <ul>
-              <li>...</li>
-              <li>...</li>
-              <li>...</li>
-              <li>...</li>
-              <li>...</li>
+              {recentNotice.map((item) => {
+                return (
+                  <li key={item.id}>
+                    <Link to={`/notice/${item.id}`}>
+                      <h4>{item.noticeTitle}</h4>
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </NoticeWrap>
         </section>
@@ -176,13 +198,27 @@ const StyledIcon = styled(FaExternalLinkAlt)`
 
 const NoticeWrap = styled.div`
   margin: 80px 0;
-  & h3 {
-    font-weight: var(--font-bw);
+  & > div {
+    display: flex;
+    justify-content: space-between;
+    h3 {
+      font-weight: var(--font-bw);
+    }
+    a {
+      color: var(--main-color);
+    }
+  }
+
+  & ul {
+    margin-top: 10px;
   }
 
   & ul li {
     padding: 10px;
-    border-bottom: 1px solid var(--main-color);
+    border-bottom: 1px dashed var(--main-color);
+    & a h4 {
+      font-size: var(--font-ssz);
+      color: var(--main-color);
+    }
   }
 `;
-
