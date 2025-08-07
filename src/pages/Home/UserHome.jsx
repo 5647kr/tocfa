@@ -38,7 +38,7 @@ export default function UserHome() {
         <section>
           <LawsWrap>
             <h3>실생활에 도움이 되는 법률 지식</h3>
-            <ul>
+            <CategoryList>
               <li>
                 <Link to="/laws/house">
                   <img src="/assets/img/house.webp" alt="부동산/임대차" />
@@ -93,7 +93,7 @@ export default function UserHome() {
                   </div>
                 </Link>
               </li>
-            </ul>
+            </CategoryList>
           </LawsWrap>
           <NoticeWrap>
             <div>
@@ -152,30 +152,29 @@ const LawsWrap = styled.div`
     font-weight: bold;
     margin-bottom: 40px;
   }
-  & ul {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-  }
+`;
+
+const CategoryList = styled.ul`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
   @media screen and (min-width: 769px) {
-    & ul {
-      grid-template-columns: repeat(3, 1fr);
-    }
+    grid-template-columns: repeat(3, 1fr);
   }
-  & ul li {
+  & > li {
     position: relative;
     aspect-ratio: 2 / 1;
   }
-  & ul li a {
+  & > li > a {
     width: 100%;
     height: 100%;
   }
-  & ul li a img {
+  & a > img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
-  & ul li a > div {
+  & a > div {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -197,7 +196,7 @@ const StyledIcon = styled(FaExternalLinkAlt)`
 `;
 
 const NoticeWrap = styled.div`
-  margin: 80px 0;
+  margin-block: 80px;
   & > div {
     display: flex;
     justify-content: space-between;
