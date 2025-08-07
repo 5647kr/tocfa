@@ -8,6 +8,10 @@ export default function UserNotice() {
   const { readPost, notice } = usePostStore();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     if (!notice || notice.length === 0) {
       readPost();
     }
@@ -17,6 +21,11 @@ export default function UserNotice() {
     <>
       <BackHeader />
       <main>
+        <HeroSection>
+          <div>
+            <h2>공지사항</h2>
+          </div>
+        </HeroSection>
         <section>
           <NoticeList>
             {notice.map((item) => {
@@ -27,7 +36,7 @@ export default function UserNotice() {
               return (
                 <li key={item.id}>
                   <Link to={`/notice/${item.id}`}>
-                    <h2>{item.noticeTitle}</h2>
+                    <h3>{item.noticeTitle}</h3>
                     <p>{krDate}</p>
                   </Link>
                 </li>
@@ -40,21 +49,39 @@ export default function UserNotice() {
   );
 }
 
+const HeroSection = styled.section`
+  background: url("/assets/img/hero.webp") no-repeat 100% 25% / cover;
+  aspect-ratio: 1 / 0.2;
+  padding: 0;
+  & > div {
+    width: 100%;
+    height: 100%;
+    background-color: var(--shadow-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  & > div > h2 {
+    font-weight: var(--font-bw);
+    color: var(--bg-color);
+  }
+`;
+
 const NoticeList = styled.ul`
-  margin-top: 40px;
-  & li {
-    padding: 10px;
+  margin-block: 80px;
+  & > li {
+    padding: 20px 10px;
     border-bottom: 1px dashed var(--main-color);
   }
 
-  & a {
+  & > li > a {
     color: var(--main-color);
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 
-  & h2 {
-    font-weight: var(--font-bw);
+  & a > p {
+    font-size: var(--font-ssz);
   }
 `;
