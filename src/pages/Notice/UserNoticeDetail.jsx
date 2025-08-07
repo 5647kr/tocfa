@@ -22,7 +22,7 @@ export default function UserNoticeDetail() {
   // sessionStorage를 이용한 조회수 중복 증가 방지
   useEffect(() => {
     const viewAndRefresh = async () => {
-      if(notice.length === 0 || !notice) {
+      if (notice.length === 0 || !notice) {
         await readPost();
       }
 
@@ -61,12 +61,12 @@ export default function UserNoticeDetail() {
       <BackHeader />
       <main>
         <section>
-          <InfoWrap>
-            <p>등록일: {PostDate}</p>
-            <p>조회수: {noticeItem.view}</p>
-          </InfoWrap>
           <ContentWrap>
             <h2>{noticeItem.noticeTitle}</h2>
+            <InfoWrap>
+              <p>등록일: {PostDate}</p>
+              <p>조회수: {noticeItem.view}</p>
+            </InfoWrap>
             <p>{noticeItem.content}</p>
           </ContentWrap>
         </section>
@@ -75,15 +75,19 @@ export default function UserNoticeDetail() {
   );
 }
 
-const InfoWrap = styled.div`
-  margin-block: 40px;
-  text-align: right;
-`;
-
 const ContentWrap = styled.div`
+  margin-block: 80px;
   text-align: center;
   & h2 {
     margin-bottom: 40px;
     font-weight: var(--font-bw);
+  }
+`;
+
+const InfoWrap = styled.div`
+  margin-block: 40px;
+  text-align: right;
+  & p {
+    font-size: var(--font-ssz);
   }
 `;
