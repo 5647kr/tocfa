@@ -67,10 +67,14 @@ const GlobalStyle = createGlobalStyle`
   }
 
   input, textarea {
+    width: 100%;
     border: 1px solid var(--sub-color);
     padding: 10px;
-    max-height: 200px;
     resize: none;
+  }
+
+  textarea {
+    height: 200px;
   }
 
   button {
