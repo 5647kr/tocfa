@@ -11,7 +11,7 @@ const useTypeStore = create((set, get) => ({
     const { userType } = get();
 
     const data = await CategoryApi(userType);
-    set({menuList: data})
+    set({ menuList: data });
   },
 }));
 
