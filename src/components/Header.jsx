@@ -1,22 +1,29 @@
 import { useEffect } from "react";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import styled from "styled-components";
 import useTypeStore from "../store/TypeStore";
 
-function Header(userType) {
-  const { setUserType, getMenu, menuList } = useTypeStore();
+function Header() {
+  const { userType, setUserType, getMenu, menuList } = useTypeStore();
+  const location = useLocation();
+
   useEffect(() => {
-    setUserType(userType);
+    if (location.pathname.includes("admin")) {
+      setUserType("admin");
+    } else {
+      setUserType("user");
+    }
+  }, [location.pathname]);
+
+  useEffect(() => {
     getMenu();
   }, [getMenu]);
-
-  console.log(menuList);
 
   return (
     <HeaderWrap>
       <HeaderTitle>
         <h1>
-          <Link to="/">
+          <Link to={"/"}>
             <img src="/assets/img/logo.png" alt="tocfa 로고" />
           </Link>
         </h1>
@@ -27,7 +34,7 @@ function Header(userType) {
             ? menuList.map((v) => {
                 return (
                   <li key={v.id}>
-                    <button>v.name</button>
+                    <button>{v.name}</button>
                   </li>
                 );
               })
@@ -57,7 +64,6 @@ const HeaderWrap = styled.header`
 const HeaderTitle = styled.div`
   width: 100%;
   height: 6rem;
-  /* box-shadow: inset 0 0 10px red; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -68,31 +74,47 @@ const HeaderTitle = styled.div`
   }
 
   @media screen and (min-width: 1024px) {
+    height: 8rem;
     justify-content: flex-start;
   }
 `;
 
 const NavLink = styled.nav`
-  /* box-shadow: inset 0 0 10px blue; */
   width: 100%;
   height: 6rem;
   & ul {
     height: inherit;
     display: flex;
-    /* box-shadow: inset 0 0 10px red; */
   }
   & ul li {
-    /* box-shadow: inset 0 0 10px green; */
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
   }
+  & ul li a {
+    height: 6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  & ul li button {
+    background-color: transparent;
+    font-size: var(--font-ssz);
+    font-weight: var(--font-rw);
+    color: var(--main-color);
+  }
+  & ul li button:active {
+    box-shadow: none;
+  }
   @media screen and (min-width: 1024px) {
+    height: 8rem;
     & ul li {
-      width: 140px;
+      width: 120px;
     }
     & ul li a {
+      height: 8rem;
       font-size: var(--font-ssz);
     }
   }
