@@ -1,17 +1,24 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { Header } from "./components/Header";
 import GlobalStyle from "./styles/GlobalStyle";
+// import UserHome from "./user/UserHome";
+import AdminLogin from "./admin/AdminLogin";
 import AdminHome from "./admin/AdminHome";
-import UserHome from "./user/UserHome";
+import AdminUpdate from "./admin/AdminUpdate";
+
 
 function App() {
+  const location = useLocation();
+  const hidePage = location.pathname === "/admin";
   return (
     <>
       <GlobalStyle />
-      <Header />
+      {!hidePage && <Header />}
       <Routes>
-        {/* <Route path="/admin" element={<AdminHome />} />
-        <Route path="/" element={<UserHome />} /> */}
+        <Route path="/admin" element={<AdminLogin />} />
+        <Route path="/admin/home" element={<AdminHome />} />
+        <Route path="/admin/post" element={<AdminPost />} />
+        <Route path="/admin/update/:id" element={<AdminUpdate />} />
       </Routes>
     </>
   );
