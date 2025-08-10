@@ -4,6 +4,7 @@ import GlobalStyle from "./styles/GlobalStyle";
 // import UserHome from "./user/UserHome";
 import AdminLogin from "./admin/AdminLogin";
 import AdminHome from "./admin/AdminHome";
+import AdminPost from "./admin/AdminPost";
 import AdminUpdate from "./admin/AdminUpdate";
 
 
