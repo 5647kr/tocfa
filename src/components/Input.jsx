@@ -18,11 +18,11 @@ function RadioInput({ id, name, checked, onChange, children }) {
   );
 }
 
-function TextInput({ id, name, value, onChange, placeholder }) {
+function TextInput({ type, id, name, value, onChange, placeholder }) {
   return (
     <label htmlFor={id}>
       <input
-        type="text"
+        type={type}
         id={id}
         name={name}
         value={value}
