@@ -1,7 +1,5 @@
 import supabase from "../supabaseClient";
 
-
-
 // 글 작성
 // 글 조회
 async function ReadApi(typeSelect) {
@@ -26,5 +24,15 @@ async function ReadApi(typeSelect) {
 }
 // 글 업데이트
 // 글 삭제
+async function DeleteApi({ id, typeSelect }) {
+  try {
+    const {error} = await supabase.from(typeSelect).delete().eq("id", id)
+    if(error) {
+      throw new Error("삭제 오류")
+    }
+  } catch (error) {
+    throw error
+  }
+}
 
-export { ReadApi };
+export { ReadApi, DeleteApi };
