@@ -1,12 +1,17 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import usePostStore from "../store/PostStore";
-import { useEffect, useState } from "react";
+import { RxCrossCircled } from "react-icons/rx";
 import Loading from "../components/Loading";
+import Modal from "../components/Modal";
 
 export default function AdminHome() {
-  const { typeSelect, readTable, notice, laws, category } = usePostStore();
+  const { typeSelect, readTable, deleteTable, notice, laws, category } =
+    usePostStore();
   const [dataTable, setDataTable] = useState([]);
+  const [deleteModal, setDeleteModal] = useState(false);
+  const [deleteId, setDeleteId] = useState(null);
 
   useEffect(() => {
     setDataTable([]);
@@ -22,7 +27,24 @@ export default function AdminHome() {
     }
   }, [typeSelect, notice, laws, category]);
 
-  console.log("data", dataTable);
+  const handleDeleteModal = (id) => {
+    setDeleteModal(true);
+    setDeleteId(id);
+  };
+
+  const clearDeleteModal = () => {
+    setDeleteModal(false);
+    setDeleteId(null)
+  };
+
+  const handleDeleteTable = () => {
+    try {
+      deleteTable(deleteId);
+      clearDeleteModal();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <main>
@@ -52,9 +74,8 @@ export default function AdminHome() {
               </thead>
               <tbody>
                 {dataTable.map((v) => {
-                  console.log(v)
                   return (
-                    <tr>
+                    <tr key={v.id}>
                       <td>{v.id}</td>
                       <td>{v.title}</td>
                       <td>
@@ -68,7 +89,13 @@ export default function AdminHome() {
                         <Link to={`/admin/update/${v.id}`}>Edit</Link>
                       </td>
                       <td>
-                        <button>Delete</button>
+                        <button
+                          onClick={() => {
+                            handleDeleteModal(v.id);
+                          }}
+                        >
+                          Delete
+                        </button>
                       </td>
                     </tr>
                   );
@@ -79,6 +106,17 @@ export default function AdminHome() {
             <Loading />
           )}
         </TableWrap>
+
+        {deleteModal && (
+          <DeleteModal>
+            <ErrorIcon />
+            <strong>정말 삭제하시겠습니까?</strong>
+            <BtnWrap>
+              <button onClick={clearDeleteModal}>취소</button>
+              <button onClick={handleDeleteTable}>삭제</button>
+            </BtnWrap>
+          </DeleteModal>
+        )}
       </section>
     </main>
   );
@@ -138,5 +176,30 @@ const DataTableWrap = styled.table`
     color: var(--error-color);
     background-color: var(--white-color);
     font-weight: var(--font-rw);
+  }
+`;
+
+const DeleteModal = styled(Modal)`
+  box-shadow: 0 2px 4px var(--sub-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
+
+const ErrorIcon = styled(RxCrossCircled)`
+  font-size: 14rem;
+  color: var(--error-color);
+`;
+
+const BtnWrap = styled.div`
+  display: flex;
+  gap: 2rem;
+  & button:nth-child(2) {
+    background-color: var(--error-color);
   }
 `;
