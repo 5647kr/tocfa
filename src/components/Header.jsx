@@ -2,9 +2,11 @@ import { useEffect } from "react";
 import { Link, useLocation } from "react-router";
 import styled from "styled-components";
 import useTypeStore from "../store/TypeStore";
+import usePostStore from "../store/PostStore";
 
 function Header() {
   const { userType, setUserType, getMenu, menuList } = useTypeStore();
+  const { typeSelect, setTypeSelect } = usePostStore();
   const location = useLocation();
 
   useEffect(() => {
@@ -34,14 +36,21 @@ function Header() {
             ? menuList.map((v) => {
                 return (
                   <li key={v.id}>
-                    <button>{v.name}</button>
+                    <button
+                      id={v.id}
+                      onClick={() => {
+                        setTypeSelect(v.engName);
+                      }}
+                    >
+                      {v.title}
+                    </button>
                   </li>
                 );
               })
             : menuList.map((v) => {
                 return (
                   <li key={v.id}>
-                    <Link to={`/laws/${v.engName}`}>{v.name}</Link>
+                    <Link to={`/laws/${v.engName}`}>{v.title}</Link>
                   </li>
                 );
               })}
@@ -53,6 +62,7 @@ function Header() {
 
 const HeaderWrap = styled.header`
   width: 100%;
+  background-color: var(--white-color);
   box-shadow: 0 2px 4px var(--sub-color);
   display: flex;
   flex-direction: column;
@@ -60,7 +70,6 @@ const HeaderWrap = styled.header`
   left: 0;
   top: 0;
   z-index: 999;
-
 
   @media screen and (min-width: 1024px) {
     flex-direction: row;

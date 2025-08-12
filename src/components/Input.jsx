@@ -53,6 +53,9 @@ function TextArea({ id, name, value, onChange, placeholder }) {
 
 const RadioInputWrap = styled.div`
   & label {
+    width: 100%;
+    display: block;
+    text-align: center;
     padding: 5px 10px;
     border: 1px solid var(--main-color);
     cursor: pointer;
