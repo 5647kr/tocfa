@@ -9,7 +9,6 @@ function Header() {
   const { typeSelect, setTypeSelect } = usePostStore();
   const location = useLocation();
 
-
   useEffect(() => {
     if (location.pathname.includes("admin")) {
       setUserType("admin");
@@ -22,8 +21,6 @@ function Header() {
     getMenu();
   }, [getMenu]);
 
-
-  console.log(typeSelect)
   return (
     <HeaderWrap>
       <HeaderTitle>
