@@ -5,13 +5,26 @@ import usePostStore from "../store/PostStore";
 import { RxCrossCircled } from "react-icons/rx";
 import Loading from "../components/Loading";
 import Modal from "../components/Modal";
+import useTypeStore from "../store/TypeStore";
 
 export default function AdminHome() {
-  const { typeSelect, readTable, deleteTable, notice, laws, category } =
-    usePostStore();
+  const {
+    typeSelect,
+    setTypeSelect,
+    readTable,
+    deleteTable,
+    notice,
+    laws,
+    category,
+  } = usePostStore();
+  const { getMenu, menuList } = useTypeStore();
   const [dataTable, setDataTable] = useState([]);
   const [deleteModal, setDeleteModal] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
+
+  useEffect(() => {
+    getMenu();
+  }, []);
 
   useEffect(() => {
     setDataTable([]);
@@ -27,6 +40,11 @@ export default function AdminHome() {
     }
   }, [typeSelect, notice, laws, category]);
 
+  const handleChageType = (engName) => {
+    setTypeSelect(engName)
+  }
+
+
   const handleDeleteModal = (id) => {
     setDeleteModal(true);
     setDeleteId(id);
@@ -34,7 +52,7 @@ export default function AdminHome() {
 
   const clearDeleteModal = () => {
     setDeleteModal(false);
-    setDeleteId(null)
+    setDeleteId(null);
   };
 
   const handleDeleteTable = () => {
@@ -49,12 +67,19 @@ export default function AdminHome() {
   return (
     <main>
       <section>
-        <LogOutWrap>
-          <button>로그아웃</button>
-        </LogOutWrap>
-
-        <TableWrap>
+        <HandleWrap>
+          <ul>
+            {menuList.map((v) => {
+              return (
+                <li key={v.id}>
+                  <button id={v.id} onClick={() => handleChageType(v.engName)}>{v.title}</button>
+                </li>
+              );
+            })}
+          </ul>
           <Link to="/admin/post">새 글 작성</Link>
+        </HandleWrap>
+        <div>
           {dataTable.length > 0 ? (
             <DataTableWrap>
               <thead>
@@ -105,7 +130,7 @@ export default function AdminHome() {
           ) : (
             <Loading />
           )}
-        </TableWrap>
+        </div>
 
         {deleteModal && (
           <DeleteModal>
@@ -122,12 +147,25 @@ export default function AdminHome() {
   );
 }
 
-const LogOutWrap = styled.div`
-  margin-block: 8rem 4rem;
-  text-align: right;
-`;
-
-const TableWrap = styled.div`
+const HandleWrap = styled.div`
+  margin-top: 8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  & ul {
+    display: flex;
+  }
+  & button {
+    background-color: var(--white-color);
+    border: 1px solid var(--sub-color);
+    border-bottom: none;
+    color: var(--sub-color);
+    font-weight: var(--font-rw);
+    padding: 0.5rem 1rem;
+  }
+  & li:nth-child(2) button {
+    border-inline: none;
+  }
   & a {
     width: fit-content;
     border: 1px solid var(--sub-color);

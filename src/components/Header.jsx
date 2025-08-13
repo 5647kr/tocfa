@@ -2,11 +2,9 @@ import { useEffect } from "react";
 import { Link, useLocation } from "react-router";
 import styled from "styled-components";
 import useTypeStore from "../store/TypeStore";
-import usePostStore from "../store/PostStore";
 
 function Header() {
   const { userType, setUserType, getMenu, menuList } = useTypeStore();
-  const { typeSelect, setTypeSelect } = usePostStore();
   const location = useLocation();
 
   useEffect(() => {
@@ -31,30 +29,21 @@ function Header() {
         </h1>
       </HeaderTitle>
       <NavLink>
-        <ul>
-          {userType === "admin"
-            ? menuList.map((v) => {
-                return (
-                  <li key={v.id}>
-                    <button
-                      id={v.id}
-                      onClick={() => {
-                        setTypeSelect(v.engName);
-                      }}
-                    >
-                      {v.title}
-                    </button>
-                  </li>
-                );
-              })
-            : menuList.map((v) => {
-                return (
-                  <li key={v.id}>
-                    <Link to={`/laws/${v.engName}`}>{v.title}</Link>
-                  </li>
-                );
-              })}
-        </ul>
+        {userType === "admin" ? (
+          <LogOutWrap>
+            <button>로그아웃</button>
+          </LogOutWrap>
+        ) : (
+          <ul>
+            {menuList.map((v) => {
+              return (
+                <li key={v.id}>
+                  <Link to={`/laws/${v.engName}`}>{v.title}</Link>
+                </li>
+              );
+            })}
+          </ul>
+        )}
       </NavLink>
     </HeaderWrap>
   );
@@ -94,7 +83,14 @@ const HeaderTitle = styled.div`
   }
 `;
 
-const NavLink = styled.nav`
+const LogOutWrap = styled.div`
+height: 100%;
+display: flex;
+justify-content: flex-end;
+align-items: center;
+`;
+
+const NavLink = styled.div`
   width: 100%;
   height: 6rem;
   & ul {
@@ -112,16 +108,6 @@ const NavLink = styled.nav`
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-
-  & ul li button {
-    background-color: transparent;
-    font-size: var(--font-ssz);
-    font-weight: var(--font-rw);
-    color: var(--main-color);
-  }
-  & ul li button:active {
-    box-shadow: none;
   }
   @media screen and (min-width: 1024px) {
     height: 8rem;
