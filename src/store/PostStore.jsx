@@ -1,5 +1,6 @@
 import { create } from "zustand";
-import { ReadApi, DeleteApi } from "../api/PostApi";
+import { CreateApi, ReadApi, DeleteApi } from "../api/PostApi";
+import CategoryApi from "../api/CategoryApi";
 
 const usePostStore = create((set, get) => ({
   typeSelect: "notice",
@@ -8,6 +9,32 @@ const usePostStore = create((set, get) => ({
   category: [],
 
   setTypeSelect: (typeSelect) => set({ typeSelect: typeSelect }),
+
+  // 카테고리
+  categoryTable: async () => {
+    const data = await CategoryApi("user");
+    set({ category: data });
+  },
+
+  // 작성
+  createTable: async (data) => {
+    const { typeSelect } = get();
+
+    const newPost = await CreateApi({ data, typeSelect });
+
+    console.log(newPost)
+
+    set((state) => {
+      switch (typeSelect) {
+        case "notice":
+          return { notice: [newPost, ...state.notice] };
+        case "laws":
+          return { laws: [newPost, ...state.laws] };
+        case "category":
+          return { category: [newPost, ...state.category] };
+      }
+    });
+  },
 
   // 조회
   readTable: async () => {
@@ -24,6 +51,11 @@ const usePostStore = create((set, get) => ({
     }
   },
 
+  updateTable: async() => {
+
+  },
+
+  // 삭제
   deleteTable: async (id) => {
     const { typeSelect } = get();
 
