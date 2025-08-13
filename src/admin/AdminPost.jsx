@@ -1,14 +1,23 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import useTypeStore from "../store/TypeStore";
 import usePostStore from "../store/PostStore";
 import { RadioInput, TextArea, TextInput } from "../components/Input";
 
 
-
 export default function AdminPost() {
-  const { typeSelect, createTable } = usePostStore();
+  const { typeSelect, setTypeSelect, createTable } = usePostStore();
+  const { getMenu, menuList } = useTypeStore();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    getMenu()
+  }, [])
+
+  const handleChageType = (engName) => {
+    setTypeSelect(engName);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,23 +27,38 @@ export default function AdminPost() {
 
     try {
       createTable(data);
-      navigate("/admin/home")
+      navigate("/admin/home");
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
   };
   return (
     <main>
       <section>
+        <HandleWrap>
+          <ul>
+            {menuList.map((v) => {
+              return (
+                <li key={v.id}>
+                  <button id={v.id} onClick={() => handleChageType(v.engName)}>
+                    {v.title}
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        </HandleWrap>
         {typeSelect === "notice" && <NoticeForm handleSubmit={handleSubmit} />}
         {typeSelect === "laws" && <LawsForm handleSubmit={handleSubmit} />}
-        {typeSelect === "category" && <CategoryForm handleSubmit={handleSubmit} />}
+        {typeSelect === "category" && (
+          <CategoryForm handleSubmit={handleSubmit} />
+        )}
       </section>
     </main>
   );
 }
 
-function NoticeForm({handleSubmit}) {
+function NoticeForm({ handleSubmit }) {
   return (
     <RegisterWrap>
       <h2>공지사항 작성</h2>
@@ -52,7 +76,7 @@ function NoticeForm({handleSubmit}) {
   );
 }
 
-function LawsForm({handleSubmit}) {
+function LawsForm({ handleSubmit }) {
   const { category, categoryTable } = usePostStore();
   useEffect(() => {
     categoryTable();
@@ -89,7 +113,7 @@ function LawsForm({handleSubmit}) {
   );
 }
 
-function CategoryForm({handleSubmit}) {
+function CategoryForm({ handleSubmit }) {
   return (
     <RegisterWrap>
       <h2>카테고리 작성</h2>
@@ -106,9 +130,29 @@ function CategoryForm({handleSubmit}) {
   );
 }
 
+const HandleWrap = styled.div`
+  margin-top: 8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  & ul {
+    display: flex;
+  }
+  & button {
+    background-color: var(--white-color);
+    border: 1px solid var(--sub-color);
+    border-bottom: none;
+    color: var(--sub-color);
+    font-weight: var(--font-rw);
+    padding: 0.5rem 1rem;
+  }
+  & li:nth-child(2) button {
+    border-inline: none;
+  }
+`;
+
 const RegisterWrap = styled.div`
   padding: 4rem;
-  margin-top: 8rem;
   border: 1px solid var(--sub-color);
   & h2 {
     text-align: center;
