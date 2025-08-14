@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { CreateApi, ReadApi, DeleteApi } from "../api/PostApi";
+import { CreateApi, ReadApi, UpdateApi, DeleteApi } from "../api/PostApi";
 import CategoryApi from "../api/CategoryApi";
 
 const usePostStore = create((set, get) => ({
@@ -22,7 +22,7 @@ const usePostStore = create((set, get) => ({
 
     const newPost = await CreateApi({ data, typeSelect });
 
-    console.log(newPost)
+    console.log(newPost);
 
     set((state) => {
       switch (typeSelect) {
@@ -43,16 +43,38 @@ const usePostStore = create((set, get) => ({
     const data = await ReadApi(typeSelect);
 
     if (typeSelect === "notice") {
-      set({ notice: data });
+      set({ notice: [...data] });
     } else if (typeSelect === "laws") {
-      set({ laws: data });
+      set({ laws: [...data] });
     } else {
-      set({ category: data });
+      set({ category: [...data] });
     }
   },
 
-  updateTable: async() => {
+  // 수정
+  updateTable: async (data) => {
+    const { typeSelect } = get();
 
+    const updateTable = await UpdateApi({ data, typeSelect });
+    set((state) => {
+      switch (typeSelect) {
+        case "notice":
+          return {
+            ...state,
+            notice: state.notice.map((table) =>
+              table.id === data.id ? updateTable : table
+            ),
+          };
+        case "laws":
+        case "category":
+          return {
+            ...state,
+            notice: state.notice.map((table) =>
+              table.id === data.id ? updateTable : table
+            ),
+          };
+      }
+    });
   },
 
   // 삭제
