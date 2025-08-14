@@ -111,7 +111,7 @@ export default function AdminHome() {
                           v.engName}
                       </td>
                       <td>
-                        <Link to={`/admin/update/${v.id}`}>Edit</Link>
+                        <Link to={`/admin/update/${v.id}`} state={v}>Edit</Link>
                       </td>
                       <td>
                         <button
