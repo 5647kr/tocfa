@@ -8,12 +8,12 @@ async function CreateApi({ data, typeSelect }) {
       .insert([data])
       .select();
 
-    if(error) {
-      throw new Error("글 작성 실패")
+    if (error) {
+      throw new Error("글 작성 실패");
     }
-    return newPost[0]
+    return newPost[0];
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
 }
 // 글 조회
@@ -38,6 +38,22 @@ async function ReadApi(typeSelect) {
   }
 }
 // 글 수정
+async function UpdateApi({ data, typeSelect }) {
+  try {
+    const { data: updateData, error } = await supabase
+      .from(typeSelect)
+      .update(data)
+      .eq("id", data.id);
+
+      if(error) {
+        throw new Error("글 수정 실패")
+      }
+      return updateData;
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 // 글 삭제
 async function DeleteApi({ id, typeSelect }) {
   try {
@@ -50,4 +66,4 @@ async function DeleteApi({ id, typeSelect }) {
   }
 }
 
-export { CreateApi, ReadApi, DeleteApi };
+export { CreateApi, ReadApi, UpdateApi, DeleteApi };

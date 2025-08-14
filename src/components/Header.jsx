@@ -13,35 +13,40 @@ function Header() {
     } else {
       setUserType("user");
     }
-  }, [location.pathname]);
+  }, [location.pathname, userType]);
 
+  console.log(userType)
+
+  // 메뉴 가져오기
   useEffect(() => {
     getMenu();
-  }, [getMenu]);
+  }, [userType]);
+
+  // 현재 경로가 admin인지 판단
+  const isAdmin = location.pathname.startsWith("/admin");
 
   return (
     <HeaderWrap>
       <HeaderTitle>
         <h1>
-          <Link to={"/"}>
+          <Link to="/">
             <img src="/assets/img/logo.png" alt="tocfa 로고" />
           </Link>
         </h1>
       </HeaderTitle>
+
       <NavLink>
-        {userType === "admin" ? (
+        {isAdmin ? (
           <LogOutWrap>
             <button>로그아웃</button>
           </LogOutWrap>
         ) : (
           <ul>
-            {menuList.map((v) => {
-              return (
-                <li key={v.id}>
-                  <Link to={`/laws/${v.engName}`}>{v.title}</Link>
-                </li>
-              );
-            })}
+            {menuList.map((v) => (
+              <li key={v.id}>
+                <Link to={`/laws/${v.engName}`}>{v.title}</Link>
+              </li>
+            ))}
           </ul>
         )}
       </NavLink>
@@ -84,10 +89,10 @@ const HeaderTitle = styled.div`
 `;
 
 const LogOutWrap = styled.div`
-height: 100%;
-display: flex;
-justify-content: flex-end;
-align-items: center;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 `;
 
 const NavLink = styled.div`
