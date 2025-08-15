@@ -24,7 +24,7 @@ export default function AdminHome() {
 
   useEffect(() => {
     getMenu();
-  }, []);
+  }, [getMenu]);
 
   useEffect(() => {
     setDataTable([]);
@@ -38,12 +38,11 @@ export default function AdminHome() {
     } else {
       readTable();
     }
-  }, [typeSelect, notice, laws, category]);
+  }, [typeSelect, readTable, notice, laws, category]);
 
   const handleChageType = (engName) => {
-    setTypeSelect(engName)
-  }
-
+    setTypeSelect(engName);
+  };
 
   const handleDeleteModal = (id) => {
     setDeleteModal(true);
@@ -72,7 +71,9 @@ export default function AdminHome() {
             {menuList.map((v) => {
               return (
                 <li key={v.id}>
-                  <button id={v.id} onClick={() => handleChageType(v.engName)}>{v.title}</button>
+                  <button id={v.id} onClick={() => handleChageType(v.engName)}>
+                    {v.title}
+                  </button>
                 </li>
               );
             })}
@@ -99,19 +100,45 @@ export default function AdminHome() {
               </thead>
               <tbody>
                 {dataTable.map((v) => {
+                  let category = "";
+                  switch (v.category) {
+                    case "house":
+                      category = "임대/임차";
+                      break;
+                    case "finance":
+                      category = "금전/사기";
+                      break;
+                    case "rights":
+                      category = "권리/명예";
+                      break;
+                    case "work":
+                      category = "근로/노동";
+                      break;
+                    case "contract":
+                      category = "계약";
+                      break;
+                    case "transport":
+                      category = "교통";
+                      break;
+                    default:
+                      category = "기타";
+                      break;
+                  }
                   return (
                     <tr key={v.id}>
                       <td>{v.id}</td>
                       <td>{v.title}</td>
                       <td>
                         {typeSelect === "notice" && v.content}
-                        {typeSelect === "laws" && v.category}
+                        {typeSelect === "laws" && category}
                         {typeSelect !== "notice" &&
                           typeSelect !== "laws" &&
                           v.engName}
                       </td>
                       <td>
-                        <Link to={`/admin/update/${v.id}`} state={v}>Edit</Link>
+                        <Link to={`/admin/update/${v.id}`} state={v}>
+                          Edit
+                        </Link>
                       </td>
                       <td>
                         <button
