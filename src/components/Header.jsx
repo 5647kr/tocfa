@@ -1,11 +1,13 @@
 import { useEffect } from "react";
-import { Link, useLocation } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import styled from "styled-components";
 import useTypeStore from "../store/TypeStore";
+import { LogOutApi } from "../api/LogApi";
 
 function Header() {
   const { userType, setUserType, getMenu, menuList } = useTypeStore();
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (location.pathname.includes("admin")) {
@@ -13,17 +15,20 @@ function Header() {
     } else {
       setUserType("user");
     }
-  }, [location.pathname, userType]);
-
-  console.log(userType)
+  }, [location.pathname, setUserType, userType]);
 
   // 메뉴 가져오기
   useEffect(() => {
     getMenu();
-  }, [userType]);
+  }, [getMenu, userType]);
 
   // 현재 경로가 admin인지 판단
   const isAdmin = location.pathname.startsWith("/admin");
+
+  const handleLogOut = async () => {
+    await LogOutApi();
+    navigate("/admin")
+  }
 
   return (
     <HeaderWrap>
@@ -38,7 +43,7 @@ function Header() {
       <NavLink>
         {isAdmin ? (
           <LogOutWrap>
-            <button>로그아웃</button>
+            <button onClick={handleLogOut}>로그아웃</button>
           </LogOutWrap>
         ) : (
           <ul>
