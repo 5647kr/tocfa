@@ -14,8 +14,6 @@ export default function UserHome() {
     readTable();
   }, [categoryTable, readTable]);
 
-  console.log(notice);
-
   return (
     <main>
       <HeroSection bgImg="/assets/img/hero.webp">
@@ -47,12 +45,24 @@ export default function UserHome() {
         </ul>
       </CategorySection>
       <NoticeSection>
-        <h2>새소식</h2>
+        <TitleWrap>
+          <h2>새소식</h2>
+          <Link to={"/notice"}>전체보기</Link>
+        </TitleWrap>
         <ul>
           {notice.map((item) => {
+            const date = new Date(item.created_at).toLocaleDateString("ko-KR", {
+              timeZone: "Asia/Seoul",
+              year: "numeric",
+              month: "2-digit",
+              day: "2-digit",
+            });
             return (
               <li key={item.id}>
-                <Link to={`/notice/${item.id}`}>{item.title}</Link>
+                <Link to={`/notice/${item.id}`}>
+                  <h3>{item.title}</h3>
+                  <span>{date}</span>
+                </Link>
               </li>
             );
           })}
@@ -122,5 +132,22 @@ const NoticeSection = styled(ContentSection)`
   & li {
     padding: 1rem;
     border-bottom: 1px dashed var(--sub-color);
+  }
+  & a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  & span {
+    color: var(--sub-color);
+  }
+`;
+
+const TitleWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  & a {
+    color: var(--sub-color);
   }
 `;
