@@ -5,9 +5,11 @@ import AdminLogin from "./admin/AdminLogin";
 import AdminHome from "./admin/AdminHome";
 import AdminPost from "./admin/AdminPost";
 import AdminUpdate from "./admin/AdminUpdate";
-import UserHome from "./user/UserHome";
 import Protected from "./components/Protected";
 import Admin from "./admin/Admin";
+import UserHome from "./user/UserHome";
+import UserNotice from "./user/UserNotice";
+import UserNoticeDetail from "./user/UserNoticeDetail";
 
 function App() {
   const location = useLocation();
@@ -34,6 +36,8 @@ function App() {
         </Route>
 
         <Route path="/" element={<UserHome />} />
+        <Route path="/notice" element={<UserNotice />} />
+        <Route path="/notice/:id" element={<UserNoticeDetail />} />
       </Routes>
     </>
   );
