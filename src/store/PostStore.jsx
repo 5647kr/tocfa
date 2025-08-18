@@ -22,8 +22,6 @@ const usePostStore = create((set, get) => ({
 
     const newPost = await CreateApi({ data, typeSelect });
 
-    console.log(newPost);
-
     set((state) => {
       switch (typeSelect) {
         case "notice":

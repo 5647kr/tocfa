@@ -17,8 +17,11 @@ const GlobalStyle = createGlobalStyle`
   }
 
   main {
-    padding-block: 80px;
+    padding-block: 120px;
     position: relative;
+    @media screen and (min-width: 1024px) {
+      padding-block: 80px;
+    }
   }
 
   ul, li {
@@ -62,7 +65,7 @@ const GlobalStyle = createGlobalStyle`
   h3, h4 {
     font-size: clamp(1.8rem, 2vw, 2.6rem);
   }
-  p, button, a, input, textarea, label, strong, span, th {
+  p, button, a, input, textarea, label, strong, span, th, pre {
     font-size: clamp(1.4rem, 1.6vw, 2.2rem);
   }
 
