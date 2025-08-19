@@ -30,8 +30,6 @@ export default function UserLaws() {
     }
   }, [laws, id]);
 
-  console.log(lawList);
-
   return (
     <main>
       <HeroSection bgImg={`/assets/img/${id}.webp`}>
@@ -39,7 +37,7 @@ export default function UserLaws() {
       </HeroSection>
       <section>
         <FilterWrap>
-          <button>등록순</button>
+          <button>최신순</button>
           <button>조회순</button>
         </FilterWrap>
         <LawWrap>
@@ -94,5 +92,8 @@ const LawWrap = styled.div`
   & a {
     display: flex;
     justify-content: space-between;
+  }
+  & p {
+    color: var(--sub-color);
   }
 `;
