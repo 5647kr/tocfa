@@ -3,11 +3,12 @@ import { useParams } from "react-router-dom";
 import supabase from "../supabaseClient";
 import usePostStore from "../store/PostStore";
 import styled from "styled-components";
+import { ViewApi } from "../api/PostApi";
 
 export default function UserNoticeDetail() {
   const params = useParams();
   const id = params.id;
-  const { notice, readTable } = usePostStore();
+  const { typeSelect, notice, readTable } = usePostStore();
   const [noticeItem, setNoticeItem] = useState([]);
 
   useEffect(() => {
@@ -31,15 +32,8 @@ export default function UserNoticeDetail() {
   });
 
   useEffect(() => {
-    const increaseView = async () => {
-      const { error } = await supabase.rpc("increment_view", {
-        table_name: "notice",
-        row_id: id,
-      });
-      if (error) console.error("조회수 증가 실패:", error);
-    };
-    increaseView();
-  }, [id]);
+    ViewApi({id, typeSelect});
+  }, [id])
 
   return (
     <main>
