@@ -13,7 +13,7 @@ export default function UserNotice() {
   }, []);
   return (
     <main>
-      <HeroSection bgImg="/assets/img/hero.webp">
+      <HeroSection bgImg={`${process.env.PUBLIC_URL}/assets/img/hero.webp`}>
         <h2>공지사항</h2>
       </HeroSection>
       <NoticeListSection>

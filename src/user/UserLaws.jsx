@@ -48,7 +48,7 @@ export default function UserLaws() {
 
   return (
     <main>
-      <HeroSection bgImg={`/assets/img/${id}.webp`}>
+      <HeroSection bgImg={`${process.env.PUBLIC_URL}/assets/img/${id}.webp`}>
         {categoryTitle ? <h2>{categoryTitle.title}</h2> : null}
       </HeroSection>
       <section>

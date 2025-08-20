@@ -29,7 +29,7 @@ export default function UserHome() {
 
   return (
     <main>
-      <HeroSection bgImg="/assets/img/hero.webp">
+      <HeroSection bgImg={`${process.env.PUBLIC_URL}/assets/img/hero.webp`}>
         <h2>생활 속 법률 지식, 이제는 나에게 맞게</h2>
         <h3>
           카테고리별 상황별로 구성하여 <br />
@@ -44,7 +44,7 @@ export default function UserHome() {
             return (
               <CategoryItem
                 key={item.id}
-                $bg={`/assets/img/${item.engName}.webp`}
+                $bg={`${process.env.PUBLIC_URL}/assets/img/${item.engName}.webp`}
               >
                 <Link to={`/laws/${item.engName}`}>
                   <div>
