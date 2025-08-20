@@ -2,18 +2,21 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" />
-    <title>Redirecting...</title>
+    <meta charset="utf-8">
+    <title>포옹타입</title>
     <script type="text/javascript">
-      const base = "/tocfa";
-      const path = window.location.pathname.startsWith(base)
-        ? window.location.pathname
-        : base + window.location.pathname;
-
-      window.location.replace(
-        path + window.location.search + window.location.hash
+      // GitHub Pages에서 SPA 라우팅을 위한 리디렉션
+      var pathSegmentsToKeep = 1;
+      var l = window.location;
+      l.replace(
+        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+        l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
+        l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
+        (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+        l.hash
       );
     </script>
   </head>
-  <body></body>
+  <body>
+  </body>
 </html>
