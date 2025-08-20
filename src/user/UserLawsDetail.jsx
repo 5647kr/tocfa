@@ -11,9 +11,6 @@ export default function UserLawsDetail() {
   const { typeSelect, setTypeSelect, readTable, laws } = usePostStore();
   const [data, setData] = useState(null);
 
-  console.log(typeSelect);
-  console.log(laws);
-
   useEffect(() => {
     if (laws.length === 0) {
       setTypeSelect("laws");
@@ -23,8 +20,8 @@ export default function UserLawsDetail() {
   }, [laws, id, readTable, setTypeSelect]);
 
   useEffect(() => {
-    ViewApi({id, typeSelect});
-  }, [id])
+    ViewApi({ id, typeSelect });
+  }, [id]);
 
   const date = data
     ? new Date(data.created_at).toLocaleDateString("ko-KR", {
@@ -38,22 +35,22 @@ export default function UserLawsDetail() {
   let category = "계약";
   switch (data?.category) {
     case "house":
-      category = "임대/임차"
+      category = "임대/임차";
       break;
     case "finance":
-      category = "금전/사기"
+      category = "금전/사기";
       break;
     case "rights":
-      category = "권리/명예"
+      category = "권리/명예";
       break;
     case "transport":
-      category = "교통"
+      category = "교통";
       break;
     case "work":
-      category = "근로/노동"
+      category = "근로/노동";
       break;
     case "contract":
-      category = "계약"
+      category = "계약";
       break;
     default:
       category = "기타";
@@ -80,15 +77,15 @@ export default function UserLawsDetail() {
                 </li>
                 <li>
                   <h3>법 조항 내용</h3>
-                  <pre>{data.law_con}</pre>
+                  <p>{data.law_con}</p>
                 </li>
                 <li>
                   <h3>처벌</h3>
-                  <pre>{data.law_pen}</pre>
+                  <p>{data.law_pen}</p>
                 </li>
                 <li>
                   <h3>실생활 적용 예시</h3>
-                  <pre>{data.case}</pre>
+                  <p>{data.case}</p>
                 </li>
               </ul>
             </ContentWrap>
@@ -102,7 +99,7 @@ export default function UserLawsDetail() {
 }
 
 const LawsInfo = styled.div`
-  margin-block: 4rem;
+  margin-block: 8rem;
   & h2 {
     text-align: center;
     font-weight: var(--font-bw);
@@ -112,7 +109,7 @@ const LawsInfo = styled.div`
 const InfoWrap = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-block: 4rem;
+  margin-block: 8rem;
   text-align: right;
 `;
 
@@ -122,7 +119,11 @@ const ContentWrap = styled.div`
   }
 
   & h3 {
-    margin-bottom: 1px;
+    margin-bottom: 1rem;
     font-weight: var(--font-bw);
+  }
+
+  & p {
+    word-break: keep-all;
   }
 `;

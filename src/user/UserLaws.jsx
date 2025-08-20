@@ -46,8 +46,6 @@ export default function UserLaws() {
     }
   }, [id, laws, isNew]);
 
-  console.log(lawList)
-
   return (
     <main>
       <HeroSection bgImg={`/assets/img/${id}.webp`}>

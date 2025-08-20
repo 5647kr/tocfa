@@ -50,7 +50,7 @@ async function UpdateApi({ data, typeSelect }) {
     }
     return updateData;
   } catch (error) {
-    console.log(error);
+    throw error
   }
 }
 
