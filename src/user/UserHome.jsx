@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import usePostStore from "../store/PostStore";
@@ -7,12 +7,25 @@ import ContentSection from "../components/ContentSection";
 import { FaExternalLinkAlt } from "react-icons/fa";
 
 export default function UserHome() {
-  const { categoryTable, readTable, category, notice } = usePostStore();
+  const { setTypeSelect, categoryTable, readTable, category, notice } = usePostStore();
 
+  
   useEffect(() => {
+    setTypeSelect("notice")
     categoryTable();
     readTable();
   }, [categoryTable, readTable]);
+
+  const [noticeList, setNoticeList] = useState(notice);
+
+  useEffect(() => {
+    if (notice.length > 0) {
+      const sortList = [...notice].sort(
+        (a, b) => new Date(a.created_at) - new Date(b.created_at)
+      ).slice(0, 6);
+      setNoticeList(sortList);
+    }
+  }, [notice]);
 
   return (
     <main>
@@ -50,7 +63,7 @@ export default function UserHome() {
           <Link to={"/notice"}>전체보기</Link>
         </TitleWrap>
         <ul>
-          {notice.map((item) => {
+          {noticeList.map((item) => {
             const date = new Date(item.created_at).toLocaleDateString("ko-KR", {
               timeZone: "Asia/Seoul",
               year: "numeric",

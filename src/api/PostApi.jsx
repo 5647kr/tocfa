@@ -45,12 +45,12 @@ async function UpdateApi({ data, typeSelect }) {
       .update(data)
       .eq("id", data.id);
 
-      if(error) {
-        throw new Error("글 수정 실패")
-      }
-      return updateData;
+    if (error) {
+      throw new Error("글 수정 실패");
+    }
+    return updateData;
   } catch (error) {
-    console.log(error)
+    throw error
   }
 }
 
@@ -66,4 +66,19 @@ async function DeleteApi({ id, typeSelect }) {
   }
 }
 
-export { CreateApi, ReadApi, UpdateApi, DeleteApi };
+// 조회수 증가
+async function ViewApi({ id, typeSelect }) {
+  try {
+    const { error } = await supabase.rpc("increment_view", {
+      table_name: typeSelect,
+      row_id: id,
+    });
+    if (error) {
+      throw new Error("조회수 증가 오류")
+    }
+  } catch (error) {
+    throw error
+  }
+}
+
+export { CreateApi, ReadApi, UpdateApi, DeleteApi, ViewApi };

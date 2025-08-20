@@ -56,6 +56,10 @@ const GlobalStyle = createGlobalStyle`
     position: absolute;
   }
 
+  h1, h2, h3, h4 {
+    font-weight: var(--font-bw);
+  }
+  
   h1 {
     font-size: clamp(2.6rem, 3vw, 3.4rem);
   }

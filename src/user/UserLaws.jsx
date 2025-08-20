@@ -11,6 +11,7 @@ export default function UserLaws() {
     usePostStore();
   const [lawList, setLawList] = useState([]);
   const [categoryTitle, setCategoryTitle] = useState([]);
+  const [isNew, setIsNew] = useState("new");
 
   useEffect(() => {
     setTypeSelect("laws");
@@ -24,13 +25,26 @@ export default function UserLaws() {
     }
   }, [category, id]);
 
+  const handleSort = (e) => {
+    const type = e.target.id;
+    setIsNew(type);
+  };
+
   useEffect(() => {
     if (laws.length > 0) {
-      setLawList(laws.filter((item) => item.category === id));
-    }
-  }, [laws, id]);
+      let sortList = laws.filter((item) => item.category === id);
 
-  console.log(lawList);
+      if (isNew === "new") {
+        sortList = sortList.sort(
+          (a, b) => new Date(b.created_at) - new Date(a.created_at)
+        );
+      } else {
+        sortList = sortList.sort((a, b) => b.view - a.view);
+      }
+
+      setLawList(sortList);
+    }
+  }, [id, laws, isNew]);
 
   return (
     <main>
@@ -39,8 +53,20 @@ export default function UserLaws() {
       </HeroSection>
       <section>
         <FilterWrap>
-          <button>등록순</button>
-          <button>조회순</button>
+          <button
+            id="new"
+            onClick={handleSort}
+            className={isNew === "new" ? "active" : ""}
+          >
+            최신순
+          </button>
+          <button
+            id="view"
+            onClick={handleSort}
+            className={isNew === "view" ? "active" : ""}
+          >
+            조회순
+          </button>
         </FilterWrap>
         <LawWrap>
           <ul>
@@ -84,6 +110,13 @@ const FilterWrap = styled.div`
   & button:first-child {
     border-right: 1px solid var(--sub-color);
   }
+  & button:active {
+    box-shadow: none;
+  }
+  & button.active {
+    font-weight: var(--font-bw);
+    color: var(--main-color);
+  }
 `;
 
 const LawWrap = styled.div`
@@ -94,5 +127,8 @@ const LawWrap = styled.div`
   & a {
     display: flex;
     justify-content: space-between;
+  }
+  & p {
+    color: var(--sub-color);
   }
 `;
