@@ -35,7 +35,7 @@ function Header() {
       <HeaderTitle>
         <h1>
           <Link to="/">
-            <img src="/assets/img/logo.png" alt="tocfa 로고" />
+            <img src={`${process.env.PUBLIC_URL}/assets/img/logo.png`} alt="tocfa 로고" />
           </Link>
         </h1>
       </HeaderTitle>

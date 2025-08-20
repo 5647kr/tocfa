@@ -15,7 +15,7 @@ import UserLawsDetail from "./user/UserLawsDetail";
 
 function App() {
   const location = useLocation();
-  const hidePage = location.pathname === "/admin";
+  const hidePage = location.pathname.startsWith === "/admin";
 
   const session = localStorage.getItem("sb-gbsjttwoeqeidstgcgcv-auth-token");
   return (
