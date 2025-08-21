@@ -62,7 +62,8 @@ export default function AdminLogin() {
 
 const MainWrap = styled.main`
   height: 100vh;
-  background: url("/assets/img/hero.webp") 100% 100% / cover;
+  background: url(${process.env.PUBLIC_URL}/assets/img/hero.webp) center center /
+    cover no-repeat;
   opacity: 0.8;
   position: relative;
   display: flex;
