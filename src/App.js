@@ -15,11 +15,11 @@ import UserLawsDetail from "./user/UserLawsDetail";
 
 function App() {
   const location = useLocation();
-  const hidePage = location.pathname === "/tocfa/admin";
+  const hidePage = location.pathname === "/admin";
 
   console.log("hidePage 불리언값: ", hidePage)
   console.log("location.pathname: ", location.pathname);
-  console.log("location.pathname 같냐?: ", location.pathname === "/tocfa/admin");
+  console.log("location.pathname 같냐?: ", location.pathname === "/admin");
 
 
   const session = localStorage.getItem("sb-gbsjttwoeqeidstgcgcv-auth-token");
