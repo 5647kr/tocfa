@@ -15,7 +15,7 @@ import UserLawsDetail from "./user/UserLawsDetail";
 
 function App() {
   const location = useLocation();
-  const hidePage = location.pathname === `${process.env.PUBLIC_URL}/admin`;
+  const hidePage = location.pathname === "/tocfa/admin";
 
   const session = localStorage.getItem("sb-gbsjttwoeqeidstgcgcv-auth-token");
   return (
