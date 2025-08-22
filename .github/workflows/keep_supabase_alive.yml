@@ -1,0 +1,17 @@
+name: Keep Supabase Alive
+
+# 하루에 한 번 실행 (UTC 기준 0시)
+on:
+  schedule:
+    - cron: '0 0 * * *'  
+
+jobs:
+  keep-alive:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send GET request to Supabase
+        run: |
+          curl -X GET "https://gbsjttwoeqeidstgcgcv.supabase.co/rest/v1/notice?select=*" \
+            -H "apikey: ${{ secrets.SUPABASE_API_KEY }}" \
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_API_KEY }}"
