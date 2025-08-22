@@ -26,19 +26,22 @@ export default function AdminHome() {
     getMenu();
   }, [getMenu]);
 
-  useEffect(() => {
-    setDataTable([]);
+useEffect(() => {
+  setDataTable([]);
 
-    if (notice.length > 0 && typeSelect === "notice") {
-      setDataTable([...notice]);
-    } else if (laws.length > 0 && typeSelect === "laws") {
-      setDataTable([...laws]);
-    } else if (category.length > 0 && typeSelect === "category") {
-      setDataTable([...category]);
-    } else {
-      readTable();
-    }
-  }, [typeSelect, readTable, notice, laws, category]);
+  const sortByLatest = (arr) =>
+    [...arr].sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
+  if (notice.length > 0 && typeSelect === "notice") {
+    setDataTable(sortByLatest(notice));
+  } else if (laws.length > 0 && typeSelect === "laws") {
+    setDataTable(sortByLatest(laws));
+  } else if (category.length > 0 && typeSelect === "category") {
+    setDataTable(sortByLatest(category));
+  } else {
+    readTable();
+  }
+}, [typeSelect, readTable, notice, laws, category]);
 
   const handleChageType = (engName) => {
     setTypeSelect(engName);
