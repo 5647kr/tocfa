@@ -30,6 +30,8 @@ const usePostStore = create((set, get) => ({
           return { laws: [newPost, ...state.laws] };
         case "category":
           return { category: [newPost, ...state.category] };
+        default:
+          return;
       }
     });
   },
@@ -40,12 +42,15 @@ const usePostStore = create((set, get) => ({
 
     const data = await ReadApi(typeSelect);
 
-    if (typeSelect === "notice") {
-      set({ notice: [...data] });
-    } else if (typeSelect === "laws") {
-      set({ laws: [...data] });
-    } else {
-      set({ category: [...data] });
+    switch (typeSelect) {
+      case "notice":
+        return set({ notice: [...data] });
+      case "laws":
+        return set({ laws: [...data] });
+      case "category":
+        return set({ category: [...data] });
+      default:
+        return;
     }
   },
 
@@ -64,13 +69,21 @@ const usePostStore = create((set, get) => ({
             ),
           };
         case "laws":
+          return {
+            ...state,
+            laws: state.laws.map((table) => {
+              table.id === data.id ? updateTable : table;
+            }),
+          };
         case "category":
           return {
             ...state,
-            notice: state.notice.map((table) =>
+            category: state.category.map((table) =>
               table.id === data.id ? updateTable : table
             ),
           };
+        default:
+          return;
       }
     });
   },
@@ -80,18 +93,21 @@ const usePostStore = create((set, get) => ({
     const { typeSelect } = get();
 
     set((state) => {
-      if (typeSelect === "notice") {
-        return {
-          notice: state.notice.filter((v) => v.id !== id),
-        };
-      } else if (typeSelect === "laws") {
-        return {
-          laws: state.laws.filter((v) => v.id !== id),
-        };
-      } else {
-        return {
-          category: state.category.filter((v) => v.id !== id),
-        };
+      switch (typeSelect) {
+        case "notice":
+          return {
+            notice: state.notice.filter((v) => v.id !== id),
+          };
+        case "laws":
+          return {
+            laws: state.laws.filter((v) => v.id !== id),
+          };
+        case "category":
+          return {
+            category: state.category.filter((v) => v.id !== id),
+          };
+        default:
+          return;
       }
     });
     await DeleteApi({ id, typeSelect });
