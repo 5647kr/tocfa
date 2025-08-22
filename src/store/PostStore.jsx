@@ -71,9 +71,9 @@ const usePostStore = create((set, get) => ({
         case "laws":
           return {
             ...state,
-            laws: state.laws.map((table) => {
-              table.id === data.id ? updateTable : table;
-            }),
+            laws: state.laws.map((table) =>
+              table.id === data.id ? updateTable : table
+            ),
           };
         case "category":
           return {
