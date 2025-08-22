@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/tocfa/static/js/main.0060f178.js",
+    "main.js": "/tocfa/static/js/main.ab0a72bb.js",
     "index.html": "/tocfa/index.html",
-    "main.0060f178.js.map": "/tocfa/static/js/main.0060f178.js.map"
+    "main.ab0a72bb.js.map": "/tocfa/static/js/main.ab0a72bb.js.map"
   },
   "entrypoints": [
-    "static/js/main.0060f178.js"
+    "static/js/main.ab0a72bb.js"
   ]
 }
