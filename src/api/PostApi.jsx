@@ -13,7 +13,7 @@ async function CreateApi({ data, typeSelect }) {
     }
     return newPost[0];
   } catch (error) {
-    console.error(error);
+    throw error;
   }
 }
 // 글 조회
