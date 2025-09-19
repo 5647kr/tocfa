@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 import bgMobile from "../assets/img/adminLoginBg-mobile.webp";
 import bgTablet from "../assets/img/adminLoginBg-tablet.webp";
@@ -7,30 +8,70 @@ import Input from "../components/Input";
 import { User } from "lucide-react";
 import { LockKeyhole } from "lucide-react";
 import { SubmitButton } from "../components/Button";
+import { LogInApi } from "../api/LogApi";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setErrorMsg("");
+
+    try {
+      // 벨리데이션
+      if (email.trim === "") {
+        setErrorMsg("이메일을 작성해주세요.");
+        return;
+      }
+
+      if (password.trim().length < 6) {
+        setErrorMsg("비밀번호는 6자 이상 작성해주세요.");
+        return;
+      }
+
+      const { error } = await LogInApi({ email, password });
+
+      if (error) {
+        throw error;
+      } else {
+        navigate("/admin/home");
+      }
+    } catch (error) {
+      setErrorMsg("이메일과 비밀번호가 맞지 않습니다.");
+    }
+  };
+
   return (
     <LoginWrap>
-      <LoginForm>
+      <LoginForm onSubmit={handleLogin}>
         <h2>Login</h2>
         <p>로그인이 필요합니다.</p>
+        <p>{errorMsg}</p>
         <InputWrap>
           <label htmlFor="email">Email</label>
           <Input
+            type="email"
             id="email"
-            name="email"
-            autocomplete="off"
+            value={email}
+            autoComplete="off"
             placeholder="이메일을 입력하세요."
+            onChange={(e) => setEmail(e.target.value)}
           />
           <User color={`var(--gray-color)`} />
         </InputWrap>
         <InputWrap>
           <label htmlFor="password">Password</label>
           <Input
+            type="password"
             id="password"
-            name="password"
-            autocomplete="off"
+            value={password}
+            autoComplete="off"
             placeholder="비밀번호를 입력하세요."
+            onChange={(e) => setPassword(e.target.value)}
           />
           <LockKeyhole color={`var(--gray-color)`} />
         </InputWrap>
@@ -99,6 +140,7 @@ const InputWrap = styled.div`
   & > input {
     width: 100%;
     padding: 1rem 2.4rem 1rem 1rem;
+    font-size: 1.6rem;
   }
   & > input::placeholder {
     color: var(--gray-color);
