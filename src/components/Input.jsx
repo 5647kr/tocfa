@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export default function Input({ ...props }) {
-  return <InputStyled type="text" {...props} />;
+  return <InputStyled {...props} />;
 }
 
 const InputStyled = styled.input`
