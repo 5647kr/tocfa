@@ -17,7 +17,8 @@
 <br />
 <br />
 
-- 배포 URL: https://5647kr.github.io/focfa/<br />
+- 배포 URL: [https://5647kr.github.io/focfa/](https://5647kr.github.io/tocfa/)
+<br />
 
 - 관리자 계정<br/>
   ID : admin@admin.com<br/>
