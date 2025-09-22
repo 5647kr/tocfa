@@ -1,21 +1,21 @@
 import { useState } from "react";
 import styled from "styled-components";
-import bgMobile from "../assets/img/adminLoginBg-mobile.webp";
-import bgTablet from "../assets/img/adminLoginBg-tablet.webp";
-import bgNoteBook from "../assets/img/adminLoginBg-notebook.webp";
-import bg4k from "../assets/img/adminLoginBg-4k.webp";
 import Input from "../components/Input";
-import { User } from "lucide-react";
+import { Mail } from "lucide-react";
+import { Eye } from "lucide-react";
+import { EyeOff } from "lucide-react";
 import { LockKeyhole } from "lucide-react";
 import { SubmitButton } from "../components/Button";
 import { LogInApi } from "../api/LogApi";
 import { useNavigate } from "react-router-dom";
+import ErrorMsg from "../components/ErrorMsg";
 
 export default function LoginPage() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+  const [isPasswordShow, setIsPasswordShow] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -23,7 +23,7 @@ export default function LoginPage() {
 
     try {
       // 벨리데이션
-      if (email.trim === "") {
+      if (email.trim() === "") {
         setErrorMsg("이메일을 작성해주세요.");
         return;
       }
@@ -45,111 +45,140 @@ export default function LoginPage() {
     }
   };
 
+  const handlePasswordShow = () => {
+    setIsPasswordShow((isPasswordShow) => !isPasswordShow);
+  };
+
+  console.log(errorMsg)
+
   return (
     <LoginWrap>
+      <h2>Welcome To StarScope</h2>
+      {errorMsg && <ErrorMsg>{errorMsg}</ErrorMsg>}
       <LoginForm onSubmit={handleLogin}>
-        <h2>Login</h2>
-        <p>로그인이 필요합니다.</p>
-        <p>{errorMsg}</p>
-        <InputWrap>
-          <label htmlFor="email">Email</label>
-          <Input
-            type="email"
-            id="email"
-            value={email}
-            autoComplete="off"
-            placeholder="이메일을 입력하세요."
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <User color={`var(--gray-color)`} />
-        </InputWrap>
-        <InputWrap>
+        <div>
+          <label htmlFor="email">Email Address</label>
+          <InputWrap>
+            <Mail color="#99A1AF" />
+            <Input
+              type="email"
+              id="email"
+              value={email}
+              autoComplete="off"
+              placeholder="이메일을 입력하세요."
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </InputWrap>
+        </div>
+        <div>
           <label htmlFor="password">Password</label>
-          <Input
-            type="password"
-            id="password"
-            value={password}
-            autoComplete="off"
-            placeholder="비밀번호를 입력하세요."
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <LockKeyhole color={`var(--gray-color)`} />
-        </InputWrap>
+          <InputWrap>
+            <LockKeyhole color="#99A1AF" />
+            <Input
+              type={isPasswordShow ? "text" : "password"}
+              id="password"
+              value={password}
+              autoComplete="off"
+              placeholder="비밀번호를 입력하세요."
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <button type="button" onClick={handlePasswordShow}>
+              {isPasswordShow ? (
+                <Eye color="#99A1AF" />
+              ) : (
+                <EyeOff color="#99A1AF" />
+              )}
+            </button>
+          </InputWrap>
+        </div>
 
-        <SubmitButton>로그인</SubmitButton>
+        <SubmitButton>Sign In</SubmitButton>
       </LoginForm>
     </LoginWrap>
   );
 }
 
-const LoginWrap = styled.main`
-  width: 100%;
-  height: 100vh;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: url(${bg4k}) no-repeat center / cover;
-
-  @media (max-width: 1440px) {
-    background: url(${bgNoteBook}) no-repeat center / cover;
+const LoginWrap = styled.article`
+  width: clamp(448px, 100%, 448px);
+  background-color: #45556c;
+  padding: 4rem;
+  border-radius: 1rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  & > h2 {
+    font-size: 1.6rem;
+    font-weight: var(--font-bw);
+    text-align: center;
+    color: var(--white-color);
+    margin-bottom: 4rem;
   }
-
-  @media (max-width: 768px) {
-    background: url(${bgTablet}) no-repeat center / cover;
-  }
-
-  @media (max-width: 480px) {
-    background: url(${bgMobile}) no-repeat center / cover;
+  & > div {
+    width: 30rem;
+    margin: 0 auto;
+    margin-bottom: 2rem;
   }
 `;
 
 const LoginForm = styled.form`
-  width: clamp(480px, 100%, 480px);
-  background-color: var(--white-color);
-  padding: 4rem;
+  width: 30rem;
   border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 0 auto;
   h2 {
+    font-size: 1.6rem;
     font-weight: var(--font-bw);
+    text-align: center;
+    color: var(--white-color);
+    margin-bottom: 4rem;
   }
-  p {
-    margin-top: 2rem;
-    color: var(--gray-color);
+  & label {
+    color: var(--white-color);
+    font-size: 1.4rem;
   }
   & > button {
-    width: 100%;
-    margin-top: 4rem;
+    background-color: #99a1af;
+    font-size: 1.4rem;
+    width: fit-content;
+    margin-left: auto;
+    color: var(--white-color);
   }
 `;
 
 const InputWrap = styled.div`
-  display: flex;
-  align-items: center;
-  border: 1px solid var(--gray-color);
-  border-radius: 1rem;
+  margin: 0 auto;
   position: relative;
-  overflow: hidden;
-  margin-top: 2rem;
-  & > label {
-    min-width: 10rem;
-    padding-left: 1.2rem;
-    font-size: 1.4rem;
-    color: var(--gray-color);
-    border-right: 1px solid var(--gray-color);
-  }
   & > input {
-    width: 100%;
-    padding: 1rem 2.4rem 1rem 1rem;
-    font-size: 1.6rem;
+    padding: 1rem 4rem;
+    border-radius: 1rem;
+    font-size: 1.4rem;
+    margin-top: 0.4rem;
+    display: block;
   }
   & > input::placeholder {
-    color: var(--gray-color);
+    color: #99a1af;
   }
   & > svg {
     position: absolute;
-    right: 1.2rem;
     top: 50%;
     transform: translateY(-50%);
-    aspect-ratio: 1 / 1;
+    left: 1.2rem;
+    width: 1.4rem;
+  }
+  & > button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 1.2rem;
+    background-color: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+  }
+  & svg {
+    width: 1.4rem;
   }
 `;
