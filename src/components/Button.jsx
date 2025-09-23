@@ -14,13 +14,8 @@ const ButtonStyled = styled.button`
 `;
 
 const SubmitButtonStyled = styled(ButtonStyled)`
-  background-color: var(--bg-color);
-  padding: 1rem 3rem;
+  padding: 1rem 2rem;
   border-radius: 1rem;
-  box-shadow: 0 2px 4px var(--gray-color);
-  &:active {
-    box-shadow: inset 0 2px 4px var(--gray-color);
-  }
 `
 
 export { Button, SubmitButton };
