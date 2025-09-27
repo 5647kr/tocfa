@@ -1,26 +1,17 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
-function Button({ children, ...props }) {
-  return <ButtonStyled {...props}>{children}</ButtonStyled>;
+export default function Button({children, props}) {
+  return (
+    <StyledButton {...props}>{children}</StyledButton>
+  )
 }
 
-function SubmitButton({children, ...props}) {
-  return <SubmitButtonStyled {...props}>{children}</SubmitButtonStyled>
-}
-
-const ButtonStyled = styled.button`
-  background-color: transparent;
-  border: none;
-`;
-
-const SubmitButtonStyled = styled(ButtonStyled)`
-  background-color: var(--bg-color);
-  padding: 1rem 3rem;
+const StyledButton = styled.button`
+  background-color: var(--boxBg-color);
+  color: var(--white-color);
+  padding: 1rem 2rem;
   border-radius: 1rem;
-  box-shadow: 0 2px 4px var(--gray-color);
-  &:active {
-    box-shadow: inset 0 2px 4px var(--gray-color);
-  }
+  border: none;
+  font-weight: var(--font-mw);
+  font-size: var(--font-smz);
 `
-
-export { Button, SubmitButton };

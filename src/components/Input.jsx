@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
-export default function Input({ ...props }) {
-  return <InputStyled type="text" {...props} />;
+export default function Input({ props }) {
+  return <StyledInput {...props} />;
 }
 
-const InputStyled = styled.input`
-  width: 100%;
-  border: none;
+const StyledInput = styled.input`
   background-color: var(--white-color);
-`;
+  border: none;
+  font-size: var(--font-smz);
+`
