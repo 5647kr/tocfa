@@ -30,11 +30,16 @@ const GlobalStyle = createGlobalStyle`
     background-color: var(--bg-color);
   }
 
+  main {
+    display: grid;
+  }
+
   * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-weight: var(--ront-rw);
+    font-weight: var(--font-rw);
+    color: var(--text-color);
     letter-spacing: -0.3px;
   }
 
