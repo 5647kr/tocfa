@@ -30,10 +30,6 @@ const GlobalStyle = createGlobalStyle`
     background-color: var(--bg-color);
   }
 
-  main {
-    display: grid;
-  }
-
   * {
     padding: 0;
     margin: 0;
@@ -60,6 +56,29 @@ const GlobalStyle = createGlobalStyle`
 
   &:where(input, textarea, a, button):focus {
     outline: none;
+  }
+
+  main {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.6rem;
+    padding-inline: 1.6rem;
+  }
+
+  @media screen and (min-width: 481px) and (max-width: 768px) {
+    main {
+      grid-template-columns: repeat(8, 1fr);
+      gap: 2rem;
+      padding-inline: 2rem;
+    }
+  }
+  
+  @media screen and (min-width: 769px) {
+    main {
+      grid-template-columns: repeat(12, 1fr);
+      gap: 2.4rem;
+      padding-inline: 2.4rem;
+    }
   }
 `;
 
