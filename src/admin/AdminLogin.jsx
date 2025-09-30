@@ -36,6 +36,7 @@ export default function AdminLogin() {
         navigate("/admin/home");
       }
     } catch (error) {
+      console.error(error)
       setErrorMessage("이메일과 비밀번호가 맞지 않습니다.");
     }
   };
