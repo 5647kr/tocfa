@@ -1,7 +1,6 @@
 import supabase from "../supabaseClient";
 
 async function CreatePost({ data, tableName }) {
-  console.log(data, tableName);
   try {
     const { data: newPost, error } = await supabase
       .from(tableName)
@@ -17,7 +16,6 @@ async function CreatePost({ data, tableName }) {
 }
 
 async function ReadPost(tableName) {
-  console.log(tableName);
   try {
     const { data, error } = await supabase.from(tableName).select("*");
 

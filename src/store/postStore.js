@@ -3,6 +3,7 @@ import { CreatePost, DeletePost, ReadPost, UpdatePost } from "../api/Post";
 
 const usePostStore = create((set) => ({
   commu_faq: [],
+  store_store: [],
 
   createPost: async (data, tableName) => {
     const newPost = await CreatePost({ data, tableName });
@@ -11,6 +12,8 @@ const usePostStore = create((set) => ({
       switch (tableName) {
         case "commu_faq":
           return { commu_faq: [newPost, ...state.commu_faq] };
+        case "store_store":
+          return { store_store: [newPost, ...state.store_store] };
         default:
           return state;
       }
@@ -24,6 +27,8 @@ const usePostStore = create((set) => ({
       switch (tableName) {
         case "commu_faq":
           return { commu_faq: [...data] };
+        case "store_store":
+          return { store_store: [...data] };
         default:
           return state;
       }
@@ -31,7 +36,6 @@ const usePostStore = create((set) => ({
   },
 
   updatePost: async (id, data, tableName) => {
-    console.log(id, data, tableName);
     const updateData = await UpdatePost({ id, data, tableName });
 
     set((state) => {
@@ -39,6 +43,12 @@ const usePostStore = create((set) => ({
         case "commu_faq":
           return {
             commu_faq: state.commu_faq.map((data) =>
+              data.id === id ? updateData : data
+            ),
+          };
+        case "store_store":
+          return {
+            store_store: state.store_store.map((data) =>
               data.id === id ? updateData : data
             ),
           };
@@ -56,6 +66,10 @@ const usePostStore = create((set) => ({
         case "commu_faq":
           return {
             commu_faq: state.commu_faq.filter((post) => post.id !== id),
+          };
+        case "store_store":
+          return {
+            store_store: state.store_store.filter((post) => post.id !== id),
           };
         default:
           return state;
