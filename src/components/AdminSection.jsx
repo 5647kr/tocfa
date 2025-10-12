@@ -5,9 +5,10 @@ const AdminSectionWrap = styled.section`
   padding-block: 6rem;
   @media screen and (min-width: 769px) {
     grid-column: 3 / -2;
+    min-height: calc(100vh - 12rem);
   }
   & > div {
-    height: calc(100vh - 12rem);
+    min-height: calc(100vh - 18rem);
   }
 `;
 

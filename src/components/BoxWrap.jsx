@@ -7,6 +7,8 @@ const BoxWrap = styled.div`
   box-shadow: 0 5px 15px var(--stroke-color);
   display: flex;
   flex-direction: column;
-`
+  flex-grow: 1;
+  height: 100%;
+`;
 
 export default BoxWrap;
