@@ -64,6 +64,15 @@ const GlobalStyle = createGlobalStyle`
     gap: 1.6rem;
     padding-inline: 1.6rem;
   }
+  
+  .a11y-hidden {
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+  }
 
   @media screen and (min-width: 481px) and (max-width: 768px) {
     main {
