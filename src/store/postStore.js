@@ -4,6 +4,7 @@ import { CreatePost, DeletePost, ReadPost, UpdatePost } from "../api/Post";
 const usePostStore = create((set, get) => ({
   product_product: [],
   store_store: [],
+  commu_event: [],
   commu_faq: [],
 
   // ================== CREATE ==================
@@ -19,6 +20,8 @@ const usePostStore = create((set, get) => ({
           };
         case "commu_faq":
           return { commu_faq: [optimisticPost, ...state.commu_faq] };
+        case "commu_event":
+          return { commu_event: [optimisticPost, ...state.commu_event] };
         case "store_store":
           return { store_store: [optimisticPost, ...state.store_store] };
         default:
@@ -40,6 +43,12 @@ const usePostStore = create((set, get) => ({
           case "commu_faq":
             return {
               commu_faq: state.commu_faq.map((p) =>
+                p.id === tempId ? newPost : p
+              ),
+            };
+          case "commu_event":
+            return {
+              commu_event: state.commu_event.map((p) =>
                 p.id === tempId ? newPost : p
               ),
             };
@@ -66,6 +75,10 @@ const usePostStore = create((set, get) => ({
             return {
               commu_faq: state.commu_faq.filter((p) => p.id !== tempId),
             };
+          case "commu_event":
+            return {
+              commu_event: state.commu_event.filter((p) => p.id !== tempId),
+            };
           case "store_store":
             return {
               store_store: state.store_store.filter((p) => p.id !== tempId),
@@ -91,6 +104,12 @@ const usePostStore = create((set, get) => ({
         case "commu_faq":
           return {
             commu_faq: state.commu_faq.map((p) =>
+              p.id === id ? { ...p, ...data } : p
+            ),
+          };
+        case "commu_event":
+          return {
+            commu_event: state.commu_event.map((p) =>
               p.id === id ? { ...p, ...data } : p
             ),
           };
@@ -123,6 +142,8 @@ const usePostStore = create((set, get) => ({
           };
         case "commu_faq":
           return { commu_faq: state.commu_faq.filter((p) => p.id !== id) };
+        case "commu_event":
+          return { commu_event: state.commu_event.filter((p) => p.id !== id) };
         case "store_store":
           return { store_store: state.store_store.filter((p) => p.id !== id) };
         default:
