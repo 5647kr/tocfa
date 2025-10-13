@@ -3,6 +3,7 @@ import GlobalStyle from "./style/GlobalStyle";
 import AdminLogin from "./admin/AdminLogin";
 import AdminOutlet from "./admin/AdminOutlet";
 import EventPost from "./admin/commu/event/EventPost";
+import EventCreate from "./admin/commu/event/EventCreate";
 import FaqPost from "./admin/commu/faq/FaqPost";
 import FaqCreate from "./admin/commu/faq/FaqCreate";
 import StorePost from "./admin/store/StorePost";
@@ -27,6 +28,8 @@ export default function App() {
             <Route path="store/create" element={<StoreCreate />} />
             <Route path="store/update/:id" element={<StoreCreate />} />
             <Route path="event" element={<EventPost />} />
+            <Route path="event/create" element={<EventCreate />} />
+            <Route path="event/create/:id" element={<EventCreate />} />
             <Route path="faq" element={<FaqPost />} />
             <Route path="faq/create" element={<FaqCreate />} />
             <Route path="faq/update/:id" element={<FaqCreate />} />
