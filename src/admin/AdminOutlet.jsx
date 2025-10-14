@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import AdminHeader from "../components/AdminHeader";
 import AdminNav from "../components/AdminNav";
+import AdminSectionWrap from "../components/AdminSection";
+import BoxWrap from "../components/BoxWrap";
 
 export default function AdminOutlet() {
   const [isMobile, setIsMobile] = useState(false);
@@ -37,7 +39,12 @@ export default function AdminOutlet() {
       {isMobile && <AdminHeader handleNav={handleNav} />}
       <main>
         {navActive && <AdminNav handleCloseNav={handleCloseNav} />}
-        <Outlet />
+
+        <AdminSectionWrap>
+          <BoxWrap>
+            <Outlet />
+          </BoxWrap>
+        </AdminSectionWrap>
       </main>
     </>
   );

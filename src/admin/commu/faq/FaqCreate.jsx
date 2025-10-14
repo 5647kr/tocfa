@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { CircleQuestionMark } from "lucide-react";
+import usePostStore from "../../../store/postStore";
 import AdminSectionWrap from "../../../components/AdminSection";
 import BoxWrap from "../../../components/BoxWrap";
 import Input from "../../../components/Input";
 import Button from "../../../components/Button";
 import ErrorBox from "../../../components/ErrorBox";
-import usePostStore from "../../../store/postStore";
-import { useNavigate, useParams } from "react-router-dom";
 
 export default function FaqCreate() {
   const [formState, setFormState] = useState({
@@ -72,8 +72,7 @@ export default function FaqCreate() {
   };
 
   return (
-    <AdminSectionWrap>
-      <BoxWrap>
+      <>
         <TitleWrap>
           <div>
             <CircleQuestionMark />
@@ -111,8 +110,7 @@ export default function FaqCreate() {
             {isEditMode ? "FAQ 수정 완료" : "신규 FAQ 등록"}
           </Button>
         </FaqForm>
-      </BoxWrap>
-    </AdminSectionWrap>
+      </>
   );
 }
 

@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
-import styled from "styled-components";
-import { ImagePlus, Package, X } from "lucide-react";
-
 import { useNavigate, useParams } from "react-router-dom";
+import styled from "styled-components";
+import { ImagePlus, PartyPopper, X } from "lucide-react";
+import usePostStore from "../../../store/postStore";
 import AdminSectionWrap from "../../../components/AdminSection";
 import BoxWrap from "../../../components/BoxWrap";
 import ErrorBox from "../../../components/ErrorBox";
 import Input from "../../../components/Input";
 import Button from "../../../components/Button";
-import usePostStore from "../../../store/postStore";
 
 export default function EventCreate() {
   const [formState, setFormState] = useState({
@@ -37,8 +36,6 @@ export default function EventCreate() {
   useEffect(() => {
     if (isEditMode && commu_event.length > 0) {
       const post = commu_event.find((data) => data?.id === params.id);
-
-      console.log(post);
 
       if (post) {
         setFormState({
@@ -94,15 +91,13 @@ export default function EventCreate() {
       return;
     }
 
-    console.log(newFormData);
-
     try {
       if (isEditMode) {
         await updatePost(params.id, newFormData, "commu_event");
       } else {
         await createPost(newFormData, "commu_event");
       }
-      navigate("/admin/product");
+      navigate("/admin/event");
     } catch (error) {
       console.error(error);
     }
@@ -127,73 +122,71 @@ export default function EventCreate() {
   };
 
   return (
-    <AdminSectionWrap>
-      <BoxWrap>
-        <TitleWrap>
-          <Package />
-          <h1>{isEditMode ? "기존 이벤트 수정" : "신규 이벤트 등록"}</h1>
-        </TitleWrap>
+    <>
+      <TitleWrap>
+        <PartyPopper />
+        <h1>{isEditMode ? "기존 이벤트 수정" : "신규 이벤트 등록"}</h1>
+      </TitleWrap>
 
-        {errorMessage && <ErrorBox>{errorMessage}</ErrorBox>}
-        <FaqForm onSubmit={handleProductSubmit}>
-          <InputWrap>
-            <label htmlFor="title">제목</label>
-            <Input
-              type="text"
-              id="title"
-              name="title"
-              autoComplete="off"
-              value={formState.title}
-              onChange={handleChange}
-              placeholder="제목을 입력해주세요"
-            />
-          </InputWrap>
+      {errorMessage && <ErrorBox>{errorMessage}</ErrorBox>}
+      <FaqForm onSubmit={handleProductSubmit}>
+        <InputWrap>
+          <label htmlFor="title">제목</label>
+          <Input
+            type="text"
+            id="title"
+            name="title"
+            autoComplete="off"
+            value={formState.title}
+            onChange={handleChange}
+            placeholder="제목을 입력해주세요"
+          />
+        </InputWrap>
 
-          <ImgWrap>
-            <label htmlFor="imgurl">이벤트 사진</label>
-            {/* 이미지 선택 후 화면 (미리보기) */}
-            {previewImg ? (
-              <PreviewImgWrap $previewImg={previewImg}>
-                <img src={previewImg} alt="Preview" />
-                <button type="button" onClick={() => setPreviewImg("")}>
-                  <X />
-                </button>
-              </PreviewImgWrap>
-            ) : (
-              <PreviewImgWrap $previewImg={previewImg}>
-                <input
-                  type="file"
-                  id="imgurl"
-                  accept="image/*"
-                  className="a11y-hidden"
-                  onChange={handleChangeImg}
-                />
-                <label htmlFor="imgurl">
-                  <ImagePlus />
-                  <span>이미지 등록</span>
-                </label>
-              </PreviewImgWrap>
-            )}
-          </ImgWrap>
+        <ImgWrap>
+          <label htmlFor="imgurl">이벤트 사진</label>
+          {/* 이미지 선택 후 화면 (미리보기) */}
+          {previewImg ? (
+            <PreviewImgWrap $previewImg={previewImg}>
+              <img src={previewImg} alt="Preview" />
+              <button type="button" onClick={() => setPreviewImg("")}>
+                <X />
+              </button>
+            </PreviewImgWrap>
+          ) : (
+            <PreviewImgWrap $previewImg={previewImg}>
+              <input
+                type="file"
+                id="imgurl"
+                accept="image/*"
+                className="a11y-hidden"
+                onChange={handleChangeImg}
+              />
+              <label htmlFor="imgurl">
+                <ImagePlus />
+                <span>이미지 등록</span>
+              </label>
+            </PreviewImgWrap>
+          )}
+        </ImgWrap>
 
-          <InputWrap>
-            <label htmlFor="content">이벤트 설명</label>
-            <textarea
-              id="content"
-              name="content"
-              autoComplete="off"
-              value={formState.content}
-              onChange={handleChange}
-              placeholder="이벤트 설명을 입력해주세요"
-            />
-          </InputWrap>
+        <InputWrap>
+          <label htmlFor="content">이벤트 설명</label>
+          <textarea
+            id="content"
+            name="content"
+            autoComplete="off"
+            value={formState.content}
+            onChange={handleChange}
+            placeholder="이벤트 설명을 입력해주세요"
+          />
+        </InputWrap>
 
-          <Button type="submit">
-            {isEditMode ? "이벤트 수정 완료" : "신규 이벤트 등록"}
-          </Button>
-        </FaqForm>
-      </BoxWrap>
-    </AdminSectionWrap>
+        <Button type="submit">
+          {isEditMode ? "이벤트 수정 완료" : "신규 이벤트 등록"}
+        </Button>
+      </FaqForm>
+    </>
   );
 }
 

@@ -35,7 +35,7 @@ export default function AdminNav({ handleCloseNav }) {
 
   const handleLogOut = async () => {
     const { error } = await LogOut();
-    console.log(error);
+    console.error(error);
     navigate("/auth/login");
   };
 

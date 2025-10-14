@@ -1,11 +1,11 @@
-import styled from "styled-components";
-import AdminSectionWrap from "../../../components/AdminSection";
-import BoxWrap from "../../../components/BoxWrap";
-import { Link } from "react-router-dom";
-import ConfirmWrap from "../../../components/ConfirmWrap";
-import { PartyPopper } from "lucide-react";
 import { useEffect, useState } from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { PartyPopper } from "lucide-react";
 import usePostStore from "../../../store/postStore";
+import AdminSectionWrap from "../../../components/AdminSection";
+import ConfirmWrap from "../../../components/ConfirmWrap";
+import BoxWrap from "../../../components/BoxWrap";
 import Button from "../../../components/Button";
 
 export default function EventPost() {
@@ -49,8 +49,7 @@ export default function EventPost() {
   };
 
   return (
-    <AdminSectionWrap>
-      <BoxWrap>
+      <>
         <TitleWrap>
           <div>
             <PartyPopper />
@@ -97,8 +96,7 @@ export default function EventPost() {
             </div>
           </DeleteConfirmBox>
         )}
-      </BoxWrap>
-    </AdminSectionWrap>
+      </>
   );
 }
 
