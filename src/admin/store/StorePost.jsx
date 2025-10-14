@@ -1,10 +1,10 @@
-import styled from "styled-components";
-import AdminSectionWrap from "../../components/AdminSection";
-import BoxWrap from "../../components/BoxWrap";
-import { Store } from "lucide-react";
-import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import usePostStore from "../../store/postStore";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { Store } from "lucide-react";
+import AdminSectionWrap from "../../components/AdminSection";
+import BoxWrap from "../../components/BoxWrap";
 import ConfirmWrap from "../../components/ConfirmWrap";
 import Button from "../../components/Button";
 
@@ -13,7 +13,7 @@ export default function StorePost() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [confirmDel, setConfirmDel] = useState(false);
   const [delId, setDelId] = useState("");
-  const [sortStore, setSortStore] = useState([]);
+  const [sortStore, setSortStore] = useState(store_store);
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -49,56 +49,56 @@ export default function StorePost() {
   };
 
   return (
-    <AdminSectionWrap>
-      <BoxWrap>
-        <TitleWrap>
-          <div>
-            <Store />
-            <h1>전체 매장 목록 <span>/ 총: {sortStore.length} 매장</span></h1>
-          </div>
-          <Link to={"create"}>신규 매장 등록</Link>
-        </TitleWrap>
+    <>
+      <TitleWrap>
+        <div>
+          <Store />
+          <h1>
+            전체 매장 목록 <span>/ 총: {sortStore.length} 매장</span>
+          </h1>
+        </div>
+        <Link to={"create"}>신규 매장 등록</Link>
+      </TitleWrap>
 
-        <TableWrap>
-          <StoreTable>
-            <thead>
-              <tr>
-                <th>매장명</th>
-                <th>실적도</th>
-                <th>Edit</th>
-                <th>Delete</th>
+      <TableWrap>
+        <StoreTable>
+          <thead>
+            <tr>
+              <th>매장명</th>
+              <th>실적도</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {sortStore?.map((store) => (
+              <tr key={store.id}>
+                <td>{store.title}</td>
+                <td>{store.performance}</td>
+                <td>
+                  <Link to={`update/${store.id}`}>Edit</Link>
+                </td>
+                <td>
+                  <button onClick={() => activeConfirmDelete(store.id)}>
+                    Delete
+                  </button>
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {sortStore?.map((store) => (
-                <tr key={store.id}>
-                  <td>{store.title}</td>
-                  <td>{store.performance}</td>
-                  <td>
-                    <Link to={`update/${store.id}`}>Edit</Link>
-                  </td>
-                  <td>
-                    <button onClick={() => activeConfirmDelete(store.id)}>
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </StoreTable>
-        </TableWrap>
+            ))}
+          </tbody>
+        </StoreTable>
+      </TableWrap>
 
-        {confirmDel && (
-          <DeleteConfirmBox>
-            <h2>정말 삭제하시겠습니까?</h2>
-            <div>
-              <Button onClick={cancelDelete}>취소</Button>
-              <Button onClick={handleDelete}>삭제</Button>
-            </div>
-          </DeleteConfirmBox>
-        )}
-      </BoxWrap>
-    </AdminSectionWrap>
+      {confirmDel && (
+        <DeleteConfirmBox>
+          <h2>정말 삭제하시겠습니까?</h2>
+          <div>
+            <Button onClick={cancelDelete}>취소</Button>
+            <Button onClick={handleDelete}>삭제</Button>
+          </div>
+        </DeleteConfirmBox>
+      )}
+    </>
   );
 }
 
@@ -111,7 +111,8 @@ const TitleWrap = styled.div`
     align-items: center;
     gap: 1.2rem;
   }
-  & h1, span {
+  & h1,
+  span {
     font-size: 1.6rem;
     font-weight: var(--font-mw);
   }

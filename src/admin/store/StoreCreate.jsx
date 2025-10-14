@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
-import styled from "styled-components";
-import { CircleQuestionMark } from "lucide-react";
-
 import { useNavigate, useParams } from "react-router-dom";
+import styled from "styled-components";
+import { Store } from "lucide-react";
+import usePostStore from "../../store/postStore";
 import AdminSectionWrap from "../../components/AdminSection";
 import BoxWrap from "../../components/BoxWrap";
 import ErrorBox from "../../components/ErrorBox";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
-import usePostStore from "../../store/postStore";
 
 export default function StoreCreate() {
   const [formState, setFormState] = useState({
@@ -72,49 +71,45 @@ export default function StoreCreate() {
     setFormState((prev) => ({ ...prev, [name]: value }));
   };
 
-  console.log(store_store)
-
   return (
-    <AdminSectionWrap>
-      <BoxWrap>
-        <TitleWrap>
-          <CircleQuestionMark />
-          <h1>{isEditMode ? "기존 매장 수정" : "신규 매장 등록"}</h1>
-        </TitleWrap>
+    <>
+      <TitleWrap>
+        <Store />
+        <h1>{isEditMode ? "기존 매장 수정" : "신규 매장 등록"}</h1>
+      </TitleWrap>
 
-        {errorMessage && <ErrorBox>{errorMessage}</ErrorBox>}
-        <FaqForm onSubmit={handleStoreSubmit}>
-          <div>
-            <label htmlFor="title">매장명</label>
-            <Input
-              type="text"
-              id="title"
-              name="title"
-              autoComplete="off"
-              value={formState.title}
-              onChange={handleChange}
-              placeholder="제목을 입력해주세요"
-            />
-          </div>
-          <div>
-            <label htmlFor="location">위치</label>
-            <Input
-              type="text"
-              id="location"
-              name="location"
-              autoComplete="off"
-              value={formState.location}
-              onChange={handleChange}
-              placeholder="위치를 입력해주세요."
-            />
-          </div>
+      {errorMessage && <ErrorBox>{errorMessage}</ErrorBox>}
+      <FaqForm onSubmit={handleStoreSubmit}>
+        <div>
+          <label htmlFor="title">매장명</label>
+          <Input
+            type="text"
+            id="title"
+            name="title"
+            autoComplete="off"
+            value={formState.title}
+            onChange={handleChange}
+            placeholder="제목을 입력해주세요"
+          />
+        </div>
+        <div>
+          <label htmlFor="location">위치</label>
+          <Input
+            type="text"
+            id="location"
+            name="location"
+            autoComplete="off"
+            value={formState.location}
+            onChange={handleChange}
+            placeholder="위치를 입력해주세요."
+          />
+        </div>
 
-          <Button type="submit">
-            {isEditMode ? "매장 수정 완료" : "신규 매장 등록"}
-          </Button>
-        </FaqForm>
-      </BoxWrap>
-    </AdminSectionWrap>
+        <Button type="submit">
+          {isEditMode ? "매장 수정 완료" : "신규 매장 등록"}
+        </Button>
+      </FaqForm>
+    </>
   );
 }
 

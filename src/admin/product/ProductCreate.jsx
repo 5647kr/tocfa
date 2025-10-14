@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { ImagePlus, Package, X } from "lucide-react";
-
 import { useNavigate, useParams } from "react-router-dom";
+import usePostStore from "../../store/postStore";
 import AdminSectionWrap from "../../components/AdminSection";
 import BoxWrap from "../../components/BoxWrap";
 import ErrorBox from "../../components/ErrorBox";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
-import usePostStore from "../../store/postStore";
 
 export default function PostCreate() {
   const [formState, setFormState] = useState({
@@ -40,8 +39,6 @@ export default function PostCreate() {
   useEffect(() => {
     if (isEditMode && product_product.length > 0) {
       const post = product_product.find((data) => data?.id === params.id);
-
-      console.log(post);
 
       if (post) {
         setFormState({
@@ -112,8 +109,6 @@ export default function PostCreate() {
       return;
     }
 
-    console.log(newFormData);
-
     try {
       if (isEditMode) {
         await updatePost(params.id, newFormData, "product_product");
@@ -145,116 +140,115 @@ export default function PostCreate() {
   };
 
   return (
-    <AdminSectionWrap>
-      <BoxWrap>
-        <TitleWrap>
-          <Package />
-          <h1>{isEditMode ? "기존 상품 수정" : "신규 상품 등록"}</h1>
-        </TitleWrap>
+    <>
+      <TitleWrap>
+        <Package />
+        <h1>{isEditMode ? "기존 상품 수정" : "신규 상품 등록"}</h1>
+      </TitleWrap>
 
-        {errorMessage && <ErrorBox>{errorMessage}</ErrorBox>}
-        <FaqForm onSubmit={handleProductSubmit}>
-          <InputWrap>
-            <label htmlFor="title">상품명</label>
-            <Input
-              type="text"
-              id="title"
-              name="title"
-              autoComplete="off"
-              value={formState.title}
-              onChange={handleChange}
-              placeholder="상품명을 입력해주세요"
-            />
-          </InputWrap>
+      {errorMessage && <ErrorBox>{errorMessage}</ErrorBox>}
+      <FaqForm onSubmit={handleProductSubmit}>
+        <InputWrap>
+          <label htmlFor="title">상품명</label>
+          <Input
+            type="text"
+            id="title"
+            name="title"
+            autoComplete="off"
+            value={formState.title}
+            onChange={handleChange}
+            placeholder="상품명을 입력해주세요"
+          />
+        </InputWrap>
 
-          <SpecInputWrap>
-            <ImgWrap>
-              <label htmlFor="imgurl">제품 사진</label>
-              {/* 이미지 선택 후 화면 (미리보기) */}
-              {previewImg ? (
-                <PreviewImgWrap $previewImg={previewImg}>
-                  <img src={previewImg} alt="Preview" />
-                  <button type="button" onClick={() => setPreviewImg("")}>
-                    <X />
-                  </button>
-                </PreviewImgWrap>
-              ) : (
-                <PreviewImgWrap $previewImg={previewImg}>
-                  <input
-                    type="file"
-                    id="imgurl"
-                    accept="image/*"
-                    className="a11y-hidden"
-                    onChange={handleChangeImg}
-                  />
-                  <label htmlFor="imgurl">
-                    <ImagePlus />
-                    <span>이미지 등록</span>
-                  </label>
-                </PreviewImgWrap>
-              )}
-            </ImgWrap>
-            <ContentWrap>
-              <InputWrap>
-                <label htmlFor="aperture">구경 (mm)</label>
-                <Input
-                  type="number"
-                  id="aperture"
-                  name="aperture"
-                  autoComplete="off"
-                  min={0}
-                  value={formState.aperture}
-                  onChange={handleChange}
-                  placeholder="구경을 입력해주세요."
+        <SpecInputWrap>
+          <ImgWrap>
+            <label htmlFor="imgurl">제품 사진</label>
+            {/* 이미지 선택 후 화면 (미리보기) */}
+            {previewImg ? (
+              <PreviewImgWrap $previewImg={previewImg}>
+                <img src={previewImg} alt="Preview" />
+                <button type="button" onClick={() => setPreviewImg("")}>
+                  <X />
+                </button>
+              </PreviewImgWrap>
+            ) : (
+              <PreviewImgWrap $previewImg={previewImg}>
+                <input
+                  type="file"
+                  id="imgurl"
+                  accept="image/*"
+                  className="a11y-hidden"
+                  onChange={handleChangeImg}
                 />
-              </InputWrap>
-              <InputWrap>
-                <label htmlFor="focallength">초점거리 (mm)</label>
-                <Input
-                  type="number"
-                  id="focallength"
-                  name="focallength"
-                  autoComplete="off"
-                  min={0}
-                  value={formState.focallength}
-                  onChange={handleChange}
-                  placeholder="초점거리를 입력해주세요."
-                />
-              </InputWrap>
-              <InputWrap>
-                <label htmlFor="apertureratio">초점비 (f/)</label>
-                <Input
-                  type="number"
-                  id="apertureratio"
-                  name="apertureratio"
-                  autoComplete="off"
-                  min={0}
-                  value={formState.apertureratio}
-                  onChange={handleChange}
-                  placeholder="초점비를 입력해주세요."
-                />
-              </InputWrap>
-            </ContentWrap>
-          </SpecInputWrap>
+                <label htmlFor="imgurl">
+                  <ImagePlus />
+                  <span>이미지 등록</span>
+                </label>
+              </PreviewImgWrap>
+            )}
+          </ImgWrap>
+          <ContentWrap>
+            <InputWrap>
+              <label htmlFor="aperture">구경 (mm)</label>
+              <Input
+                type="number"
+                id="aperture"
+                name="aperture"
+                autoComplete="off"
+                min={0}
+                value={formState.aperture}
+                onChange={handleChange}
+                placeholder="구경을 입력해주세요."
+              />
+            </InputWrap>
+            <InputWrap>
+              <label htmlFor="focallength">초점거리 (mm)</label>
+              <Input
+                type="number"
+                id="focallength"
+                name="focallength"
+                autoComplete="off"
+                min={0}
+                value={formState.focallength}
+                onChange={handleChange}
+                placeholder="초점거리를 입력해주세요."
+              />
+            </InputWrap>
+            <InputWrap>
+              <label htmlFor="apertureratio">초점비 (f/)</label>
+              <Input
+                type="number"
+                id="apertureratio"
+                name="apertureratio"
+                autoComplete="off"
+                min={0}
+                step="0.01"
+                value={formState.apertureratio}
+                onChange={handleChange}
+                placeholder="초점비를 입력해주세요."
+              />
+            </InputWrap>
+          </ContentWrap>
+        </SpecInputWrap>
 
-          <InputWrap>
-            <label htmlFor="content">제품 설명</label>
-            <textarea
-              id="content"
-              name="content"
-              autoComplete="off"
-              value={formState.content}
-              onChange={handleChange}
-              placeholder="제품 설명을 입력해주세요"
-            />
-          </InputWrap>
+        <InputWrap>
+          <label htmlFor="content">제품 설명</label>
+          <textarea
+            id="content"
+            name="content"
+            autoComplete="off"
+            value={formState.content}
+            onChange={handleChange}
+            placeholder="제품 설명을 입력해주세요"
+          />
+        </InputWrap>
 
-          <Button type="submit">
-            {isEditMode ? "상품 수정 완료" : "신규 상품 등록"}
-          </Button>
-        </FaqForm>
-      </BoxWrap>
-    </AdminSectionWrap>
+        <Button type="submit">
+          {isEditMode ? "상품 수정 완료" : "신규 상품 등록"}
+        </Button>
+      </FaqForm>
+    </>
   );
 }
 

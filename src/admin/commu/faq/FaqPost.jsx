@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { CircleQuestionMark } from "lucide-react";
+import usePostStore from "../../../store/postStore";
 import AdminSectionWrap from "../../../components/AdminSection";
 import BoxWrap from "../../../components/BoxWrap";
-import { Link } from "react-router-dom";
-import usePostStore from "../../../store/postStore";
 import ConfirmWrap from "../../../components/ConfirmWrap";
 import Button from "../../../components/Button";
 
@@ -13,7 +13,7 @@ export default function FaqPost() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [confirmDel, setConfirmDel] = useState(false);
   const [delId, setDelId] = useState("");
-  const [sortFaq, setSortFaq] = useState([]);
+  const [sortFaq, setSortFaq] = useState(commu_faq);
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -48,59 +48,55 @@ export default function FaqPost() {
     }
   };
 
-  console.log(sortFaq);
-
   return (
-    <AdminSectionWrap>
-      <BoxWrap>
-        <TitleWrap>
-          <div>
-            <CircleQuestionMark />
-            <h1>FAQ 목록</h1>
-          </div>
-          <Link to={"create"}>신규 FAQ 등록</Link>
-        </TitleWrap>
+    <>
+      <TitleWrap>
+        <div>
+          <CircleQuestionMark />
+          <h1>FAQ 목록</h1>
+        </div>
+        <Link to={"create"}>신규 FAQ 등록</Link>
+      </TitleWrap>
 
-        <TableWrap>
-          <CommuTable>
-            <thead>
-              <tr>
-                <th>Title</th>
-                <th>Content</th>
-                <th>Edit</th>
-                <th>Delete</th>
+      <TableWrap>
+        <CommuTable>
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Content</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {sortFaq?.map((commu) => (
+              <tr key={commu.id}>
+                <td>{commu.title}</td>
+                <td>{commu.content}</td>
+                <td>
+                  <Link to={`update/${commu.id}`}>Edit</Link>
+                </td>
+                <td>
+                  <button onClick={() => activeConfirmDelete(commu.id)}>
+                    Delete
+                  </button>
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {sortFaq?.map((commu) => (
-                <tr key={commu.id}>
-                  <td>{commu.title}</td>
-                  <td>{commu.content}</td>
-                  <td>
-                    <Link to={`update/${commu.id}`}>Edit</Link>
-                  </td>
-                  <td>
-                    <button onClick={() => activeConfirmDelete(commu.id)}>
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </CommuTable>
-        </TableWrap>
+            ))}
+          </tbody>
+        </CommuTable>
+      </TableWrap>
 
-        {confirmDel && (
-          <DeleteConfirmBox>
-            <h2>정말 삭제하시겠습니까?</h2>
-            <div>
-              <Button onClick={cancelDelete}>취소</Button>
-              <Button onClick={handleDelete}>삭제</Button>
-            </div>
-          </DeleteConfirmBox>
-        )}
-      </BoxWrap>
-    </AdminSectionWrap>
+      {confirmDel && (
+        <DeleteConfirmBox>
+          <h2>정말 삭제하시겠습니까?</h2>
+          <div>
+            <Button onClick={cancelDelete}>취소</Button>
+            <Button onClick={handleDelete}>삭제</Button>
+          </div>
+        </DeleteConfirmBox>
+      )}
+    </>
   );
 }
 
