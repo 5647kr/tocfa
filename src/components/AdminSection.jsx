@@ -7,7 +7,7 @@ const AdminSectionWrap = styled.section`
     height: calc(100vh - 18rem);
   }
   @media screen and (min-width: 769px) {
-    grid-column: 3 / -2;
+    grid-column: 3 / -1;
     & > div {
       height: calc(100vh - 12rem);
     }

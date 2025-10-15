@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import AdminHeader from "../components/AdminHeader";
 import AdminNav from "../components/AdminNav";
 import AdminSectionWrap from "../components/AdminSection";
@@ -8,6 +8,8 @@ import BoxWrap from "../components/BoxWrap";
 export default function AdminOutlet() {
   const [isMobile, setIsMobile] = useState(false);
   const [navActive, setNavActive] = useState(false);
+  const [isHome, setIsHome] = useState(false);
+  const location = useLocation();
 
   const handleCloseNav = () => {
     setNavActive((navActive) => !navActive);
@@ -34,6 +36,10 @@ export default function AdminOutlet() {
     return () => window.removeEventListener("resize", handleResize);
   }, [isMobile]);
 
+  useEffect(() => {
+    if (location.pathname === "/admin/home") setIsHome(true);
+  }, [location.pathname]);
+
   return (
     <>
       {isMobile && <AdminHeader handleNav={handleNav} />}
@@ -41,7 +47,7 @@ export default function AdminOutlet() {
         {navActive && <AdminNav handleCloseNav={handleCloseNav} />}
 
         <AdminSectionWrap>
-          <BoxWrap>
+          <BoxWrap $isHome={isHome}>
             <Outlet />
           </BoxWrap>
         </AdminSectionWrap>

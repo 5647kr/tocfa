@@ -10,6 +10,7 @@ import StorePost from "./admin/store/StorePost";
 import StoreCreate from "./admin/store/StoreCreate";
 import ProductPost from "./admin/product/ProductPost";
 import ProductCreate from "./admin/product/ProductCreate";
+import HomePost from "./admin/home/HomePost";
 
 export default function App() {
   return (
@@ -20,7 +21,7 @@ export default function App() {
         <Routes>
           <Route path="/auth/login" element={<AdminLogin />} />
           <Route path="/admin" element={<AdminOutlet />}>
-            <Route path="home" element={<EventPost />} />
+            <Route path="home" element={<HomePost />} />
             <Route path="product" element={<ProductPost />} />
             <Route path="product/create" element={<ProductCreate />} />
             <Route path="product/update/:id" element={<ProductCreate />} />
