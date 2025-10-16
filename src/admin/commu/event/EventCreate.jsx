@@ -3,8 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { ImagePlus, PartyPopper, X } from "lucide-react";
 import usePostStore from "../../../store/postStore";
-import AdminSectionWrap from "../../../components/AdminSection";
-import BoxWrap from "../../../components/BoxWrap";
 import ErrorBox from "../../../components/ErrorBox";
 import Input from "../../../components/Input";
 import Button from "../../../components/Button";
@@ -248,7 +246,7 @@ const ImgWrap = styled.div`
 const PreviewImgWrap = styled.div`
   position: relative;
   width: 100%;
-  aspect-ratio: 1 / 0.2;
+  aspect-ratio: 1 / 0.5;
   background-color: ${({ $previewImg }) =>
     $previewImg ? "var(--white-color)" : "var(--bg-color)"};
   box-shadow: ${({ $previewImg }) =>
@@ -268,7 +266,7 @@ const PreviewImgWrap = styled.div`
 
   & > img {
     width: 100%;
-    aspect-ratio: 1 / 0.2;
+    aspect-ratio: 1 / 0.5;
     object-fit: cover;
     vertical-align: top;
     border-radius: 1rem;

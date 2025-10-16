@@ -18,94 +18,196 @@ export default function HomePost() {
     }
   }, [product_product]);
 
-  console.log(productList);
-  console.log(store_store);
-
   return (
     <>
-      <InfoWrap>
-        <ul>
-          <InfoItem>
-            <h2>상품 수</h2>
-            <strong>{productList.length}</strong>
-          </InfoItem>
-          <InfoItem>
-            <h2>매장 수</h2>
-            <strong>{store_store.length}</strong>
-          </InfoItem>
-          <InfoItem>
-            <h2>일반 문의 수</h2>
-            <strong>60</strong>
-          </InfoItem>
-          <InfoItem>
-            <h2>창업 문의 수</h2>
-            <strong>60</strong>
-          </InfoItem>
-        </ul>
+      <title>StarScope 데시보드</title>
+      <h1 className="a11y-hidden">StarScope DashBoard</h1>
+      <InfoList>
+        <li>
+          <h2>상품 수</h2>
+          <strong>{productList?.length}</strong>
+        </li>
+        <li>
+          <h2>매장 수</h2>
+          <strong>{productList?.length}</strong>
+        </li>
+        <li>
+          <h2>일반 문의 수</h2>
+          <strong>{productList?.length}</strong>
+        </li>
+        <li>
+          <h2>창업 문의 수</h2>
+          <strong>{productList?.length}</strong>
+        </li>
+      </InfoList>
 
-        <DataWrap>
-          <div>
-            <TitleWrap>
-              <ChartNoAxesCombined />
-              <h2>상품 순위</h2>
-            </TitleWrap>
-
-            <DataProgressWrap>
-              <ol>
-                {productList?.map((product) => (
-                  <ProgressItem key={product.id}>
-                    <div>
-                      <label htmlFor="">{product.title}</label>
-                      <strong>{product.popular} / 999</strong>
-
-                    </div>
-                    <progress max={999} value={product.popular} />
-                  </ProgressItem>
-                ))}
-              </ol>
-            </DataProgressWrap>
-          </div>
-          <div>
-            <TitleWrap>
-              <ChartNoAxesCombined />
-              <h2>매장 순위</h2>
-            </TitleWrap>
-
-            <DataProgressWrap>....</DataProgressWrap>
-          </div>
-        </DataWrap>
-      </InfoWrap>
+      <DataWrap>
+        <div>
+          <TitleWrap>
+            <ChartNoAxesCombined />
+            <h3>상품 순위</h3>
+          </TitleWrap>
+          <DataList>
+            <li>
+              <div>
+                <label htmlFor="">상품명</label>
+                <strong>
+                  <span>900</span> / 999
+                </strong>
+              </div>
+              <progress max={999} value={333} />
+            </li>
+            <li>
+              <div>
+                <label htmlFor="">상품명</label>
+                <strong>
+                  <span>900</span> / 999
+                </strong>
+              </div>
+              <progress max={999} value={333} />
+            </li>
+            <li>
+              <div>
+                <label htmlFor="">상품명</label>
+                <strong>
+                  <span>900</span> / 999
+                </strong>
+              </div>
+              <progress max={999} value={333} />
+            </li>
+            <li>
+              <div>
+                <label htmlFor="">상품명</label>
+                <strong>
+                  <span>900</span> / 999
+                </strong>
+              </div>
+              <progress max={999} value={333} />
+            </li>
+            <li>
+              <div>
+                <label htmlFor="">상품명</label>
+                <strong>
+                  <span>900</span> / 999
+                </strong>
+              </div>
+              <progress max={999} value={333} />
+            </li>
+            <li>
+              <div>
+                <label htmlFor="">상품명</label>
+                <strong>
+                  <span>900</span> / 999
+                </strong>
+              </div>
+              <progress max={999} value={333} />
+            </li>
+            <li>
+              <div>
+                <label htmlFor="">상품명</label>
+                <strong>
+                  <span>900</span> / 999
+                </strong>
+              </div>
+              <progress max={999} value={333} />
+            </li>
+          </DataList>
+        </div>
+        <div>
+          <TitleWrap>
+            <ChartNoAxesCombined />
+            <h3>매장 순위</h3>
+          </TitleWrap>
+          <DataList>
+            <li>
+              <div>
+                <label htmlFor="">매장명</label>
+                <strong>
+                  <span>900</span> / 999
+                </strong>
+              </div>
+              <progress max={999} value={333} />
+            </li>
+            <li>
+              <div>
+                <label htmlFor="">매장명</label>
+                <strong>
+                  <span>900</span> / 999
+                </strong>
+              </div>
+              <progress max={999} value={333} />
+            </li>
+            <li>
+              <div>
+                <label htmlFor="">매장명</label>
+                <strong>
+                  <span>900</span> / 999
+                </strong>
+              </div>
+              <progress max={999} value={333} />
+            </li>
+            <li>
+              <div>
+                <label htmlFor="">매장명</label>
+                <strong>
+                  <span>900</span> / 999
+                </strong>
+              </div>
+              <progress max={999} value={333} />
+            </li>
+            <li>
+              <div>
+                <label htmlFor="">매장명</label>
+                <strong>
+                  <span>900</span> / 999
+                </strong>
+              </div>
+              <progress max={999} value={333} />
+            </li>
+            <li>
+              <div>
+                <label htmlFor="">매장명</label>
+                <strong>
+                  <span>900</span> / 999
+                </strong>
+              </div>
+              <progress max={999} value={333} />
+            </li>
+            <li>
+              <div>
+                <label htmlFor="">매장명</label>
+                <strong>
+                  <span>900</span> / 999
+                </strong>
+              </div>
+              <progress max={999} value={333} />
+            </li>
+          </DataList>
+        </div>
+      </DataWrap>
     </>
   );
 }
 
-const InfoWrap = styled.div`
-  height: 100%;
+const InfoList = styled.ul`
   display: flex;
-  flex-direction: column;
-  & > ul {
-    display: flex;
-    gap: 2rem;
+  gap: 2rem;
+  & > li {
+    width: 100%;
+    height: 10rem;
+    padding: 1rem;
+    position: relative;
+    background-color: var(--white-color);
+    border-radius: 1rem;
+    box-shadow: 0 5px 15px var(--stroke-color);
   }
-`;
-
-const InfoItem = styled.li`
-  width: 100%;
-  background-color: var(--white-color);
-  border-radius: 1rem;
-  padding: 2rem;
-  aspect-ratio: 1 / 0.8;
-  box-shadow: 0 5px 15px var(--stroke-color);
-  position: relative;
-  & > h2 {
+  li > h2 {
     font-size: var(--font-sz);
-    font-weight: var(--font-rw);
     position: absolute;
     right: 1rem;
     bottom: 1rem;
   }
-  & > strong {
-    display: block;
+  li > strong {
     font-size: 3rem;
     font-weight: var(--font-bw);
   }
@@ -113,23 +215,23 @@ const InfoItem = styled.li`
 
 const DataWrap = styled.div`
   margin-top: 6rem;
-  min-height: 0;
+  height: calc(100% - 16rem);
   display: flex;
   flex-direction: column;
   gap: 2rem;
   & > div {
     width: 100%;
-    min-height: 0;
-    flex-grow: 1;
+    height: calc(50% - 1rem);
     background-color: var(--white-color);
-    box-shadow: 0 5px 15px var(--stroke-color);
     border-radius: 1rem;
+    box-shadow: 0 5px 15px var(--stroke-color);
     padding: 2rem;
-    display: flex;
-    flex-direction: column;
   }
   @media screen and (min-width: 769px) {
     flex-direction: row;
+    & > div {
+      height: 100%;
+    }
   }
 `;
 
@@ -138,51 +240,51 @@ const TitleWrap = styled.div`
   align-items: center;
   gap: 0.8rem;
   & > svg {
-    width: var(--font-smz);
+    width: 1.6rem;
   }
-  & > h2 {
+  & > h3 {
     font-size: var(--font-smz);
+    font-weight: var(--font-bw);
   }
 `;
 
-const DataProgressWrap = styled.div`
-  box-shadow: inset 0 0 10px blue;
-  margin-top: 3rem;
-  flex-grow: 1;
-  /* min-height: 0; */
+const DataList = styled.ul`
+  margin-top: 2rem;
+  height: calc(100% - 4.4rem);
   overflow-y: auto;
-  ol {
-    height: 100%;
-    overflow-y: auto;
+  padding-right: 1rem;
+  & > li {
+    display: flex;
+    flex-direction: column;
   }
-`;
-
-const ProgressItem = styled.li`
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  &:not(:first-child) {
+  li:not(:first-child) {
     margin-top: 1rem;
   }
-  & > div {
+  li > div {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 0.4rem;
   }
-  & label {
+  li > div label {
+    font-size: var(--font-smz);
+  }
+  li > div span {
     font-size: var(--font-sz);
+    font-weight: var(--font-bw);
   }
-  & > progress {
+  li > progress {
     width: 100%;
     height: 1rem;
-    border-radius: 1rem;
     border: 1px solid var(--stroke-color);
+    border-radius: 1rem;
     overflow: hidden;
   }
-  & > progress::-webkit-progress-bar {
+  li > progress::-webkit-progress-bar {
     background-color: var(--white-color);
   }
-  & > progress::-webkit-progress-value {
+  li > progress::-webkit-progress-value {
+    height: 1rem;
     background-color: var(--boxBg-color);
   }
 `;

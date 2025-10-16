@@ -59,9 +59,6 @@ const GlobalStyle = createGlobalStyle`
   }
 
   main {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.6rem;
     padding-inline: 1.6rem;
   }
   

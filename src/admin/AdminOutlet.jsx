@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import AdminHeader from "../components/AdminHeader";
 import AdminNav from "../components/AdminNav";
-import AdminSectionWrap from "../components/AdminSection";
-import BoxWrap from "../components/BoxWrap";
+import SectionWrap from "../components/SectionWrap";
+import styled from "styled-components";
 
 export default function AdminOutlet() {
   const [isMobile, setIsMobile] = useState(false);
   const [navActive, setNavActive] = useState(false);
   const [isHome, setIsHome] = useState(false);
+  const [isCreate, setIsCreate] = useState(false);
   const location = useLocation();
 
   const handleCloseNav = () => {
@@ -37,7 +38,20 @@ export default function AdminOutlet() {
   }, [isMobile]);
 
   useEffect(() => {
-    if (location.pathname === "/admin/home") setIsHome(true);
+    if (location.pathname === "/admin/home") {
+      setIsHome(true);
+    } else {
+      setIsHome(false);
+    }
+
+    if (
+      location.pathname.includes("create") ||
+      location.pathname.includes("update")
+    ) {
+      setIsCreate(true);
+    } else {
+      setIsCreate(false);
+    }
   }, [location.pathname]);
 
   return (
@@ -46,12 +60,33 @@ export default function AdminOutlet() {
       <main>
         {navActive && <AdminNav handleCloseNav={handleCloseNav} />}
 
-        <AdminSectionWrap>
-          <BoxWrap $isHome={isHome}>
+        <AdminSectionWrap $isHome={isHome} $isCreate={isCreate}>
+          <div>
             <Outlet />
-          </BoxWrap>
+          </div>
         </AdminSectionWrap>
       </main>
     </>
   );
 }
+
+const AdminSectionWrap = styled(SectionWrap)`
+  padding-block: 6rem;
+  & > div {
+    background-color: ${({ $isHome }) =>
+      $isHome ? "transparent" : "var(--white-color)"};
+    border-radius: ${({ $isHome }) => ($isHome ? "none" : "1rem")};
+    padding: ${({ $isHome }) => ($isHome ? "none" : "2rem")};
+    box-shadow: ${({ $isHome }) =>
+      $isHome ? "none" : "0 5px 15px var(--stroke-color)"};
+    min-height: ${({ $isCreate }) =>
+      $isCreate ? "calc(100vh - 18rem)" : "none"};
+    height: ${({ $isCreate }) => ($isCreate ? "none" : "calc(100vh - 18rem)")};
+    @media screen and (min-width: 769px) {
+      min-height: ${({ $isCreate }) =>
+        $isCreate ? "calc(100vh - 12rem)" : "none"};
+      height: ${({ $isCreate }) =>
+        $isCreate ? "none" : "calc(100vh - 12rem)"};
+    }
+  }
+`;

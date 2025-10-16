@@ -7,6 +7,7 @@ const ConfirmWrap = styled.div`
   transform: translate(-50%, -50%);
   width: 40rem;
   padding: 2rem;
+  z-index: 10;
   border-radius: 1rem;
   border: 2px solid var(--stroke-color);
   background-color: var(--white-color);
