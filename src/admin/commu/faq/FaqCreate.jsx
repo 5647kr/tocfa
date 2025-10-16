@@ -3,8 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { CircleQuestionMark } from "lucide-react";
 import usePostStore from "../../../store/postStore";
-import AdminSectionWrap from "../../../components/AdminSection";
-import BoxWrap from "../../../components/BoxWrap";
 import Input from "../../../components/Input";
 import Button from "../../../components/Button";
 import ErrorBox from "../../../components/ErrorBox";

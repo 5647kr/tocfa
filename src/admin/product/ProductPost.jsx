@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { Package } from "lucide-react";
-import AdminSectionWrap from "../../components/AdminSection";
-import BoxWrap from "../../components/BoxWrap";
 import ConfirmWrap from "../../components/ConfirmWrap";
 import usePostStore from "../../store/postStore";
 import Button from "../../components/Button";
@@ -48,10 +46,9 @@ export default function ProductPost() {
     }
   };
 
-  console.log(sortProduct);
-
   return (
     <>
+      <title>StarScope 상품</title>
       <TitleWrap>
         <div>
           <Package />
@@ -63,32 +60,39 @@ export default function ProductPost() {
       </TitleWrap>
 
       <TableWrap>
-        <ProductTable>
-          <thead>
-            <tr>
-              <th>상품명</th>
-              <th>인기도</th>
-              <th>Edit</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            {sortProduct?.map((product) => (
-              <tr key={product.id}>
-                <td>{product.title}</td>
-                <td>{product.popular}</td>
-                <td>
-                  <Link to={`update/${product.id}`}>Edit</Link>
-                </td>
-                <td>
-                  <button onClick={() => activeConfirmDelete(product.id)}>
-                    Delete
-                  </button>
-                </td>
+        {sortProduct.length > 0 ? (
+          <ProductTable>
+            <thead>
+              <tr>
+                <th>상품명</th>
+                <th>인기도</th>
+                <th>Edit</th>
+                <th>Delete</th>
               </tr>
-            ))}
-          </tbody>
-        </ProductTable>
+            </thead>
+            <tbody>
+              {sortProduct?.map((product) => (
+                <tr key={product.id}>
+                  <td>{product.title}</td>
+                  <td>{product.popular}</td>
+                  <td>
+                    <Link to={`update/${product.id}`}>Edit</Link>
+                  </td>
+                  <td>
+                    <button onClick={() => activeConfirmDelete(product.id)}>
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </ProductTable>
+        ) : (
+          <EmptyBox>
+            <Package />
+            <strong>등록된 상품이 없습니다.</strong>
+          </EmptyBox>
+        )}
       </TableWrap>
 
       {confirmDel && (
@@ -136,19 +140,35 @@ const TitleWrap = styled.div`
 const TableWrap = styled.div`
   overflow-y: auto;
   margin-top: 6rem;
+  height: calc(100% - 9.7rem);
+`;
+
+const EmptyBox = styled.div`
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+  & > strong {
+    font-size: var(--font-smz);
+    font-weight: var(--font-bw);
+  }
 `;
 
 const ProductTable = styled.table`
   width: 100%;
-  overflow-y: auto;
-  border-collapse: collapse;
-  border: 1px solid var(--stroke-color);
   table-layout: fixed;
+  border-collapse: collapse;
+  padding-right: 1rem;
+
+  & tbody > tr {
+    border-top: 1px solid var(--stroke-color);
+  }
+
   & th,
   td {
     width: calc(100% / 4);
     padding: 1.2rem;
-    border: 1px solid var(--stroke-color);
   }
   & th {
     font-size: var(--font-smz);

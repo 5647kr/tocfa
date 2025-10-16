@@ -85,6 +85,7 @@ const NavWrap = styled.nav`
   left: 0;
   background-color: var(--white-color);
   padding-block: 4rem;
+  z-index: 999;
   & > div {
     height: 100%;
     display: flex;
@@ -100,13 +101,6 @@ const NavWrap = styled.nav`
   @media screen and (min-width: 769px) {
     & > button {
       display: none;
-    }
-  }
-
-  @media screen and (min-width: 769px) {
-    & {
-      position: relative;
-      grid-column: 1 / 3;
     }
   }
 `;

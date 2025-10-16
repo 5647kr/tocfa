@@ -3,8 +3,6 @@ import usePostStore from "../../store/postStore";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { Store } from "lucide-react";
-import AdminSectionWrap from "../../components/AdminSection";
-import BoxWrap from "../../components/BoxWrap";
 import ConfirmWrap from "../../components/ConfirmWrap";
 import Button from "../../components/Button";
 
@@ -61,32 +59,39 @@ export default function StorePost() {
       </TitleWrap>
 
       <TableWrap>
-        <StoreTable>
-          <thead>
-            <tr>
-              <th>매장명</th>
-              <th>실적도</th>
-              <th>Edit</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            {sortStore?.map((store) => (
-              <tr key={store.id}>
-                <td>{store.title}</td>
-                <td>{store.performance}</td>
-                <td>
-                  <Link to={`update/${store.id}`}>Edit</Link>
-                </td>
-                <td>
-                  <button onClick={() => activeConfirmDelete(store.id)}>
-                    Delete
-                  </button>
-                </td>
+        {sortStore.length > 0 ? (
+          <StoreTable>
+            <thead>
+              <tr>
+                <th>매장명</th>
+                <th>실적도</th>
+                <th>Edit</th>
+                <th>Delete</th>
               </tr>
-            ))}
-          </tbody>
-        </StoreTable>
+            </thead>
+            <tbody>
+              {sortStore?.map((store) => (
+                <tr key={store.id}>
+                  <td>{store.title}</td>
+                  <td>{store.performance}</td>
+                  <td>
+                    <Link to={`update/${store.id}`}>Edit</Link>
+                  </td>
+                  <td>
+                    <button onClick={() => activeConfirmDelete(store.id)}>
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </StoreTable>
+        ) : (
+          <EmptyBox>
+            <Store />
+            <strong>등록된 상품이 없습니다.</strong>
+          </EmptyBox>
+        )}
       </TableWrap>
 
       {confirmDel && (
@@ -134,7 +139,19 @@ const TitleWrap = styled.div`
 const TableWrap = styled.div`
   overflow-y: auto;
   margin-top: 6rem;
-  overflow-y: auto;
+  height: calc(100% - 9.7rem);
+`;
+
+const EmptyBox = styled.div`
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+  & > strong {
+    font-size: var(--font-smz);
+    font-weight: var(--font-bw);
+  }
 `;
 
 const StoreTable = styled.table`

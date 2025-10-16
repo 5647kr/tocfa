@@ -3,9 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { PartyPopper } from "lucide-react";
 import usePostStore from "../../../store/postStore";
-import AdminSectionWrap from "../../../components/AdminSection";
 import ConfirmWrap from "../../../components/ConfirmWrap";
-import BoxWrap from "../../../components/BoxWrap";
 import Button from "../../../components/Button";
 
 export default function EventPost() {

@@ -3,8 +3,6 @@ import styled from "styled-components";
 import { ImagePlus, Package, X } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
 import usePostStore from "../../store/postStore";
-import AdminSectionWrap from "../../components/AdminSection";
-import BoxWrap from "../../components/BoxWrap";
 import ErrorBox from "../../components/ErrorBox";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
@@ -13,6 +11,7 @@ export default function PostCreate() {
   const [formState, setFormState] = useState({
     title: "",
     imgurl: "",
+    type: "",
     aperture: "",
     focallength: "",
     apertureratio: "",
@@ -43,8 +42,9 @@ export default function PostCreate() {
       if (post) {
         setFormState({
           title: post.title,
-          aperture: post.aperture,
           imgurl: post.imgurl,
+          type: post.type,
+          aperture: post.aperture,
           focallength: post.focallength,
           apertureratio: post.apertureratio,
           content: post.content,
@@ -86,6 +86,10 @@ export default function PostCreate() {
 
     if (newFormData.title.trim() === "") {
       setErrorMessage("상품명을 입력해주세요.");
+      return;
+    }
+    if (newFormData.type.trim() === "") {
+      setErrorMessage("제품종류를 선택해주세요.");
       return;
     }
     if (newFormData.aperture.trim() === "") {
@@ -161,75 +165,88 @@ export default function PostCreate() {
           />
         </InputWrap>
 
+        <ImgWrap>
+          <label htmlFor="imgurl">제품 사진</label>
+          {/* 이미지 선택 후 화면 (미리보기) */}
+          {previewImg ? (
+            <PreviewImgWrap $previewImg={previewImg}>
+              <img src={previewImg} alt="Preview" />
+              <button type="button" onClick={() => setPreviewImg("")}>
+                <X />
+              </button>
+            </PreviewImgWrap>
+          ) : (
+            <PreviewImgWrap $previewImg={previewImg}>
+              <input
+                type="file"
+                id="imgurl"
+                accept="image/*"
+                className="a11y-hidden"
+                onChange={handleChangeImg}
+              />
+              <label htmlFor="imgurl">
+                <ImagePlus />
+                <span>이미지 등록</span>
+              </label>
+            </PreviewImgWrap>
+          )}
+        </ImgWrap>
+
         <SpecInputWrap>
-          <ImgWrap>
-            <label htmlFor="imgurl">제품 사진</label>
-            {/* 이미지 선택 후 화면 (미리보기) */}
-            {previewImg ? (
-              <PreviewImgWrap $previewImg={previewImg}>
-                <img src={previewImg} alt="Preview" />
-                <button type="button" onClick={() => setPreviewImg("")}>
-                  <X />
-                </button>
-              </PreviewImgWrap>
-            ) : (
-              <PreviewImgWrap $previewImg={previewImg}>
-                <input
-                  type="file"
-                  id="imgurl"
-                  accept="image/*"
-                  className="a11y-hidden"
-                  onChange={handleChangeImg}
-                />
-                <label htmlFor="imgurl">
-                  <ImagePlus />
-                  <span>이미지 등록</span>
-                </label>
-              </PreviewImgWrap>
-            )}
-          </ImgWrap>
-          <ContentWrap>
-            <InputWrap>
-              <label htmlFor="aperture">구경 (mm)</label>
-              <Input
-                type="number"
-                id="aperture"
-                name="aperture"
-                autoComplete="off"
-                min={0}
-                value={formState.aperture}
-                onChange={handleChange}
-                placeholder="구경을 입력해주세요."
-              />
-            </InputWrap>
-            <InputWrap>
-              <label htmlFor="focallength">초점거리 (mm)</label>
-              <Input
-                type="number"
-                id="focallength"
-                name="focallength"
-                autoComplete="off"
-                min={0}
-                value={formState.focallength}
-                onChange={handleChange}
-                placeholder="초점거리를 입력해주세요."
-              />
-            </InputWrap>
-            <InputWrap>
-              <label htmlFor="apertureratio">초점비 (f/)</label>
-              <Input
-                type="number"
-                id="apertureratio"
-                name="apertureratio"
-                autoComplete="off"
-                min={0}
-                step="0.01"
-                value={formState.apertureratio}
-                onChange={handleChange}
-                placeholder="초점비를 입력해주세요."
-              />
-            </InputWrap>
-          </ContentWrap>
+          <InputWrap>
+            <label htmlFor="title">종류</label>
+            <select
+              name="type"
+              id="type"
+              value={formState.type}
+              onChange={handleChange}
+            >
+              <option value="">망원경 종류를 선택해주세요.</option>
+              <option value="A">굴절 망원경</option>
+              <option value="B">반사 망원경</option>
+              <option value="C">돕소니안 망원경</option>
+            </select>
+          </InputWrap>
+          <InputWrap>
+            <label htmlFor="aperture">구경 (mm)</label>
+            <Input
+              type="number"
+              id="aperture"
+              name="aperture"
+              autoComplete="off"
+              min={0}
+              value={formState.aperture}
+              onChange={handleChange}
+              placeholder="구경을 입력해주세요."
+            />
+          </InputWrap>
+          <InputWrap>
+            <label htmlFor="focallength">초점거리 (mm)</label>
+            <Input
+              type="number"
+              id="focallength"
+              name="focallength"
+              autoComplete="off"
+              min={0}
+              value={formState.focallength}
+              onChange={handleChange}
+              placeholder="초점거리를 입력해주세요."
+            />
+          </InputWrap>
+          <InputWrap>
+            <label htmlFor="apertureratio">초점비 (f/)</label>
+            <Input
+              type="number"
+              id="apertureratio"
+              name="apertureratio"
+              autoComplete="off"
+              min={0}
+              step="0.01"
+              value={formState.apertureratio}
+              onChange={handleChange}
+              placeholder="초점비를 입력해주세요."
+            />
+          </InputWrap>
         </SpecInputWrap>
 
         <InputWrap>
@@ -268,45 +285,40 @@ const TitleWrap = styled.div`
 
 const FaqForm = styled.form`
   margin-top: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  & label {
-    font-size: var(--font-mz);
-  }
-  & textarea {
-    min-height: 14rem;
-  }
-  & textarea,
-  input {
-    resize: none;
-    padding: 1.2rem;
-    border: 1px solid var(--stroke-color);
-    border-radius: 1rem;
-    font-size: var(--font-mz);
-  }
-  & textarea::placeholder,
-  input::placeholder {
-    color: var(--bg-color);
-    font-size: var(--font-mz);
-  }
+  min-height: calc(100% - 4.4rem);
   & > button {
     width: fit-content;
     margin: 0 auto;
     margin-top: 4rem;
+  }
+  & label {
+    font-size: var(--font-mz);
   }
 `;
 
 const InputWrap = styled.div`
   display: flex;
   flex-direction: column;
-`;
+  & textarea {
+    min-height: 14rem;
+  }
+  & select:focus {
+    outline: none;
+  }
+  & textarea,
+  input,
+  select {
+    resize: none;
+    padding: 1.2rem;
+    border: 1px solid var(--stroke-color);
+    border-radius: 1rem;
+    font-size: var(--font-mz);
+  }
 
-const SpecInputWrap = styled.div`
-  display: flex;
-  gap: 2rem;
-  & > div {
-    width: 100%;
+  & textarea::placeholder,
+  input::placeholder {
+    color: var(--bg-color);
+    font-size: var(--font-mz);
   }
   & input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button {
@@ -315,14 +327,20 @@ const SpecInputWrap = styled.div`
   }
 `;
 
+const SpecInputWrap = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-block: 2rem;
+  & > div {
+    width: 100%;
+  }
+`;
+
 const ImgWrap = styled.div`
   display: flex;
   flex-direction: column;
-`;
-const ContentWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
+  margin-top: 2rem;
 `;
 
 const PreviewImgWrap = styled.div`
