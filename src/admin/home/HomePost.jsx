@@ -6,6 +6,7 @@ import usePostStore from "../../store/postStore";
 export default function HomePost() {
   const { product_product, store_store, readPost } = usePostStore();
   const [productList, setProductList] = useState(product_product);
+  const [storeList, setStoreList] = useState(store_store);
   useEffect(() => {
     readPost("product_product");
     readPost("store_store");
@@ -16,7 +17,13 @@ export default function HomePost() {
       const sorted = [...product_product].sort((a, b) => b.popular - a.popular);
       setProductList(sorted);
     }
-  }, [product_product]);
+    if (store_store?.length > 0) {
+      const sorted = [...store_store].sort(
+        (a, b) => b.performance - a.performance
+      );
+      setStoreList(sorted);
+    }
+  }, [product_product, store_store]);
 
   return (
     <>
@@ -29,7 +36,7 @@ export default function HomePost() {
         </li>
         <li>
           <h2>매장 수</h2>
-          <strong>{productList?.length}</strong>
+          <strong>{storeList?.length}</strong>
         </li>
         <li>
           <h2>일반 문의 수</h2>
@@ -48,69 +55,17 @@ export default function HomePost() {
             <h3>상품 순위</h3>
           </TitleWrap>
           <DataList>
-            <li>
-              <div>
-                <label htmlFor="">상품명</label>
-                <strong>
-                  <span>900</span> / 999
-                </strong>
-              </div>
-              <progress max={999} value={333} />
-            </li>
-            <li>
-              <div>
-                <label htmlFor="">상품명</label>
-                <strong>
-                  <span>900</span> / 999
-                </strong>
-              </div>
-              <progress max={999} value={333} />
-            </li>
-            <li>
-              <div>
-                <label htmlFor="">상품명</label>
-                <strong>
-                  <span>900</span> / 999
-                </strong>
-              </div>
-              <progress max={999} value={333} />
-            </li>
-            <li>
-              <div>
-                <label htmlFor="">상품명</label>
-                <strong>
-                  <span>900</span> / 999
-                </strong>
-              </div>
-              <progress max={999} value={333} />
-            </li>
-            <li>
-              <div>
-                <label htmlFor="">상품명</label>
-                <strong>
-                  <span>900</span> / 999
-                </strong>
-              </div>
-              <progress max={999} value={333} />
-            </li>
-            <li>
-              <div>
-                <label htmlFor="">상품명</label>
-                <strong>
-                  <span>900</span> / 999
-                </strong>
-              </div>
-              <progress max={999} value={333} />
-            </li>
-            <li>
-              <div>
-                <label htmlFor="">상품명</label>
-                <strong>
-                  <span>900</span> / 999
-                </strong>
-              </div>
-              <progress max={999} value={333} />
-            </li>
+            {productList?.map((product) => (
+              <li key={product.id}>
+                <div>
+                  <label htmlFor="">{product.title}</label>
+                  <strong>
+                    <span>{product.popular}</span> / 999
+                  </strong>
+                </div>
+                <progress max={999} value={product.popular} />
+              </li>
+            ))}
           </DataList>
         </div>
         <div>
@@ -119,69 +74,17 @@ export default function HomePost() {
             <h3>매장 순위</h3>
           </TitleWrap>
           <DataList>
-            <li>
-              <div>
-                <label htmlFor="">매장명</label>
-                <strong>
-                  <span>900</span> / 999
-                </strong>
-              </div>
-              <progress max={999} value={333} />
-            </li>
-            <li>
-              <div>
-                <label htmlFor="">매장명</label>
-                <strong>
-                  <span>900</span> / 999
-                </strong>
-              </div>
-              <progress max={999} value={333} />
-            </li>
-            <li>
-              <div>
-                <label htmlFor="">매장명</label>
-                <strong>
-                  <span>900</span> / 999
-                </strong>
-              </div>
-              <progress max={999} value={333} />
-            </li>
-            <li>
-              <div>
-                <label htmlFor="">매장명</label>
-                <strong>
-                  <span>900</span> / 999
-                </strong>
-              </div>
-              <progress max={999} value={333} />
-            </li>
-            <li>
-              <div>
-                <label htmlFor="">매장명</label>
-                <strong>
-                  <span>900</span> / 999
-                </strong>
-              </div>
-              <progress max={999} value={333} />
-            </li>
-            <li>
-              <div>
-                <label htmlFor="">매장명</label>
-                <strong>
-                  <span>900</span> / 999
-                </strong>
-              </div>
-              <progress max={999} value={333} />
-            </li>
-            <li>
-              <div>
-                <label htmlFor="">매장명</label>
-                <strong>
-                  <span>900</span> / 999
-                </strong>
-              </div>
-              <progress max={999} value={333} />
-            </li>
+            {storeList?.map((store) => (
+              <li key={store.id}>
+                <div>
+                  <label htmlFor="">{store.title}</label>
+                  <strong>
+                    <span>{store.performance}</span> / 999
+                  </strong>
+                </div>
+                <progress max={999} value={store.performance} />
+              </li>
+            ))}
           </DataList>
         </div>
       </DataWrap>

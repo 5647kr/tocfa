@@ -30,7 +30,7 @@ export default function App() {
             <Route path="store/update/:id" element={<StoreCreate />} />
             <Route path="event" element={<EventPost />} />
             <Route path="event/create" element={<EventCreate />} />
-            <Route path="event/create/:id" element={<EventCreate />} />
+            <Route path="event/update/:id" element={<EventCreate />} />
             <Route path="faq" element={<FaqPost />} />
             <Route path="faq/create" element={<FaqCreate />} />
             <Route path="faq/update/:id" element={<FaqCreate />} />
