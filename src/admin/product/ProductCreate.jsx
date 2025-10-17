@@ -366,7 +366,7 @@ const PreviewImgWrap = styled.div`
   & > img {
     width: 100%;
     aspect-ratio: 1 / 0.5;
-    object-fit: cover;
+    object-fit: contain;
     vertical-align: top;
     border-radius: 1rem;
   }
