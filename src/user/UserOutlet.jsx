@@ -28,6 +28,7 @@ const UserWrap = styled.section`
   grid-template-columns: repeat(4, 1fr);
   gap: 1.6rem;
   padding-block: 8rem;
+  position: relative;
   & > div {
     display: contents;
   }
