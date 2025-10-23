@@ -14,6 +14,7 @@ import HomePost from "./admin/home/HomePost";
 import UserOutlet from "./user/UserOutlet";
 import UserProduct from "./user/product/UserProduct";
 import UserProductDetail from "./user/product/UserProductDetail";
+import UserStore from "./user/store/UserStore";
 
 export default function App() {
   return (
@@ -26,7 +27,7 @@ export default function App() {
           <Route path="brand" element={<UserProduct />} />
           <Route path="product" element={<UserProduct />} />
           <Route path="product/:id" element={<UserProductDetail />} />
-          <Route path="store" element={<UserProduct />} />
+          <Route path="store" element={<UserStore />} />
           <Route path="commu" element={<UserProduct />} />
           <Route path="commu/event" element={<UserProduct />} />
         </Route>
