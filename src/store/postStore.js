@@ -7,10 +7,10 @@ const usePostStore = create((set, get) => ({
   store_business: [],
   commu_event: [],
   commu_faq: [],
+  commu_qna: [],
 
   // ================== CREATE ==================
   createPost: async (data, tableName) => {
-    console.log(data, tableName);
     const tempId = Date.now();
     const optimisticPost = { id: tempId, ...data };
 
@@ -24,6 +24,8 @@ const usePostStore = create((set, get) => ({
           return { commu_faq: [optimisticPost, ...state.commu_faq] };
         case "commu_event":
           return { commu_event: [optimisticPost, ...state.commu_event] };
+        case "commu_qna":
+          return { commu_qna: [optimisticPost, ...state.commu_qna] };
         case "store_store":
           return { store_store: [optimisticPost, ...state.store_store] };
         case "store_business":
@@ -53,6 +55,12 @@ const usePostStore = create((set, get) => ({
           case "commu_event":
             return {
               commu_event: state.commu_event.map((p) =>
+                p.id === tempId ? newPost : p
+              ),
+            };
+          case "commu_qna":
+            return {
+              commu_qna: state.commu_qna.map((p) =>
                 p.id === tempId ? newPost : p
               ),
             };
@@ -88,6 +96,10 @@ const usePostStore = create((set, get) => ({
           case "commu_event":
             return {
               commu_event: state.commu_event.filter((p) => p.id !== tempId),
+            };
+          case "commu_qna":
+            return {
+              commu_qna: state.commu_qna.filter((p) => p.id !== tempId),
             };
           case "store_store":
             return {
@@ -129,6 +141,12 @@ const usePostStore = create((set, get) => ({
               p.id === id ? { ...p, ...data } : p
             ),
           };
+        case "commu_qna":
+          return {
+            commu_qna: state.commu_qna.map((p) =>
+              p.id === id ? { ...p, ...data } : p
+            ),
+          };
         case "store_store":
           return {
             store_store: state.store_store.map((p) =>
@@ -166,6 +184,8 @@ const usePostStore = create((set, get) => ({
           return { commu_faq: state.commu_faq.filter((p) => p.id !== id) };
         case "commu_event":
           return { commu_event: state.commu_event.filter((p) => p.id !== id) };
+        case "commu_qna":
+          return { commu_qna: state.commu_qna.filter((p) => p.id !== id) };
         case "store_store":
           return { store_store: state.store_store.filter((p) => p.id !== id) };
         case "store_business":
