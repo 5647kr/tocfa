@@ -150,7 +150,13 @@ const ProductList = styled.div`
     box-shadow: 0 5px 15px var(--stroke-color);
     border-radius: 1rem;
     padding: 1rem;
-    background-color: var(--white-color);
+    background-color: var(--bg-color);
+    transition: background-color 1s ease;
+  }
+
+  & li:hover {
+    background-color: var(--stroke-color);
+    box-shadow: inset 0 5px 15px var(--stroke-color);
   }
 
   & img {
@@ -160,12 +166,16 @@ const ProductList = styled.div`
     transition: scale 0.5s ease;
   }
   & li:hover img {
-    scale: 1.2;
+    scale: 1.1;
   }
   & h2 {
     font-size: var(--font-smz);
     font-weight: var(--font-rw);
     text-align: center;
     margin-top: 1rem;
+  }
+
+  &li:hover h2 {
+    color: var(--white-color);
   }
 `;
