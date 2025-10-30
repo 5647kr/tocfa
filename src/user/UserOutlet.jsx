@@ -26,7 +26,7 @@ export default function UserOutlet() {
 const UserWrap = styled.section`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1.6rem;
+  gap: 0 1.6rem;
   padding-block: 8rem;
   position: relative;
   & > div {
@@ -36,14 +36,14 @@ const UserWrap = styled.section`
   @media screen and (min-width: 481px) and (max-width: 768px) {
     & {
       grid-template-columns: repeat(8, 1fr);
-      gap: 2rem;
+      gap: 0 2rem;
     }
   }
 
   @media screen and (min-width: 769px) {
     & {
       grid-template-columns: repeat(12, 1fr);
-      gap: 2.4rem;
+      gap: 0 2.4rem;
     }
   }
 `;

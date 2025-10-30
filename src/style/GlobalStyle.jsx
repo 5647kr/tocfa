@@ -74,7 +74,7 @@ const GlobalStyle = createGlobalStyle`
   @media screen and (min-width: 481px) and (max-width: 768px) {
     main {
       grid-template-columns: repeat(8, 1fr);
-      gap: 2rem;
+      gap: 0 2rem;
       padding-inline: 2rem;
     }
   }
@@ -82,7 +82,7 @@ const GlobalStyle = createGlobalStyle`
   @media screen and (min-width: 769px) {
     main {
       grid-template-columns: repeat(12, 1fr);
-      gap: 2.4rem;
+      gap: 0 2.4rem;
       padding-inline: 2.4rem;
     }
   }
