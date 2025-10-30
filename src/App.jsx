@@ -17,6 +17,7 @@ import UserProductDetail from "./user/product/UserProductDetail";
 import UserStore from "./user/store/UserStore";
 import CommuOutlet from "./user/commu/CommuOutlet";
 import CommuEventDetail from "./user/commu/event/CommuEventDetail";
+import UserHome from "./user/home/UserHome";
 
 export default function App() {
   return (
@@ -26,6 +27,7 @@ export default function App() {
       <Routes>
         {/* 사용자용  */}
         <Route path="/" element={<UserOutlet />}>
+          <Route path="" element={<UserHome />} />
           <Route path="brand" element={<UserProduct />} />
           <Route path="product" element={<UserProduct />} />
           <Route path="product/:id" element={<UserProductDetail />} />
