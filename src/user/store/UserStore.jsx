@@ -7,6 +7,7 @@ import Input from "../../components/Input";
 import Button from "../../components/Button";
 import ErrorBox from "../../components/ErrorBox";
 import ConfirmWrap from "../../components/ConfirmWrap";
+import { FullWrap, GridWrap } from "../../components/SectionWrap";
 
 export default function UserStore() {
   const { store_store, readPost, createPost } = usePostStore();
@@ -83,7 +84,9 @@ export default function UserStore() {
 
   return (
     <>
-      <title>StarScope 오프라인 매장</title>
+      <title>
+        {`StarScope ${activeMenu === "store" ? "오프라인 매장" : "창업문의"}`}
+      </title>
       <h1 className="a11y-hidden">오프라인 매장</h1>
 
       <BtnWrap>
@@ -114,16 +117,19 @@ export default function UserStore() {
       </BtnWrap>
 
       {activeMenu === "store" ? (
-        <StoreList>
+        <StoreListWrap>
           <ul>
             {store_store?.map((store) => (
               <li key={store?.id}>
                 <h2>{store?.title}</h2>
                 <p>{store?.location}</p>
+                <p>
+                  영업시간: {store?.open} ~ {store?.close}
+                </p>
               </li>
             ))}
           </ul>
-        </StoreList>
+        </StoreListWrap>
       ) : (
         <>
           {errorMessage && (
@@ -132,87 +138,93 @@ export default function UserStore() {
             </ErrorWrap>
           )}
 
-          <BusinessForm ref={formRef} onSubmit={handleBusinessSubmit}>
-            <div>
-              <InputTitleWrap>
-                <Sparkles />
-                <label htmlFor="name">고객명</label>
-              </InputTitleWrap>
-              <Input
-                type="text"
-                id="name"
-                name="name"
-                autoComplete="off"
-                placeholder="이름을 입력해주세요."
-              />
-            </div>
-            <div>
-              <InputTitleWrap>
-                <Sparkles />
-                <label htmlFor="contact">연락처</label>
-              </InputTitleWrap>
-              <Input
-                type="text"
-                id="contact"
-                name="contact"
-                autoComplete="off"
-                placeholder="연락처를 입력해주세요."
-              />
-            </div>
-            <div>
-              <InputTitleWrap>
-                <Sparkles />
-                <label htmlFor="email">이메일</label>
-              </InputTitleWrap>
-              <Input
-                type="email"
-                id="email"
-                name="email"
-                autoComplete="off"
-                placeholder="이메일을 입력해주세요."
-              />
-            </div>
-            <div>
-              <InputTitleWrap>
-                <Sparkles />
-                <label htmlFor="storename">지점명</label>
-              </InputTitleWrap>
-              <Input
-                type="text"
-                id="storename"
-                name="storename"
-                autoComplete="off"
-                placeholder="지점명을 입력해주세요."
-              />
-            </div>
-            <div>
-              <InputTitleWrap>
-                <Sparkles />
-                <label htmlFor="storelocation">창업희망지역</label>
-              </InputTitleWrap>
-              <Input
-                type="text"
-                id="storelocation"
-                name="storelocation"
-                autoComplete="off"
-                placeholder="창업희망지역을 입력해주세요."
-              />
-            </div>
-            <div>
-              <InputTitleWrap>
-                <Sparkles />
-                <label htmlFor="content">문의 내용</label>
-              </InputTitleWrap>
-              <textarea id="content" name="content" placeholder="문의 내용을 입력해주세요." />
-            </div>
+          <BusinessWrap>
+            <BusinessForm ref={formRef} onSubmit={handleBusinessSubmit}>
+              <div>
+                <InputTitleWrap>
+                  <Sparkles />
+                  <label htmlFor="name">고객명</label>
+                </InputTitleWrap>
+                <Input
+                  type="text"
+                  id="name"
+                  name="name"
+                  autoComplete="off"
+                  placeholder="이름을 입력해주세요."
+                />
+              </div>
+              <div>
+                <InputTitleWrap>
+                  <Sparkles />
+                  <label htmlFor="contact">연락처</label>
+                </InputTitleWrap>
+                <Input
+                  type="text"
+                  id="contact"
+                  name="contact"
+                  autoComplete="off"
+                  placeholder="연락처를 입력해주세요."
+                />
+              </div>
+              <div>
+                <InputTitleWrap>
+                  <Sparkles />
+                  <label htmlFor="email">이메일</label>
+                </InputTitleWrap>
+                <Input
+                  type="email"
+                  id="email"
+                  name="email"
+                  autoComplete="off"
+                  placeholder="이메일을 입력해주세요."
+                />
+              </div>
+              <div>
+                <InputTitleWrap>
+                  <Sparkles />
+                  <label htmlFor="storename">지점명</label>
+                </InputTitleWrap>
+                <Input
+                  type="text"
+                  id="storename"
+                  name="storename"
+                  autoComplete="off"
+                  placeholder="지점명을 입력해주세요."
+                />
+              </div>
+              <div>
+                <InputTitleWrap>
+                  <Sparkles />
+                  <label htmlFor="storelocation">창업희망지역</label>
+                </InputTitleWrap>
+                <Input
+                  type="text"
+                  id="storelocation"
+                  name="storelocation"
+                  autoComplete="off"
+                  placeholder="창업희망지역을 입력해주세요."
+                />
+              </div>
+              <div>
+                <InputTitleWrap>
+                  <Sparkles />
+                  <label htmlFor="content">문의 내용</label>
+                </InputTitleWrap>
+                <textarea
+                  id="content"
+                  name="content"
+                  placeholder="문의 내용을 입력해주세요."
+                />
+              </div>
 
-            <span>
-              <Input type="checkbox" id="agree" />
-              <label htmlFor="agree">개인정보수집 및 동의</label>
-            </span>
+              <span>
+                <Input type="checkbox" id="agree" />
+                <label htmlFor="agree">개인정보수집 및 동의</label>
+              </span>
 
-            <Button type="submit">신청하기</Button>
-          </BusinessForm>
+              <Button type="submit">신청하기</Button>
+            </BusinessForm>
+          </BusinessWrap>
 
           {successReq && (
             <ConfirmBox>
@@ -229,13 +241,12 @@ export default function UserStore() {
   );
 }
 
-const BtnWrap = styled.div`
+const BtnWrap = styled(FullWrap)`
   position: sticky;
   top: 0;
   left: 0;
   background-color: var(--bg-color);
   z-index: 20;
-  grid-column: 1 / -1;
   & > ul {
     display: flex;
     justify-content: center;
@@ -255,20 +266,8 @@ const FilterBtn = styled.button`
     $isActive ? "var(--font-bw)" : "var(--font-rw)"};
 `;
 
-const StoreList = styled.div`
+const StoreListWrap = styled(GridWrap)`
   margin-top: 4rem;
-  grid-column: 1 / -1;
-  @media screen and (min-width: 481px) and (max-width: 768px) {
-    & {
-      grid-column: 2 / -2;
-    }
-  }
-
-  @media screen and (min-width: 769px) {
-    & {
-      grid-column: 3 / -3;
-    }
-  }
   & li {
     box-shadow: 0 5px 15px var(--stroke-color);
     border-radius: 1rem;
@@ -290,35 +289,15 @@ const StoreList = styled.div`
   }
 `;
 
-const ErrorWrap = styled.div`
-  grid-column: 1 / -1;
-  @media screen and (min-width: 481px) and (max-width: 768px) {
-    & {
-      grid-column: 2 / -2;
-    }
-  }
+const ErrorWrap = styled(GridWrap)`
+  margin-top: 4rem;
+`;
 
-  @media screen and (min-width: 769px) {
-    & {
-      grid-column: 3 / -3;
-    }
-  }
+const BusinessWrap = styled(GridWrap)`
+  margin-top: 4rem;
 `;
 
 const BusinessForm = styled.form`
-  grid-column: 1 / -1;
-  @media screen and (min-width: 481px) and (max-width: 768px) {
-    & {
-      grid-column: 2 / -2;
-    }
-  }
-
-  @media screen and (min-width: 769px) {
-    & {
-      grid-column: 3 / -3;
-    }
-  }
-
   & > div {
     padding: 2rem;
     border: 1px solid var(--stroke-color);

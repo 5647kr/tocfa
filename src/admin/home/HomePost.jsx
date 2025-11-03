@@ -4,12 +4,14 @@ import { ChartNoAxesCombined } from "lucide-react";
 import usePostStore from "../../store/postStore";
 
 export default function HomePost() {
-  const { product_product, store_store, readPost } = usePostStore();
+  const { product_product, store_store, store_business, commu_qna, readPost } = usePostStore();
   const [productList, setProductList] = useState(product_product);
   const [storeList, setStoreList] = useState(store_store);
   useEffect(() => {
     readPost("product_product");
     readPost("store_store");
+    readPost("store_business");
+    readPost("commu_qna");
   }, []);
 
   useEffect(() => {
@@ -40,11 +42,11 @@ export default function HomePost() {
         </li>
         <li>
           <h2>일반 문의 수</h2>
-          <strong>{productList?.length}</strong>
+          <strong>{commu_qna?.length}</strong>
         </li>
         <li>
           <h2>창업 문의 수</h2>
-          <strong>{productList?.length}</strong>
+          <strong>{store_business?.length}</strong>
         </li>
       </InfoList>
 

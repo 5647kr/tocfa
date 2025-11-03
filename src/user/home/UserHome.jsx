@@ -3,10 +3,12 @@ import usePostStore from "../../store/postStore";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Telescope } from "lucide-react";
+import { GridWrap, FullWrap } from "../../components/SectionWrap";
 
 export default function UserHome() {
   const { product_product, readPost } = usePostStore();
   const [product, setProduct] = useState(null);
+  const [promoteProduct, setPromoteProduct] = useState(null);
 
   useEffect(() => {
     readPost("product_product");
@@ -14,165 +16,147 @@ export default function UserHome() {
 
   useEffect(() => {
     if (product_product.length > 0) {
-      popularProduct();
+      productSorting();
     }
   }, [product_product]);
 
-  const popularProduct = () => {
+  const productSorting = () => {
     const popularItem = product_product
       .sort((a, b) => b.popular - a.popular)
       .slice(0, 4);
 
+    const promoteItem = product_product
+      .sort((a, b) => a.popular - b.popular)
+      .slice(0, 4);
+
     setProduct(popularItem);
+    setPromoteProduct(promoteItem);
   };
 
-  console.log(product);
-
   return (
-    <Wrap>
+    <>
       <title>starScope 홈페이지</title>
       <h1 className="a11y-hidden">starScope 홈페이지</h1>
 
       <IntroWrap>
+        ...
         <h2></h2>
       </IntroWrap>
 
       <ImgContentWrap>
         <div>1</div>
-        <div>1</div>
-        <div>1</div>
-        <div>1</div>
+        <ImgContentItem>2</ImgContentItem>
+        <ImgContentItem>3</ImgContentItem>
+        <div>4</div>
       </ImgContentWrap>
 
-      <ProductWrap>
-        <ProductTitle>
+      <ProductContentWrap>
+        <ProductContentTitle>
           <div>
             <Telescope />
             <h2>Best Product</h2>
           </div>
-          <Link>Show All ({product_product.length})</Link>
-        </ProductTitle>
-        <ul>
+
+          <Link to={"/product"}>
+            Show all({product_product ? product_product.length : 0})
+          </Link>
+        </ProductContentTitle>
+
+        <ProductContentList>
           {product?.map((item) => (
-            <ProductItem key={item.id}>
-              <Link to={`/product/${item.id}`}>
-                <img src={item.imgurl} alt={item.title} />
-                <h2>{item.title}</h2>
+            <li key={item.id}>
+              <Link to={`/product/${item?.id}`}>
+                <div>
+                  <img src={item?.imgurl} alt={item?.title} />
+                  <h3>{item?.title}</h3>
+                </div>
               </Link>
-            </ProductItem>
+            </li>
           ))}
-        </ul>
-      </ProductWrap>
+        </ProductContentList>
+      </ProductContentWrap>
 
       <ImgContentWrap>
-        <div>1</div>
-        <div>1</div>
-        <div>1</div>
-        <div>1</div>
+        <ImgContentItem>1</ImgContentItem>
+        <div>2</div>
+        <div>3</div>
+        <ImgContentItem>2</ImgContentItem>
       </ImgContentWrap>
 
-      <NoticeWrap></NoticeWrap>
-    </Wrap>
+      <NoticeContentWrap>...</NoticeContentWrap>
+    </>
   );
 }
 
-const Wrap = styled.div`
-  display: contents;
-  & > div {
-    grid-column: 1 / -1;
-  }
-  @media screen and (min-width: 481px) and (max-width: 768px) {
-    & > div {
-      grid-column: 2 / -2;
-    }
-  }
-
-  @media screen and (min-width: 769px) {
-    & > div {
-      grid-column: 3 / -3;
-    }
-  }
+const IntroWrap = styled(GridWrap)`
+  box-shadow: inset 0 0 10px red;
 `;
 
-const IntroWrap = styled.div`
-  & > h2 {
-  }
-`;
-
-const ImgContentWrap = styled.div`
+const ImgContentWrap = styled(GridWrap)`
+  margin-top: 8rem;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.6rem;
-  margin-top: 8rem;
+  gap: 0.4rem;
 
   & > div {
-    background-color: var(--white-color);
-    box-shadow: 0 5px 15px var(--stroke-color);
-    border-radius: 1rem;
     aspect-ratio: 1 / 0.5;
+    border-radius: 1rem;
+    box-shadow: 0 5px 15px var(--stroke-color);
   }
 `;
 
-const ProductWrap = styled.div`
+const ImgContentItem = styled.div`
+  background-color: var(--white-color);
+  position: relative;
+  & > img {
+    width: 50%;
+  }
+`;
+
+const ProductContentWrap = styled(GridWrap)`
+  box-shadow: inset 0 0 10px blue;
   margin-top: 8rem;
-  & > ul {
-    display: flex;
-    gap: 1.6rem;
-    margin-top: 4rem;
-  }
-
-  @media screen and (min-width: 481px) and (max-width: 768px) {
-    & > ul {
-      gap: 2rem;
-    }
-  }
-  @media screen and (min-width: 769px) {
-    & > ul {
-      gap: 2.4rem;
-    }
-  }
 `;
 
-const ProductTitle = styled.div`
+const ProductContentTitle = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   & > div {
     display: flex;
     align-items: center;
+    gap: 0.4rem;
   }
   & h2 {
-    margin-left: 0.5rem;
     font-size: var(--font-mz);
     font-weight: var(--font-bw);
   }
-  & svg {
-    width: 1.6rem;
-    height: 1.6rem;
-  }
-  & a {
-    color: var(--boxBg-color);
-  }
 `;
 
-const ProductItem = styled.li`
-  background-color: var(--white-color);
-  box-shadow: 0 5px 15px var(--stroke-color);
-  border-radius: 1rem;
-  padding: 1rem;
+const ProductContentList = styled.ul`
+  box-shadow: inset 0 0 10px green;
+  margin-top: 4rem;
+  display: flex;
+  gap: 1.6rem;
+
+  & > li {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: 0 5px 15px var(--stroke-color);
+    background-color: var(--white-color);
+  }
+
   & img {
     width: 100%;
   }
-  & h2 {
-    margin-top: 1rem;
-    font-size: var(--font-mz);
-    font-weight: var(--font-mw);
+
+  & h3 {
     text-align: center;
   }
 `;
 
-const NoticeWrap = styled.div`
+const NoticeContentWrap = styled(FullWrap)`
+  box-shadow: inset 0 0 10px yellow;
   margin-top: 8rem;
-  box-shadow: inset 0 0 10px red;
-  aspect-ratio: 1 / 0.5;
 `;

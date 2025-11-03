@@ -13,37 +13,8 @@ export default function UserOutlet() {
     <>
       <UserHeader />
       <main>
-        <UserWrap>
-          <div>
-            <Outlet />
-          </div>
-        </UserWrap>
+        <Outlet />
       </main>
     </>
   );
 }
-
-const UserWrap = styled.section`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0 1.6rem;
-  padding-block: 8rem;
-  position: relative;
-  & > div {
-    display: contents;
-  }
-
-  @media screen and (min-width: 481px) and (max-width: 768px) {
-    & {
-      grid-template-columns: repeat(8, 1fr);
-      gap: 0 2rem;
-    }
-  }
-
-  @media screen and (min-width: 769px) {
-    & {
-      grid-template-columns: repeat(12, 1fr);
-      gap: 0 2.4rem;
-    }
-  }
-`;

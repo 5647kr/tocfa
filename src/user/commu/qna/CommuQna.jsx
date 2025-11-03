@@ -6,6 +6,7 @@ import usePostStore from "../../../store/postStore";
 import { Sparkles } from "lucide-react";
 import Input from "../../../components/Input";
 import Button from "../../../components/Button";
+import { GridWrap } from "../../../components/SectionWrap";
 
 export default function CommuQna() {
   const { createPost } = usePostStore();
@@ -61,71 +62,77 @@ export default function CommuQna() {
 
   return (
     <>
+      <title>StarScope 문의</title>
+      <h1 className="a11y-hidden">StarScope 문의</h1>
+
+
       {errorMessage && (
         <ErrorWrap>
           <ErrorBox>{errorMessage}</ErrorBox>
         </ErrorWrap>
       )}
 
-      <QnaForm ref={formRef} onSubmit={handleQnaSubmit}>
-        <div>
-          <InputTitleWrap>
-            <Sparkles />
-            <label htmlFor="name">고객명</label>
-          </InputTitleWrap>
-          <Input
-            type="text"
-            id="name"
-            name="name"
-            autoComplete="off"
-            placeholder="이름을 입력해주세요."
-          />
-        </div>
-        <div>
-          <InputTitleWrap>
-            <Sparkles />
-            <label htmlFor="contact">연락처</label>
-          </InputTitleWrap>
-          <Input
-            type="text"
-            id="contact"
-            name="contact"
-            autoComplete="off"
-            placeholder="연락처를 입력해주세요."
-          />
-        </div>
-        <div>
-          <InputTitleWrap>
-            <Sparkles />
-            <label htmlFor="email">이메일</label>
-          </InputTitleWrap>
-          <Input
-            type="email"
-            id="email"
-            name="email"
-            autoComplete="off"
-            placeholder="이메일을 입력해주세요."
-          />
-        </div>
-        <div>
-          <InputTitleWrap>
-            <Sparkles />
-            <label htmlFor="content">문의 내용</label>
-          </InputTitleWrap>
-          <textarea
-            id="content"
-            name="content"
-            placeholder="문의 내용을 입력해주세요."
-          />
-        </div>
+      <QnaWrap>
+        <QnaForm ref={formRef} onSubmit={handleQnaSubmit}>
+          <div>
+            <InputTitleWrap>
+              <Sparkles />
+              <label htmlFor="name">고객명</label>
+            </InputTitleWrap>
+            <Input
+              type="text"
+              id="name"
+              name="name"
+              autoComplete="off"
+              placeholder="이름을 입력해주세요."
+            />
+          </div>
+          <div>
+            <InputTitleWrap>
+              <Sparkles />
+              <label htmlFor="contact">연락처</label>
+            </InputTitleWrap>
+            <Input
+              type="text"
+              id="contact"
+              name="contact"
+              autoComplete="off"
+              placeholder="연락처를 입력해주세요."
+            />
+          </div>
+          <div>
+            <InputTitleWrap>
+              <Sparkles />
+              <label htmlFor="email">이메일</label>
+            </InputTitleWrap>
+            <Input
+              type="email"
+              id="email"
+              name="email"
+              autoComplete="off"
+              placeholder="이메일을 입력해주세요."
+            />
+          </div>
+          <div>
+            <InputTitleWrap>
+              <Sparkles />
+              <label htmlFor="content">문의 내용</label>
+            </InputTitleWrap>
+            <textarea
+              id="content"
+              name="content"
+              placeholder="문의 내용을 입력해주세요."
+            />
+          </div>
 
-        <span>
-          <Input type="checkbox" id="agree" />
-          <label htmlFor="agree">개인정보수집 및 동의</label>
-        </span>
+          <span>
+            <Input type="checkbox" id="agree" />
+            <label htmlFor="agree">개인정보수집 및 동의</label>
+          </span>
 
-        <Button type="submit">신청하기</Button>
-      </QnaForm>
+          <Button type="submit">신청하기</Button>
+        </QnaForm>
+      </QnaWrap>
 
       {successReq && (
         <ConfirmBox>
@@ -140,35 +147,15 @@ export default function CommuQna() {
   );
 }
 
-const ErrorWrap = styled.div`
-  grid-column: 1 / -1;
-  @media screen and (min-width: 481px) and (max-width: 768px) {
-    & {
-      grid-column: 2 / -2;
-    }
-  }
+const ErrorWrap = styled(GridWrap)`
+  margin-top: 4rem;
+`;
 
-  @media screen and (min-width: 769px) {
-    & {
-      grid-column: 3 / -3;
-    }
-  }
+const QnaWrap = styled(GridWrap)`
+  margin-top: 4rem;
 `;
 
 const QnaForm = styled.form`
-  grid-column: 1 / -1;
-  @media screen and (min-width: 481px) and (max-width: 768px) {
-    & {
-      grid-column: 2 / -2;
-    }
-  }
-
-  @media screen and (min-width: 769px) {
-    & {
-      grid-column: 3 / -3;
-    }
-  }
-
   & > div {
     padding: 2rem;
     border: 1px solid var(--stroke-color);

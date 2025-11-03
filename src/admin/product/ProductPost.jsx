@@ -46,6 +46,19 @@ export default function ProductPost() {
     }
   };
 
+  const ProductType = (type) => {
+    switch(type) {
+      case "A":
+        return "굴절망원경";
+      case "B":
+        return "반사망원경";
+      case "C":
+        return "돕소니안";
+      default:
+        return "굴절망원경"
+    }
+  }
+
   return (
     <>
       <title>StarScope 상품</title>
@@ -66,6 +79,7 @@ export default function ProductPost() {
               <tr>
                 <th>상품명</th>
                 <th>인기도</th>
+                <th>종류</th>
                 <th>Edit</th>
                 <th>Delete</th>
               </tr>
@@ -75,6 +89,7 @@ export default function ProductPost() {
                 <tr key={product.id}>
                   <td>{product.title}</td>
                   <td>{product.popular}</td>
+                  <td>{ProductType(product.type)}</td>
                   <td>
                     <Link to={`update/${product.id}`}>Edit</Link>
                   </td>

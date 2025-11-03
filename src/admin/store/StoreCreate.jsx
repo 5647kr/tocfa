@@ -11,6 +11,8 @@ export default function StoreCreate() {
   const [formState, setFormState] = useState({
     title: "",
     location: "",
+    open: "",
+    close: "",
   });
   const [isLoaded, setIsLoaded] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -34,7 +36,12 @@ export default function StoreCreate() {
       const post = store_store.find((data) => data?.id === params.id);
 
       if (post) {
-        setFormState({ title: post.title, location: post.location });
+        setFormState({
+          title: post.title,
+          location: post.location,
+          open: post.open,
+          close: post.close,
+        });
       }
     }
   }, [store_store, isEditMode, params.id]);
@@ -49,6 +56,16 @@ export default function StoreCreate() {
     }
     if (formState.location.trim() === "") {
       setErrorMessage("위치를 입력해주세요.");
+      return;
+    }
+
+    if (formState.open.trim() === "") {
+      setErrorMessage("오픈 시간을 입력해주세요.");
+      return;
+    }
+
+    if (formState.close.trim() === "") {
+      setErrorMessage("마감 시간을 입력해주세요.");
       return;
     }
 
@@ -103,6 +120,29 @@ export default function StoreCreate() {
           />
         </div>
 
+        <TimeWrap>
+          <div>
+            <label htmlFor="open">오픈 시간</label>
+            <Input
+              type="time"
+              id="open"
+              name="open"
+              value={formState.open}
+              onChange={handleChange}
+            />
+          </div>
+          <div>
+            <label htmlFor="close">마감 시간</label>
+            <Input
+              type="time"
+              id="close"
+              name="close"
+              value={formState.close}
+              onChange={handleChange}
+            />
+          </div>
+        </TimeWrap>
+
         <Button type="submit">
           {isEditMode ? "매장 수정 완료" : "신규 매장 등록"}
         </Button>
@@ -134,6 +174,9 @@ const FaqForm = styled.form`
     display: flex;
     flex-direction: column;
   }
+  & > div:nth-child(3) {
+    flex-direction: row;
+  }
   & label {
     font-size: var(--font-mz);
   }
@@ -157,5 +200,15 @@ const FaqForm = styled.form`
     width: fit-content;
     margin: 0 auto;
     margin-top: 4rem;
+  }
+`;
+
+const TimeWrap = styled.div`
+  gap: 2rem;
+
+  & > div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
   }
 `;

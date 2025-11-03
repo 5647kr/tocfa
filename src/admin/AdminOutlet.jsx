@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import AdminHeader from "../components/AdminHeader";
 import AdminNav from "../components/AdminNav";
-import SectionWrap from "../components/SectionWrap";
 import styled from "styled-components";
 
 export default function AdminOutlet() {
@@ -70,8 +69,20 @@ export default function AdminOutlet() {
   );
 }
 
-const AdminSectionWrap = styled(SectionWrap)`
-  padding-block: 6rem;
+const AdminSectionWrap = styled.section`
+  grid-column: 1 / -1;
+
+  @media screen and (min-width: 468px) and (max-width: 768px) {
+    padding-inline: 1.6rem;
+    /* grid-column: 2 / -2; */
+  }
+
+  @media screen and (min-width: 769px) {
+    margin-left: 24rem;
+    grid-column: 1 / -1;
+  }
+
+
   & > div {
     background-color: ${({ $isHome }) =>
       $isHome ? "transparent" : "var(--white-color)"};
@@ -84,9 +95,9 @@ const AdminSectionWrap = styled(SectionWrap)`
     height: ${({ $isCreate }) => ($isCreate ? "none" : "calc(100vh - 18rem)")};
     @media screen and (min-width: 769px) {
       min-height: ${({ $isCreate }) =>
-        $isCreate ? "calc(100vh - 12rem)" : "none"};
+        $isCreate ? "calc(100vh - 16rem)" : "none"};
       height: ${({ $isCreate }) =>
-        $isCreate ? "none" : "calc(100vh - 12rem)"};
+        $isCreate ? "none" : "calc(100vh - 16rem)"};
     }
   }
 `;

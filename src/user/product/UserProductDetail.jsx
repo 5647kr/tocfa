@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import usePostStore from "../../store/postStore";
 import styled from "styled-components";
 import { Telescope } from "lucide-react";
+import { GridWrap } from "../../components/SectionWrap";
 
 export default function UserProductDetail() {
   const params = useParams();
@@ -28,9 +29,8 @@ export default function UserProductDetail() {
   };
 
   const popularProduct = () => {
-    const type = localStorage.getItem("product");
     const popularItem = product_product
-      .filter((product) => product.type === type)
+      .filter((item) => item.type === product?.type)
       .sort((a, b) => b.popular - a.popular)
       .slice(0, 3);
 
@@ -51,8 +51,8 @@ export default function UserProductDetail() {
   };
 
   return (
-    <Wrap>
-      <ProductTitle>
+    <>
+      <ProductTitleWrap>
         <ImgWrap>
           <img src={product?.imgurl} alt={product?.title} />
         </ImgWrap>
@@ -61,9 +61,9 @@ export default function UserProductDetail() {
           <h1>{product?.title}</h1>
           <p>{product?.content}</p>
         </TitleWrap>
-      </ProductTitle>
+      </ProductTitleWrap>
 
-      <ProductSpec>
+      <ProductSpecWrap>
         <ContentTitle>
           <Telescope />
           <h2>제품 사양</h2>
@@ -83,9 +83,9 @@ export default function UserProductDetail() {
             <p>f/{product?.apertureratio}</p>
           </li>
         </SpecList>
-      </ProductSpec>
+      </ProductSpecWrap>
 
-      <PopularProduct>
+      <PopularProductWrap>
         <ContentTitle>
           <Telescope />
           <h2>인기 제품</h2>
@@ -101,31 +101,12 @@ export default function UserProductDetail() {
             </li>
           ))}
         </ProductList>
-      </PopularProduct>
-    </Wrap>
+      </PopularProductWrap>
+    </>
   );
 }
 
-const Wrap = styled.div`
-  display: contents;
-  & > div {
-    grid-column: 1 / -1;
-
-    @media screen and (min-width: 481px) and (max-width: 768px) {
-      & {
-        grid-column: 2 / -2;
-      }
-    }
-
-    @media screen and (min-width: 769px) {
-      & {
-        grid-column: 3 / -3;
-      }
-    }
-  }
-`;
-
-const ProductTitle = styled.div`
+const ProductTitleWrap = styled(GridWrap)`
   display: flex;
   flex-direction: column;
   gap: 6rem;
@@ -175,7 +156,7 @@ const TitleWrap = styled.div`
   }
 `;
 
-const ProductSpec = styled.div`
+const ProductSpecWrap = styled(GridWrap)`
   margin-top: 8rem;
   display: flex;
   flex-direction: column;
@@ -216,7 +197,7 @@ const SpecList = styled.ul`
   }
 `;
 
-const PopularProduct = styled.div`
+const PopularProductWrap = styled(GridWrap)`
   margin-top: 8rem;
 `;
 
@@ -239,7 +220,7 @@ const ProductList = styled.ul`
     transition: scale 0.5s ease;
   }
   & li:hover img {
-    scale: 1.2;
+    scale: 1.1;
   }
   & h4 {
     font-size: var(--font-mz);

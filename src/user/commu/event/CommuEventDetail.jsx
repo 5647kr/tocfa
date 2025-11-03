@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import usePostStore from "../../../store/postStore";
 import { MoveLeft } from "lucide-react";
+import { GridWrap } from "../../../components/SectionWrap";
 
 export default function CommuEventDetail() {
   const params = useParams();
@@ -40,7 +41,10 @@ export default function CommuEventDetail() {
   };
 
   return (
-    <Wrap>
+    <>
+      <title>StarScope 이벤트</title>
+      <h1 className="a11y-hidden">StarScope 이벤트</h1>
+      
       <ProductTitle>
         <div>
           <button onClick={BackBtn}>
@@ -55,30 +59,11 @@ export default function CommuEventDetail() {
         <img src={event?.imgurl} alt={event?.title} />
         <p>{event?.content}</p>
       </ContentWrap>
-    </Wrap>
+    </>
   );
 }
 
-const Wrap = styled.div`
-  display: contents;
-  & > div {
-    grid-column: 1 / -1;
-
-    @media screen and (min-width: 481px) and (max-width: 768px) {
-      & {
-        grid-column: 2 / -2;
-      }
-    }
-
-    @media screen and (min-width: 769px) {
-      & {
-        grid-column: 3 / -3;
-      }
-    }
-  }
-`;
-
-const ProductTitle = styled.div`
+const ProductTitle = styled(GridWrap)`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -94,7 +79,7 @@ const ProductTitle = styled.div`
   }
 `;
 
-const ContentWrap = styled.div`
+const ContentWrap = styled(GridWrap)`
   margin-top: 6rem;
 
   & > img {

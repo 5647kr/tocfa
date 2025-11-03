@@ -3,6 +3,7 @@ import styled from "styled-components";
 import CommuEvent from "./event/CommuEvent";
 import CommuFaq from "./faq/CommuFaq";
 import CommuQna from "./qna/CommuQna";
+import { FullWrap } from "../../components/SectionWrap";
 
 export default function CommuOutlet() {
   const [activeMenu, setActiveMenu] = useState("event");
@@ -61,13 +62,12 @@ export default function CommuOutlet() {
   );
 }
 
-const BtnWrap = styled.div`
+const BtnWrap = styled(FullWrap)`
   position: sticky;
   top: 0;
   left: 0;
   background-color: var(--bg-color);
   z-index: 20;
-  grid-column: 1 / -1;
   & > ul {
     display: flex;
     justify-content: center;
