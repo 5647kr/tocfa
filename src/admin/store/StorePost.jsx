@@ -65,6 +65,8 @@ export default function StorePost() {
               <tr>
                 <th>매장명</th>
                 <th>실적도</th>
+                <th>오픈 시간</th>
+                <th>마감 시간</th>
                 <th>Edit</th>
                 <th>Delete</th>
               </tr>
@@ -74,6 +76,8 @@ export default function StorePost() {
                 <tr key={store.id}>
                   <td>{store.title}</td>
                   <td>{store.performance}</td>
+                  <td>{store.open}</td>
+                  <td>{store.close}</td>
                   <td>
                     <Link to={`update/${store.id}`}>Edit</Link>
                   </td>
@@ -156,14 +160,18 @@ const EmptyBox = styled.div`
 
 const StoreTable = styled.table`
   width: 100%;
-  border-collapse: collapse;
-  border: 1px solid var(--stroke-color);
   table-layout: fixed;
+  border-collapse: collapse;
+  padding-right: 1rem;
+
+  & tbody > tr {
+    border-top: 1px solid var(--stroke-color);
+  }
+
   & th,
   td {
     width: calc(100% / 4);
     padding: 1.2rem;
-    border: 1px solid var(--stroke-color);
   }
   & th {
     font-size: var(--font-smz);

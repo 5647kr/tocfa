@@ -3,6 +3,7 @@ import styled from "styled-components";
 import usePostStore from "../../store/postStore";
 import { Link } from "react-router-dom";
 import Loading from "../../components/Loading";
+import {FullWrap, GridWrap} from "../../components/SectionWrap";
 
 export default function UserProduct() {
   const [activeProduct, setActiveProduct] = useState(
@@ -96,13 +97,12 @@ export default function UserProduct() {
   );
 }
 
-const FilterBtnWrap = styled.div`
+const FilterBtnWrap = styled(FullWrap)`
   position: sticky;
   top: 0;
   left: 0;
   background-color: var(--bg-color);
   z-index: 20;
-  grid-column: 1 / -1;
   & > ul {
     display: flex;
     justify-content: center;
@@ -122,41 +122,46 @@ const FilterBtn = styled.button`
     $isActive ? "var(--font-bw)" : "var(--font-rw)"};
 `;
 
-const ProductList = styled.div`
+const ProductList = styled(GridWrap)`
   margin-top: 4rem;
   & ul {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+    grid-template-columns: repeat(1, 1fr);
     gap: 1.6rem;
   }
   @media screen and (min-width: 481px) and (max-width: 768px) {
-    & {
-      grid-column: 2 / -2;
-    }
-    & ul {
+    & > ul {
+      grid-template-columns: repeat(2, 1fr);
       gap: 2rem;
     }
   }
-
-  @media screen and (min-width: 769px) {
-    & {
-      grid-column: 3 / -3;
-    }
-    & ul {
+  @media screen and (min-width: 769px) and (max-width: 1024px) {
+    & > ul {
+      grid-template-columns: repeat(2, 1fr);
       gap: 2.4rem;
     }
   }
+
+  @media screen and (min-width: 1025px) and (max-width: 1440px) {
+    & > ul {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.4rem;
+    }
+  }
+
+  @media screen and (min-width: 1441px) {
+    & > ul {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2.4rem;
+    }
+  }
+
   & li {
     box-shadow: 0 5px 15px var(--stroke-color);
     border-radius: 1rem;
     padding: 1rem;
-    background-color: var(--bg-color);
+    background-color: var(--white-color);
     transition: background-color 1s ease;
-  }
-
-  & li:hover {
-    background-color: var(--stroke-color);
-    box-shadow: inset 0 5px 15px var(--stroke-color);
   }
 
   & img {

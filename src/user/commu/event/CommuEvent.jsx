@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import styled from "styled-components";
 import usePostStore from "../../../store/postStore";
 import { Link } from "react-router-dom";
+import { GridWrap } from "../../../components/SectionWrap";
 
 export default function CommuEvent() {
   const { commu_event, readPost } = usePostStore();
@@ -22,7 +23,7 @@ export default function CommuEvent() {
           {commu_event?.map((event) => (
             <li key={event?.id}>
               <Link to={`/commu/event/${event?.id}`}>
-                <img src={event?.imgurl} alt={event?.title} />
+                <img src={event?.imgurl} alt={event?.title} loading="lazy" />
                 <div>
                   <h2>{event.title}</h2>
                 </div>
@@ -35,28 +36,35 @@ export default function CommuEvent() {
   );
 }
 
-const EventList = styled.div`
+const EventList = styled(GridWrap)`
   margin-top: 4rem;
-  grid-column: 1 / -1;
   & ul {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+    grid-template-columns: repeat(1, 1fr);
     gap: 1.6rem;
   }
   @media screen and (min-width: 481px) and (max-width: 768px) {
-    & {
-      grid-column: 2 / -2;
-    }
     & ul {
+      grid-template-columns: repeat(2, 1fr);
       gap: 2rem;
     }
   }
-
-  @media screen and (min-width: 769px) {
-    & {
-      grid-column: 3 / -3;
-    }
+  
+  @media screen and (min-width: 769px) and (max-width: 1024px) {
     & ul {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2.4rem;
+    }
+  }
+  @media screen and (min-width: 1025px) and (max-width: 1440px) {
+    & ul {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.4rem;
+    }
+  }
+  @media screen and (min-width: 1441px) {
+    & ul {
+      grid-template-columns: repeat(4, 1fr);
       gap: 2.4rem;
     }
   }

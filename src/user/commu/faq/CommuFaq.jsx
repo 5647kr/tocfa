@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import styled from "styled-components";
 import usePostStore from "../../../store/postStore";
 import { Sparkles } from "lucide-react";
+import { GridWrap } from "../../../components/SectionWrap";
 
 export default function CommuFaq() {
   const { commu_faq, readPost } = usePostStore();
@@ -14,7 +15,7 @@ export default function CommuFaq() {
 
   console.log(commu_faq);
   return (
-    <Wrap>
+    <>
       <title>StarScope FAQ</title>
       <h1 className="a11y-hidden">StarScope FAQ</h1>
       <FaqList>
@@ -30,30 +31,11 @@ export default function CommuFaq() {
           ))}
         </ul>
       </FaqList>
-    </Wrap>
+    </>
   );
 }
 
-const Wrap = styled.div`
-  display: contents;
-  & > div {
-    grid-column: 1 / -1;
-
-    @media screen and (min-width: 481px) and (max-width: 768px) {
-      & {
-        grid-column: 2 / -2;
-      }
-    }
-
-    @media screen and (min-width: 769px) {
-      & {
-        grid-column: 3 / -3;
-      }
-    }
-  }
-`;
-
-const FaqList = styled.div`
+const FaqList = styled(GridWrap)`
   margin-top: 4rem;
   & li {
     box-shadow: 0 5px 15px var(--stroke-color);

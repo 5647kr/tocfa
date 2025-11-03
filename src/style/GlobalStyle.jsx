@@ -58,9 +58,7 @@ const GlobalStyle = createGlobalStyle`
     outline: none;
   }
 
-  main {
-    padding-inline: 1.6rem;
-  }
+
   
   .a11y-hidden {
     position: absolute;
@@ -69,6 +67,14 @@ const GlobalStyle = createGlobalStyle`
     width: 1px;
     height: 1px;
     margin: -1px;
+  }
+
+  main {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0 1.6rem;
+    padding-inline: 1.6rem;
+    padding-block: 8rem;
   }
 
   @media screen and (min-width: 481px) and (max-width: 768px) {

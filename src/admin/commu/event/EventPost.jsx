@@ -135,14 +135,18 @@ const TableWrap = styled.div`
 
 const EventTable = styled.table`
   width: 100%;
-  border-collapse: collapse;
-  border: 1px solid var(--stroke-color);
   table-layout: fixed;
+  border-collapse: collapse;
+  padding-right: 1rem;
+
+  & tbody > tr {
+    border-top: 1px solid var(--stroke-color);
+  }
+
   & th,
   td {
     width: calc(100% / 4);
     padding: 1.2rem;
-    border: 1px solid var(--stroke-color);
   }
   & th {
     font-size: var(--font-smz);

@@ -1,9 +1,19 @@
 import styled from "styled-components";
 
-const SectionWrap = styled.section`
+const FullWrap = styled.section`
+  grid-column: 1 / -1;
+`;
+
+const GridWrap = styled.section`
+  grid-column: 1 / -1;
+
+  @media screen and (min-width: 481px) and (max-width: 768px) {
+    grid-column: 2 / -2;
+  }
+
   @media screen and (min-width: 769px) {
-    margin-left: 24rem;
+    grid-column: 3 / -3;
   }
 `;
 
-export default SectionWrap;
+export { FullWrap, GridWrap };
