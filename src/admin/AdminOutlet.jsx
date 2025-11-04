@@ -71,15 +71,15 @@ export default function AdminOutlet() {
 
 const AdminSectionWrap = styled.section`
   grid-column: 1 / -1;
+  padding-inline: 1.6rem;
 
   @media screen and (min-width: 468px) and (max-width: 768px) {
-    padding-inline: 1.6rem;
-    /* grid-column: 2 / -2; */
+    padding-inline: 2rem;
   }
-
+  
   @media screen and (min-width: 769px) {
     margin-left: 24rem;
-    grid-column: 1 / -1;
+    padding-inline: 2.4rem;
   }
 
 

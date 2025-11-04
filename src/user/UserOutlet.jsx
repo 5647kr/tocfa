@@ -1,7 +1,8 @@
-import styled from "styled-components";
-import UserHeader from "../components/UserHeader";
-import { Outlet, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import UserHeader from "../components/UserHeader";
+import UserFooter from "../components/UserFooter";
+import { Outlet, useLocation } from "react-router-dom";
+
 
 export default function UserOutlet() {
   const { pathname } = useLocation();
@@ -15,6 +16,7 @@ export default function UserOutlet() {
       <main>
         <Outlet />
       </main>
+      <UserFooter />
     </>
   );
 }
