@@ -4,11 +4,17 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Telescope } from "lucide-react";
 import { GridWrap, FullWrap } from "../../components/SectionWrap";
+import homeImgContent1 from "../../assets/img/homeImgContent1.jpg";
+import homeImgContent2 from "../../assets/img/homeImgContent2.jpg";
+import homeImgContent3 from "../../assets/img/homeImgContent3.jpg";
+import homeImgContent4 from "../../assets/img/homeImgContent4.jpg";
+import homeNoticeContent from "../../assets/img/homeNoticeContent.jpg";
+import homeNoticeProduct from "../../assets/img/homeNoticeProduct.png";
 
 export default function UserHome() {
   const { product_product, readPost } = usePostStore();
   const [product, setProduct] = useState(null);
-  const [promoteProduct, setPromoteProduct] = useState(null);
+  const [promoteProduct, setPromoteProduct] = useState([]);
 
   useEffect(() => {
     readPost("product_product");
@@ -39,15 +45,47 @@ export default function UserHome() {
       <h1 className="a11y-hidden">starScope 홈페이지</h1>
 
       <IntroWrap>
-        ...
-        <h2></h2>
+        <h2>
+          눈앞의 별을, 손끝에서 만나다. <br />
+          별과 우주의 모든 순간을 포착하는 망원경, <br />
+          StarScope
+        </h2>
+        <p>
+          관측의 경계를 넘어서, 당신의 시선을 우주로 확장합니다. <br />
+          별빛이 닿는 모든 곳에 StarScope가 함께합니다.
+        </p>
       </IntroWrap>
 
       <ImgContentWrap>
-        <div>1</div>
-        <ImgContentItem>2</ImgContentItem>
-        <ImgContentItem>3</ImgContentItem>
-        <div>4</div>
+        <ImgItem>
+          <img src={homeImgContent2} alt="" />
+        </ImgItem>
+        <ImgContentItem className="right">
+          <img src={promoteProduct[0]?.imgurl} alt={promoteProduct[0]?.title} />
+          <div>
+            <h2>{promoteProduct[0]?.title}</h2>
+            <p>
+              <span>{promoteProduct[0]?.aperture}mm</span>
+              <span> / {promoteProduct[0]?.focallength}mm</span>
+              <span> / f({promoteProduct[0]?.apertureratio})</span>
+            </p>
+          </div>
+        </ImgContentItem>
+        <ImgContentItem className="left">
+          <img src={promoteProduct[1]?.imgurl} alt={promoteProduct[1]?.title} />
+          <div>
+            <h2>{promoteProduct[1]?.title}</h2>
+            <p>
+              <span>{promoteProduct[1]?.aperture}mm</span>
+              <span> / {promoteProduct[1]?.focallength}mm</span>
+              <span> / f({promoteProduct[1]?.apertureratio})</span>
+            </p>
+          </div>
+        </ImgContentItem>
+        <ImgItem>
+          {" "}
+          <img src={homeImgContent4} alt="" />
+        </ImgItem>
       </ImgContentWrap>
 
       <ProductContentWrap>
@@ -77,19 +115,62 @@ export default function UserHome() {
       </ProductContentWrap>
 
       <ImgContentWrap>
-        <ImgContentItem>1</ImgContentItem>
-        <div>2</div>
-        <div>3</div>
-        <ImgContentItem>2</ImgContentItem>
+        <ImgContentItem className="left">
+          <img src={promoteProduct[2]?.imgurl} alt={promoteProduct[2]?.title} />
+          <div>
+            <h2>{promoteProduct[2]?.title}</h2>
+            <p>
+              <span>{promoteProduct[2]?.aperture}mm</span>
+              <span> / {promoteProduct[2]?.focallength}mm</span>
+              <span> / f({promoteProduct[2]?.apertureratio})</span>
+            </p>
+          </div>
+        </ImgContentItem>
+        <ImgItem>
+          <img src={homeImgContent1} alt="" />
+        </ImgItem>
+        <ImgItem>
+          <img src={homeImgContent3} alt="" />
+        </ImgItem>
+        <ImgContentItem className="right">
+          <img src={promoteProduct[3]?.imgurl} alt={promoteProduct[3]?.title} />
+          <div>
+            <h2>{promoteProduct[3]?.title}</h2>
+            <p>
+              <span>{promoteProduct[3]?.aperture}mm</span>
+              <span> / {promoteProduct[3]?.focallength}mm</span>
+              <span> / f({promoteProduct[3]?.apertureratio})</span>
+            </p>
+          </div>
+        </ImgContentItem>
       </ImgContentWrap>
 
-      <NoticeContentWrap>...</NoticeContentWrap>
+      <NoticeContentWrap>
+        <img src={homeNoticeContent} alt="" />
+        <div>
+          <img src={homeNoticeProduct} alt="새 출시 제품" />
+          <NoticeContent>
+            <h3>Skyliner N 254/1200 Classic 출시</h3>
+            <p>254mm / 1200mm / f/4.7</p>
+          </NoticeContent>
+        </div>
+      </NoticeContentWrap>
     </>
   );
 }
 
 const IntroWrap = styled(GridWrap)`
-  box-shadow: inset 0 0 10px red;
+  & > h2 {
+    text-align: center;
+    font-weight: var(--font-bw);
+    font-size: var(--font-lz);
+  }
+
+  & > p {
+    text-align: center;
+    font-size: var(--font-smz);
+    margin-top: 2rem;
+  }
 `;
 
 const ImgContentWrap = styled(GridWrap)`
@@ -110,11 +191,42 @@ const ImgContentItem = styled.div`
   position: relative;
   & > img {
     width: 50%;
+    vertical-align: top;
+  }
+  &.right > img {
+    display: block;
+    margin-left: auto;
+    transform: scaleX(-1);
+  }
+
+  &.right > div {
+    left: 1rem;
+    text-align: left;
+  }
+  &.left > div {
+    right: 1rem;
+    text-align: right;
+  }
+  & > div {
+    position: absolute;
+    bottom: 1rem;
+  }
+  & span {
+    color: var(--stroke-color);
+    font-size: var(--font-sz);
+  }
+`;
+
+const ImgItem = styled.div`
+  overflow: hidden;
+  & > img {
+    width: 100%;
+    aspect-ratio: 1 / 0.5;
+    vertical-align: top;
   }
 `;
 
 const ProductContentWrap = styled(GridWrap)`
-  box-shadow: inset 0 0 10px blue;
   margin-top: 8rem;
 `;
 
@@ -134,7 +246,6 @@ const ProductContentTitle = styled.div`
 `;
 
 const ProductContentList = styled.ul`
-  box-shadow: inset 0 0 10px green;
   margin-top: 4rem;
   display: flex;
   gap: 1.6rem;
@@ -157,6 +268,57 @@ const ProductContentList = styled.ul`
 `;
 
 const NoticeContentWrap = styled(FullWrap)`
-  box-shadow: inset 0 0 10px yellow;
   margin-top: 8rem;
+  position: relative;
+  box-shadow: 0 5px 15px var(--stroke-color);
+  & > img {
+    width: 100%;
+    vertical-align: top;
+    aspect-ratio: 1 / 0.5;
+    object-fit: cover;
+  }
+
+  & > div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    aspect-ratio: 1 / 0.5;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+
+  & > div > img {
+    position: absolute;
+    width: 40%;
+    right: 0;
+    bottom: 0;
+  }
+
+  & > div h3 {
+    font-size: var(--font-2xlz);
+    font-weight: var(--font-bw);
+  }
+
+  & > div p {
+    font-size: var(--font-mz);
+  }
 `;
+
+
+const NoticeContent = styled.div`
+  position: absolute;
+  left: 2rem;
+  bottom: 2rem;
+  & h3, p {
+    color: var(--white-color);
+  }
+
+  & h3 {
+    font-size: var(--font-2xlz);
+    font-weight: var(--font-bw);
+  }
+
+  & p {
+    font-size: var(--font-mz);
+  }
+`
