@@ -1,12 +1,15 @@
-import { Search, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
-import Input from "./Input";
+import heroImg1 from "../assets/img/heroImg1.jpg";
+import heroImg2 from "../assets/img/heroImg2.jpg";
+import heroImg3 from "../assets/img/heroImg3.jpg";
 
 export default function UserHeader() {
   const location = useLocation();
   const [activeMenu, setActiveMenu] = useState("");
+  const [currentImg, setCurrentImg] = useState(0);
+  const heroImgs = [heroImg1, heroImg2, heroImg3];
 
   useEffect(() => {
     const path = location.pathname;
@@ -24,9 +27,25 @@ export default function UserHeader() {
     }
   }, [location.pathname]);
 
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentImg((prev) => (prev + 1) % heroImgs.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <HeaderWrap>
-      <HeroWrap>...</HeroWrap>
+      <HeroWrap>
+        {heroImgs.map((img, index) => (
+          <HeroImg
+            key={index}
+            src={img}
+            alt={`hero_${index}`}
+            $isActive={currentImg === index}
+          />
+        ))}
+      </HeroWrap>
       <NavWrap>
         <TitleWrap>
           <h1>
@@ -50,8 +69,6 @@ export default function UserHeader() {
             </NavItem>
           </ul>
         </NavList>
-
-        <SearchWrap>...</SearchWrap>
       </NavWrap>
     </HeaderWrap>
   );
@@ -62,9 +79,17 @@ const HeaderWrap = styled.header`
 `;
 
 const HeroWrap = styled.div`
-  box-shadow: inset 0 0 10px red;
   aspect-ratio: 1 / 0.4;
   border-radius: 0 0 1rem 1rem;
+`;
+
+const HeroImg = styled.img`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: ${({ $isActive }) => ($isActive ? 1 : 0)};
+  transition: opacity 1s ease-in-out;
 `;
 
 const NavWrap = styled.nav`
@@ -106,6 +131,7 @@ const TitleWrap = styled.div`
 const NavList = styled.div`
   width: 20rem;
   background-color: transparent;
+  margin: 0 auto;
   & > ul {
     height: 100%;
     display: flex;
@@ -126,5 +152,3 @@ const NavItem = styled.li`
     text-decoration: ${({ $isActive }) => ($isActive ? "underline" : "none")};
   }
 `;
-
-const SearchWrap = styled.div``;
