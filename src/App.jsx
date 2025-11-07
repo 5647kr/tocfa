@@ -19,6 +19,9 @@ import CommuOutlet from "./user/commu/CommuOutlet";
 import CommuEventDetail from "./user/commu/event/CommuEventDetail";
 import UserHome from "./user/home/UserHome";
 import UserBrand from "./user/brand/UserBrand";
+import StoreBusiness from "./admin/store/StoreBusiness";
+import QnaPost from "./admin/commu/qna/QnaPost";
+
 
 
 export default function App() {
@@ -48,12 +51,14 @@ export default function App() {
           <Route path="store" element={<StorePost />} />
           <Route path="store/create" element={<StoreCreate />} />
           <Route path="store/update/:id" element={<StoreCreate />} />
+          <Route path="business" element={<StoreBusiness />} />
           <Route path="event" element={<EventPost />} />
           <Route path="event/create" element={<EventCreate />} />
           <Route path="event/update/:id" element={<EventCreate />} />
           <Route path="faq" element={<FaqPost />} />
           <Route path="faq/create" element={<FaqCreate />} />
           <Route path="faq/update/:id" element={<FaqCreate />} />
+          <Route path="qna" element={<QnaPost />} />
         </Route>
       </Routes>
     </>
