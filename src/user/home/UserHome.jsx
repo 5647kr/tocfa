@@ -3,6 +3,8 @@ import usePostStore from "../../store/postStore";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Telescope } from "lucide-react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import { GridWrap, FullWrap } from "../../components/SectionWrap";
 import homeImgContent1 from "../../assets/img/homeImgContent1.jpg";
 import homeImgContent2 from "../../assets/img/homeImgContent2.jpg";
@@ -18,6 +20,7 @@ export default function UserHome() {
 
   useEffect(() => {
     readPost("product_product");
+    AOS.init();
   }, []);
 
   useEffect(() => {
@@ -44,7 +47,11 @@ export default function UserHome() {
       <title>starScope 홈페이지</title>
       <h1 className="a11y-hidden">starScope 홈페이지</h1>
 
-      <IntroWrap>
+      <IntroWrap
+        data-aos="fade-down"
+        data-aos-delay="200"
+        data-aos-duration="800"
+      >
         <h2>
           눈앞의 별을, 손끝에서 만나다. <br />
           별과 우주의 모든 순간을 포착하는 망원경, <br />
@@ -57,10 +64,19 @@ export default function UserHome() {
       </IntroWrap>
 
       <ImgContentWrap>
-        <ImgItem>
+        <ImgItem
+          data-aos="fade-right"
+          data-aos-delay="200"
+          data-aos-duration="800"
+        >
           <img src={homeImgContent2} alt="" />
         </ImgItem>
-        <ImgContentItem className="right">
+        <ImgContentItem
+          className="right"
+          data-aos="fade-left"
+          data-aos-delay="200"
+          data-aos-duration="800"
+        >
           <img src={promoteProduct[0]?.imgurl} alt={promoteProduct[0]?.title} />
           <div>
             <h2>{promoteProduct[0]?.title}</h2>
@@ -71,7 +87,12 @@ export default function UserHome() {
             </p>
           </div>
         </ImgContentItem>
-        <ImgContentItem className="left">
+        <ImgContentItem
+          className="left"
+          data-aos="fade-right"
+          data-aos-delay="400"
+          data-aos-duration="800"
+        >
           <img src={promoteProduct[1]?.imgurl} alt={promoteProduct[1]?.title} />
           <div>
             <h2>{promoteProduct[1]?.title}</h2>
@@ -82,8 +103,11 @@ export default function UserHome() {
             </p>
           </div>
         </ImgContentItem>
-        <ImgItem>
-          {" "}
+        <ImgItem
+          data-aos="fade-left"
+          data-aos-delay="400"
+          data-aos-duration="800"
+        >
           <img src={homeImgContent4} alt="" />
         </ImgItem>
       </ImgContentWrap>
@@ -101,8 +125,13 @@ export default function UserHome() {
         </ProductContentTitle>
 
         <ProductContentList>
-          {product?.map((item) => (
-            <li key={item.id}>
+          {product?.map((item, index) => (
+            <li
+              key={item.id}
+              data-aos="fade-down"
+              data-aos-delay={index * 200}
+              data-aos-duration="800"
+            >
               <Link to={`/product/${item?.id}`}>
                 <div>
                   <img src={item?.imgurl} alt={item?.title} />
@@ -115,7 +144,12 @@ export default function UserHome() {
       </ProductContentWrap>
 
       <ImgContentWrap>
-        <ImgContentItem className="left">
+        <ImgContentItem
+          className="left"
+          data-aos="fade-right"
+          data-aos-delay="200"
+          data-aos-duration="800"
+        >
           <img src={promoteProduct[2]?.imgurl} alt={promoteProduct[2]?.title} />
           <div>
             <h2>{promoteProduct[2]?.title}</h2>
@@ -126,13 +160,26 @@ export default function UserHome() {
             </p>
           </div>
         </ImgContentItem>
-        <ImgItem>
+        <ImgItem
+          data-aos="fade-left"
+          data-aos-delay="200"
+          data-aos-duration="800"
+        >
           <img src={homeImgContent1} alt="" />
         </ImgItem>
-        <ImgItem>
+        <ImgItem
+          data-aos="fade-right"
+          data-aos-delay="400"
+          data-aos-duration="800"
+        >
           <img src={homeImgContent3} alt="" />
         </ImgItem>
-        <ImgContentItem className="right">
+        <ImgContentItem
+          className="right"
+          data-aos="fade-left"
+          data-aos-delay="400"
+          data-aos-duration="800"
+        >
           <img src={promoteProduct[3]?.imgurl} alt={promoteProduct[3]?.title} />
           <div>
             <h2>{promoteProduct[3]?.title}</h2>
@@ -148,8 +195,18 @@ export default function UserHome() {
       <NoticeContentWrap>
         <img src={homeNoticeContent} alt="" />
         <div>
-          <img src={homeNoticeProduct} alt="새 출시 제품" />
-          <NoticeContent>
+          <img
+            src={homeNoticeProduct}
+            alt="새 출시 제품"
+            data-aos="fade-down"
+            data-aos-delay="200"
+            data-aos-duration="800"
+          />
+          <NoticeContent
+            data-aos="fade-right"
+            data-aos-delay="200"
+            data-aos-duration="800"
+          >
             <h3>Skyliner N 254/1200 Classic 출시</h3>
             <p>254mm / 1200mm / f/4.7</p>
           </NoticeContent>
@@ -304,12 +361,12 @@ const NoticeContentWrap = styled(FullWrap)`
   }
 `;
 
-
 const NoticeContent = styled.div`
   position: absolute;
   left: 2rem;
   bottom: 2rem;
-  & h3, p {
+  & h3,
+  p {
     color: var(--white-color);
   }
 
@@ -321,4 +378,4 @@ const NoticeContent = styled.div`
   & p {
     font-size: var(--font-mz);
   }
-`
+`;

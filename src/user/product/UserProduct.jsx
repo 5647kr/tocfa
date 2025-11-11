@@ -3,7 +3,9 @@ import styled from "styled-components";
 import usePostStore from "../../store/postStore";
 import { Link } from "react-router-dom";
 import Loading from "../../components/Loading";
-import {FullWrap, GridWrap} from "../../components/SectionWrap";
+import { FullWrap, GridWrap } from "../../components/SectionWrap";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 export default function UserProduct() {
   const [activeProduct, setActiveProduct] = useState(
@@ -11,6 +13,10 @@ export default function UserProduct() {
   );
   const { product_product, readPost } = usePostStore();
   const [productList, setProductList] = useState([]);
+
+  useEffect(() => {
+    AOS.init();
+  }, []);
 
   useEffect(() => {
     if (product_product.length === 0) {
@@ -83,8 +89,13 @@ export default function UserProduct() {
 
       <ProductList>
         <ul>
-          {productList?.map((product) => (
-            <li key={product.id}>
+          {productList?.map((product, index) => (
+            <li
+              key={product.id}
+              data-aos="fade-up"
+              data-aos-delay={200 * index}
+              data-aos-duration={productList.length * 100}
+            >
               <Link to={`/product/${product.id}`}>
                 <img src={product.imgurl} alt={product.title} />
                 <h2>{product.title}</h2>

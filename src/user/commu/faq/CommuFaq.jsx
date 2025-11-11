@@ -3,9 +3,15 @@ import styled from "styled-components";
 import usePostStore from "../../../store/postStore";
 import { Sparkles } from "lucide-react";
 import { GridWrap } from "../../../components/SectionWrap";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 export default function CommuFaq() {
   const { commu_faq, readPost } = usePostStore();
+
+  useEffect(() => {
+    AOS.init();
+  }, []);
 
   useEffect(() => {
     if (commu_faq.length === 0) {
@@ -13,15 +19,19 @@ export default function CommuFaq() {
     }
   }, [commu_faq, readPost]);
 
-  console.log(commu_faq);
   return (
     <>
       <title>StarScope FAQ</title>
       <h1 className="a11y-hidden">StarScope FAQ</h1>
       <FaqList>
         <ul>
-          {commu_faq?.map((faq) => (
-            <li key={faq?.id}>
+          {commu_faq?.map((faq, index) => (
+            <li
+              key={faq?.id}
+              data-aos="fade-right"
+              data-aos-delay={200 * index}
+              data-aos-duration="800"
+            >
               <div>
                 <Sparkles />
                 <h2>{faq?.title}</h2>
