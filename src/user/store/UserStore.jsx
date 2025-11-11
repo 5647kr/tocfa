@@ -8,6 +8,8 @@ import Button from "../../components/Button";
 import ErrorBox from "../../components/ErrorBox";
 import ConfirmWrap from "../../components/ConfirmWrap";
 import { FullWrap, GridWrap } from "../../components/SectionWrap";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 export default function UserStore() {
   const { store_store, readPost, createPost } = usePostStore();
@@ -15,6 +17,10 @@ export default function UserStore() {
   const [errorMessage, setErrorMessage] = useState("");
   const [successReq, setSuccessReq] = useState(false);
   const formRef = useRef(null);
+
+  useEffect(() => {
+    AOS.init();
+  }, []);
 
   useEffect(() => {
     if (store_store.length === 0) {
@@ -119,8 +125,13 @@ export default function UserStore() {
       {activeMenu === "store" ? (
         <StoreListWrap>
           <ul>
-            {store_store?.map((store) => (
-              <li key={store?.id}>
+            {store_store?.map((store, index) => (
+              <li
+                key={store?.id}
+                data-aos="fade-right"
+                data-aos-delay={100 * index}
+                data-aos-duration="600"
+              >
                 <h2>{store?.title}</h2>
                 <p>{store?.location}</p>
                 <p>
@@ -140,7 +151,11 @@ export default function UserStore() {
 
           <BusinessWrap>
             <BusinessForm ref={formRef} onSubmit={handleBusinessSubmit}>
-              <div>
+              <div
+                data-aos="fade-right"
+                data-aos-delay="100"
+                data-aos-duration="800"
+              >
                 <InputTitleWrap>
                   <Sparkles />
                   <label htmlFor="name">고객명</label>
@@ -153,7 +168,11 @@ export default function UserStore() {
                   placeholder="이름을 입력해주세요."
                 />
               </div>
-              <div>
+              <div
+                data-aos="fade-right"
+                data-aos-delay="200"
+                data-aos-duration="800"
+              >
                 <InputTitleWrap>
                   <Sparkles />
                   <label htmlFor="contact">연락처</label>
@@ -166,7 +185,11 @@ export default function UserStore() {
                   placeholder="연락처를 입력해주세요."
                 />
               </div>
-              <div>
+              <div
+                data-aos="fade-right"
+                data-aos-delay="300"
+                data-aos-duration="800"
+              >
                 <InputTitleWrap>
                   <Sparkles />
                   <label htmlFor="email">이메일</label>
@@ -179,7 +202,11 @@ export default function UserStore() {
                   placeholder="이메일을 입력해주세요."
                 />
               </div>
-              <div>
+              <div
+                data-aos="fade-right"
+                data-aos-delay="400"
+                data-aos-duration="800"
+              >
                 <InputTitleWrap>
                   <Sparkles />
                   <label htmlFor="storename">지점명</label>
@@ -192,7 +219,11 @@ export default function UserStore() {
                   placeholder="지점명을 입력해주세요."
                 />
               </div>
-              <div>
+              <div
+                data-aos="fade-right"
+                data-aos-delay="500"
+                data-aos-duration="800"
+              >
                 <InputTitleWrap>
                   <Sparkles />
                   <label htmlFor="storelocation">창업희망지역</label>
@@ -205,7 +236,11 @@ export default function UserStore() {
                   placeholder="창업희망지역을 입력해주세요."
                 />
               </div>
-              <div>
+              <div
+                data-aos="fade-right"
+                data-aos-delay="600"
+                data-aos-duration="800"
+              >
                 <InputTitleWrap>
                   <Sparkles />
                   <label htmlFor="content">문의 내용</label>

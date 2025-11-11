@@ -4,6 +4,8 @@ import usePostStore from "../../store/postStore";
 import styled from "styled-components";
 import { Telescope } from "lucide-react";
 import { GridWrap } from "../../components/SectionWrap";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 export default function UserProductDetail() {
   const params = useParams();
@@ -13,6 +15,7 @@ export default function UserProductDetail() {
 
   useEffect(() => {
     readPost("product_product");
+    AOS.init();
   }, []);
 
   useEffect(() => {
@@ -53,10 +56,18 @@ export default function UserProductDetail() {
   return (
     <>
       <ProductTitleWrap>
-        <ImgWrap>
+        <ImgWrap
+          data-aos="fade-right"
+          data-aos-delay="200"
+          data-aos-duration="800"
+        >
           <img src={product?.imgurl} alt={product?.title} />
         </ImgWrap>
-        <TitleWrap>
+        <TitleWrap
+          data-aos="fade-left"
+          data-aos-delay="200"
+          data-aos-duration="800"
+        >
           <strong>{productType(product?.type)}</strong>
           <h1>{product?.title}</h1>
           <p>{product?.content}</p>
@@ -70,15 +81,15 @@ export default function UserProductDetail() {
         </ContentTitle>
 
         <SpecList>
-          <li>
+          <li data-aos="fade-down" data-aos-delay="200" data-aos-duration="800">
             <h3>구경</h3>
             <p>{product?.aperture}mm</p>
           </li>
-          <li>
+          <li data-aos="fade-down" data-aos-delay="300" data-aos-duration="800">
             <h3>초점거리</h3>
             <p>{product?.focallength}mm</p>
           </li>
-          <li>
+          <li data-aos="fade-down" data-aos-delay="400" data-aos-duration="800">
             <h3>초점비</h3>
             <p>f/{product?.apertureratio}</p>
           </li>
@@ -92,8 +103,13 @@ export default function UserProductDetail() {
         </ContentTitle>
 
         <ProductList>
-          {popular?.map((item) => (
-            <li key={item?.id}>
+          {popular?.map((item, index) => (
+            <li
+              key={item?.id}
+              data-aos="fade-down"
+              data-aos-delay={400 * index}
+              data-aos-duration="800"
+            >
               <Link to={`/product/${item.id}`}>
                 <img src={item?.imgurl} alt={item?.title} />
                 <h4>{item?.title}</h4>

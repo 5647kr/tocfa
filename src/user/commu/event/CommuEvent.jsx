@@ -3,9 +3,15 @@ import styled from "styled-components";
 import usePostStore from "../../../store/postStore";
 import { Link } from "react-router-dom";
 import { GridWrap } from "../../../components/SectionWrap";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 export default function CommuEvent() {
   const { commu_event, readPost } = usePostStore();
+
+  useEffect(() => {
+    AOS.init();
+  }, []);
 
   useEffect(() => {
     if (commu_event.length === 0) {
@@ -20,8 +26,13 @@ export default function CommuEvent() {
 
       <EventList>
         <ul>
-          {commu_event?.map((event) => (
-            <li key={event?.id}>
+          {commu_event?.map((event, index) => (
+            <li
+              key={event?.id}
+              data-aos="fade-up"
+              data-aos-delay={200 * index}
+              data-aos-duration="800"
+            >
               <Link to={`/commu/event/${event?.id}`}>
                 <img src={event?.imgurl} alt={event?.title} loading="lazy" />
                 <div>
@@ -49,7 +60,7 @@ const EventList = styled(GridWrap)`
       gap: 2rem;
     }
   }
-  
+
   @media screen and (min-width: 769px) and (max-width: 1024px) {
     & ul {
       grid-template-columns: repeat(2, 1fr);
