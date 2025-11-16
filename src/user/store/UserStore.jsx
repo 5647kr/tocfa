@@ -1,15 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import usePostStore from "../../store/postStore";
-import Loading from "../../components/Loading";
 import { Sparkles } from "lucide-react";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import ErrorBox from "../../components/ErrorBox";
 import ConfirmWrap from "../../components/ConfirmWrap";
 import { FullWrap, GridWrap } from "../../components/SectionWrap";
-import AOS from "aos";
-import "aos/dist/aos.css";
 
 export default function UserStore() {
   const { store_store, readPost, createPost } = usePostStore();
@@ -17,10 +14,6 @@ export default function UserStore() {
   const [errorMessage, setErrorMessage] = useState("");
   const [successReq, setSuccessReq] = useState(false);
   const formRef = useRef(null);
-
-  useEffect(() => {
-    AOS.init();
-  }, []);
 
   useEffect(() => {
     if (store_store.length === 0) {
@@ -86,7 +79,27 @@ export default function UserStore() {
     }
   };
 
-  if (!store_store.length === 0) return <Loading />;
+  useEffect(() => {
+    let items;
+
+    if (activeMenu === "store") {
+      items = document.querySelectorAll(".store-items");
+    } else {
+      items = document.querySelectorAll(".business-items");
+    }
+
+    items.forEach((item) => {
+      item.classList.remove("show");
+      item.style.transitionDelay = "0s";
+    });
+
+    items.forEach((item, index) => {
+      item.style.transitionDelay = `${index * 0.2}s`;
+      setTimeout(() => {
+        item.classList.add("show");
+      }, 50);
+    });
+  }, [activeMenu, store_store]);
 
   return (
     <>
@@ -125,13 +138,8 @@ export default function UserStore() {
       {activeMenu === "store" ? (
         <StoreListWrap>
           <ul>
-            {store_store?.map((store, index) => (
-              <li
-                key={store?.id}
-                data-aos="fade-right"
-                data-aos-delay={100 * index}
-                data-aos-duration="600"
-              >
+            {store_store?.map((store) => (
+              <li key={store?.id} className="store-items">
                 <h2>{store?.title}</h2>
                 <p>{store?.location}</p>
                 <p>
@@ -151,11 +159,7 @@ export default function UserStore() {
 
           <BusinessWrap>
             <BusinessForm ref={formRef} onSubmit={handleBusinessSubmit}>
-              <div
-                data-aos="fade-right"
-                data-aos-delay="100"
-                data-aos-duration="800"
-              >
+              <div className="business-items">
                 <InputTitleWrap>
                   <Sparkles />
                   <label htmlFor="name">고객명</label>
@@ -168,11 +172,7 @@ export default function UserStore() {
                   placeholder="이름을 입력해주세요."
                 />
               </div>
-              <div
-                data-aos="fade-right"
-                data-aos-delay="200"
-                data-aos-duration="800"
-              >
+              <div className="business-items">
                 <InputTitleWrap>
                   <Sparkles />
                   <label htmlFor="contact">연락처</label>
@@ -185,11 +185,7 @@ export default function UserStore() {
                   placeholder="연락처를 입력해주세요."
                 />
               </div>
-              <div
-                data-aos="fade-right"
-                data-aos-delay="300"
-                data-aos-duration="800"
-              >
+              <div className="business-items">
                 <InputTitleWrap>
                   <Sparkles />
                   <label htmlFor="email">이메일</label>
@@ -202,11 +198,7 @@ export default function UserStore() {
                   placeholder="이메일을 입력해주세요."
                 />
               </div>
-              <div
-                data-aos="fade-right"
-                data-aos-delay="400"
-                data-aos-duration="800"
-              >
+              <div className="business-items">
                 <InputTitleWrap>
                   <Sparkles />
                   <label htmlFor="storename">지점명</label>
@@ -219,11 +211,7 @@ export default function UserStore() {
                   placeholder="지점명을 입력해주세요."
                 />
               </div>
-              <div
-                data-aos="fade-right"
-                data-aos-delay="500"
-                data-aos-duration="800"
-              >
+              <div className="business-items">
                 <InputTitleWrap>
                   <Sparkles />
                   <label htmlFor="storelocation">창업희망지역</label>
@@ -236,11 +224,7 @@ export default function UserStore() {
                   placeholder="창업희망지역을 입력해주세요."
                 />
               </div>
-              <div
-                data-aos="fade-right"
-                data-aos-delay="600"
-                data-aos-duration="800"
-              >
+              <div className="business-items">
                 <InputTitleWrap>
                   <Sparkles />
                   <label htmlFor="content">문의 내용</label>
@@ -309,6 +293,17 @@ const StoreListWrap = styled(GridWrap)`
     padding: 2rem;
     background-color: var(--white-color);
   }
+
+  & .store-items {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  & .store-items.show {
+    opacity: 1;
+    transform: translateX(0);
+  }
   & li ~ li {
     margin-top: 2rem;
   }
@@ -339,6 +334,17 @@ const BusinessForm = styled.form`
     border-radius: 1rem;
     display: flex;
     background-color: var(--white-color);
+  }
+
+  & .business-items {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  & .business-items.show {
+    opacity: 1;
+    transform: translateX(0);
   }
 
   & div ~ div {

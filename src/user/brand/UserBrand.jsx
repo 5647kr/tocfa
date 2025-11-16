@@ -1,7 +1,5 @@
 import { FullWrap, GridWrap } from "../../components/SectionWrap";
 import styled from "styled-components";
-import IntroImg_mobile from "../../assets/img/brandIntroImg_mobile.jpg";
-import TechImg_mobile from "../../assets/img/brandTechImg_mobile.jpg";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
@@ -20,24 +18,35 @@ export default function UserBrand() {
         data-aos-delay="200"
         data-aos-duration="800"
       >
-        <h2>별을 관찰하는 일을 기술이 아닌 경험의 확장</h2>
+        <h2>별을 관찰하는 일은 기술이 아닌 경험의 확장</h2>
       </BrandTitle>
 
       <BrandIntro>
-        <img src={IntroImg_mobile} alt="" />
+        <img
+          src="/heroImg/brandIntro-480.webp"
+          srcSet="
+          /heroImg/brandIntro-480.webp 480w,
+          /heroImg/brandIntro-768.webp 768w,
+          /heroImg/brandIntro-1024.webp 1024w,
+          /heroImg/brandIntro-1440.webp 1440w,
+          /heroImg/brandIntro-1920.webp 1920w"
+          sizes="100vw"
+          alt="렌즈가 보이는 사진"
+          loading="lazy"
+        />
 
         <div>
-          <h3 data-aos="fade-down" data-aos-delay="200" data-aos-duration="800">
+          <h3 data-aos="fade-down" data-aos-delay="200" data-aos-duration="400">
             별을 더 잘 보는 도구
           </h3>
           <strong
             data-aos="fade-down"
-            data-aos-delay="400"
-            data-aos-duration="800"
+            data-aos-delay="200"
+            data-aos-duration="400"
           >
             보다
           </strong>
-          <h3 data-aos="fade-down" data-aos-delay="600" data-aos-duration="800">
+          <h3 data-aos="fade-down" data-aos-delay="200" data-aos-duration="400">
             세상을 더 넓게 바라보는 시선
           </h3>
         </div>
@@ -60,7 +69,18 @@ export default function UserBrand() {
       </BrandText>
 
       <BrandTech>
-        <img src={TechImg_mobile} alt="" />
+        <img
+          src="/heroImg/brandTech-480.webp"
+          srcSet="
+          /heroImg/brandTech-480.webp 480w,
+          /heroImg/brandTech-768.webp 768w,
+          /heroImg/brandTech-1024.webp 1024w,
+          /heroImg/brandTech-1440.webp 1440w,
+          /heroImg/brandTech-1920.webp 1920w"
+          sizes="100vw"
+          alt="렌즈가 보이는 사진"
+          loading="lazy"
+        />
 
         <div>
           <h3 data-aos="fade-up" data-aos-delay="300" data-aos-duration="800">
@@ -90,12 +110,31 @@ export default function UserBrand() {
 }
 
 const BrandTitle = styled(GridWrap)`
-  margin-top: 8rem;
   & h2 {
     font-size: var(--font-mz);
     font-weight: var(--font-bw);
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 4rem;
+  }
+  @media screen and (min-width: 481px) and (max-width: 768px) {
+    & h2 {
+      font-size: var(--font-mlz);
+    }
+  }
+  @media screen and (min-width: 769px) and (max-width: 1024px) {
+    & h2 {
+      font-size: var(--font-lz);
+    }
+  }
+  @media screen and (min-width: 1025px) and (max-width: 1440px) {
+    & h2 {
+      font-size: var(--font-xlz);
+    }
+  }
+  @media screen and (min-width: 1441px) {
+    & h2 {
+      font-size: var(--font-2xlz);
+    }
   }
 `;
 
@@ -128,37 +167,109 @@ const BrandIntro = styled(FullWrap)`
   }
 
   & h3:first-child {
-    font-size: var(--font-mz);
+    font-size: var(--font-smz);
+    font-weight: var(--font-mw);
   }
 
   & strong {
-    font-size: var(--font-lz);
-    font-weight: var(--font-bw);
+    font-size: var(--font-mz);
   }
 
   & h3:last-child {
-    font-size: var(--font-lz);
+    font-size: var(--font-mlz);
     font-weight: var(--font-bw);
+  }
+
+  @media screen and (min-width: 481px) and (max-width: 768px) {
+    & h3:first-child {
+      font-size: var(--font-mz);
+    }
+
+    & strong {
+      font-size: var(--font-mlz);
+    }
+
+    & h3:last-child {
+      font-size: var(--font-lz);
+    }
+  }
+  @media screen and (min-width: 769px) and (max-width: 1024px) {
+    & h3:first-child {
+      font-size: var(--font-mlz);
+    }
+
+    & strong {
+      font-size: var(--font-lz);
+    }
+
+    & h3:last-child {
+      font-size: var(--font-xlz);
+    }
+  }
+  @media screen and (min-width: 1025px) and (max-width: 1440px) {
+    & h3:first-child {
+      font-size: var(--font-lz);
+    }
+
+    & strong {
+      font-size: var(--font-xlz);
+    }
+
+    & h3:last-child {
+      font-size: var(--font-2xlz);
+    }
+  }
+  @media screen and (min-width: 1441px) {
+    & h3:first-child {
+      font-size: var(--font-xlz);
+    }
+
+    & strong {
+      font-size: var(--font-2xlz);
+    }
+
+    & h3:last-child {
+      font-size: var(--font-3xlz);
+    }
   }
 `;
 
 const BrandText = styled(GridWrap)`
-  margin-top: 8rem;
+  margin-top: 10rem;
   & > h2 {
-    font-size: var(--font-lz);
+    font-size: var(--font-mz);
     font-weight: var(--font-bw);
   }
 
   & > p {
-    font-size: var(--font-mz);
+    font-size: var(--font-smz);
     margin: 1rem 0;
   }
-  & > p {
+
+  @media screen and (min-width: 481px) and (max-width: 768px) {
+    & > h2 {
+      font-size: var(--font-mlz);
+    }
+  }
+  @media screen and (min-width: 769px) and (max-width: 1024px) {
+    & > h2 {
+      font-size: var(--font-lz);
+    }
+  }
+  @media screen and (min-width: 1025px) and (max-width: 1440px) {
+    & > h2 {
+      font-size: var(--font-xlz);
+    }
+  }
+  @media screen and (min-width: 1441px) {
+    & > h2 {
+      font-size: var(--font-2xlz);
+    }
   }
 `;
 
 const BrandTech = styled(FullWrap)`
-  margin-top: 8rem;
+  margin-top: 10rem;
   position: relative;
 
   & > img {
@@ -183,7 +294,28 @@ const BrandTech = styled(FullWrap)`
 
   & h3 {
     color: var(--white-color);
-    font-size: var(--font-lz);
+    font-size: var(--font-mz);
     font-weight: var(--font-bw);
+  }
+
+  @media screen and (min-width: 481px) and (max-width: 768px) {
+    & h3 {
+      font-size: var(--font-mlz);
+    }
+  }
+  @media screen and (min-width: 769px) and (max-width: 1024px) {
+    & h3 {
+      font-size: var(--font-lz);
+    }
+  }
+  @media screen and (min-width: 1025px) and (max-width: 1440px) {
+    & h3 {
+      font-size: var(--font-xlz);
+    }
+  }
+  @media screen and (min-width: 1441px) {
+    & h3 {
+      font-size: var(--font-2xlz);
+    }
   }
 `;

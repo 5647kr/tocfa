@@ -3,15 +3,22 @@ import styled from "styled-components";
 import usePostStore from "../../../store/postStore";
 import { Link } from "react-router-dom";
 import { GridWrap } from "../../../components/SectionWrap";
-import AOS from "aos";
-import "aos/dist/aos.css";
 
 export default function CommuEvent() {
   const { commu_event, readPost } = usePostStore();
 
   useEffect(() => {
-    AOS.init();
-  }, []);
+    if (commu_event.length > 0) {
+      const items = document.querySelectorAll(".event-items");
+
+      items.forEach((item, index) => {
+        item.style.transitionDelay = `${index * 0.2}s`;
+        setTimeout(() => {
+          item.classList.add("show");
+        }, 50);
+      });
+    }
+  }, [commu_event]);
 
   useEffect(() => {
     if (commu_event.length === 0) {
@@ -26,12 +33,10 @@ export default function CommuEvent() {
 
       <EventList>
         <ul>
-          {commu_event?.map((event, index) => (
+          {commu_event?.map((event) => (
             <li
               key={event?.id}
-              data-aos="fade-up"
-              data-aos-delay={200 * index}
-              data-aos-duration="800"
+              className="event-items"
             >
               <Link to={`/commu/event/${event?.id}`}>
                 <img src={event?.imgurl} alt={event?.title} loading="lazy" />
@@ -86,6 +91,17 @@ const EventList = styled(GridWrap)`
     overflow: hidden;
   }
 
+  & .event-items {
+    opacity: 0;
+    transform: translateY(-30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  & .event-items.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
   & img {
     width: 100%;
     aspect-ratio: 1 / 1;
@@ -97,7 +113,7 @@ const EventList = styled(GridWrap)`
     min-height: 5rem;
   }
   & h2 {
-    font-size: var(--font-sz);
+    font-size: var(--font-smz);
     font-weight: var(--font-rw);
   }
 `;

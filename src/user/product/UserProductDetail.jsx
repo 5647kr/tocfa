@@ -61,7 +61,7 @@ export default function UserProductDetail() {
           data-aos-delay="200"
           data-aos-duration="800"
         >
-          <img src={product?.imgurl} alt={product?.title} />
+          <img src={product?.imgurl} alt={product?.title} loading="lazy" />
         </ImgWrap>
         <TitleWrap
           data-aos="fade-left"
@@ -111,7 +111,7 @@ export default function UserProductDetail() {
               data-aos-duration="800"
             >
               <Link to={`/product/${item.id}`}>
-                <img src={item?.imgurl} alt={item?.title} />
+                <img src={item?.imgurl} alt={item?.title} loading="lazy" />
                 <h4>{item?.title}</h4>
               </Link>
             </li>

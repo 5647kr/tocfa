@@ -1,15 +1,43 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
-import heroImg1 from "../assets/img/heroImg1.jpg";
-import heroImg2 from "../assets/img/heroImg2.jpg";
-import heroImg3 from "../assets/img/heroImg3.jpg";
 
 export default function UserHeader() {
   const location = useLocation();
   const [activeMenu, setActiveMenu] = useState("");
   const [currentImg, setCurrentImg] = useState(0);
-  const heroImgs = [heroImg1, heroImg2, heroImg3];
+  const heroImgs = [
+    {
+      base: "/heroImg/heroImg1-768.webp",
+      srcset: `
+      /heroImg/heroImg1-480.webp 480w,
+      /heroImg/heroImg1-768.webp 768w,
+      /heroImg/heroImg1-1024.webp 1024w,
+      /heroImg/heroImg1-1440.webp 1440w,
+      /heroImg/heroImg1-1920.webp 1920w
+    `,
+    },
+    {
+      base: "/heroImg/heroImg2-768.webp",
+      srcset: `
+      /heroImg/heroImg2-480.webp 480w,
+      /heroImg/heroImg2-768.webp 768w,
+      /heroImg/heroImg2-1024.webp 1024w,
+      /heroImg/heroImg2-1440.webp 1440w,
+      /heroImg/heroImg2-1920.webp 1920w
+    `,
+    },
+    {
+      base: "/heroImg/heroImg3-768.webp",
+      srcset: `
+      /heroImg/heroImg3-480.webp 480w,
+      /heroImg/heroImg3-768.webp 768w,
+      /heroImg/heroImg3-1024.webp 1024w,
+      /heroImg/heroImg3-1440.webp 1440w,
+      /heroImg/heroImg3-1920.webp 1920w
+    `,
+    },
+  ];
 
   useEffect(() => {
     const path = location.pathname;
@@ -40,7 +68,9 @@ export default function UserHeader() {
         {heroImgs.map((img, index) => (
           <HeroImg
             key={index}
-            src={img}
+            src={img.base}
+            srcSet={img.srcset}
+            sizes="100vw"
             alt={`hero_${index}`}
             $isActive={currentImg === index}
           />
@@ -79,8 +109,8 @@ const HeaderWrap = styled.header`
 `;
 
 const HeroWrap = styled.div`
-  aspect-ratio: 1 / 0.4;
-  border-radius: 0 0 1rem 1rem;
+  width: 100%;
+  height: 60vh;
 `;
 
 const HeroImg = styled.img`
@@ -90,10 +120,12 @@ const HeroImg = styled.img`
   object-fit: cover;
   opacity: ${({ $isActive }) => ($isActive ? 1 : 0)};
   transition: opacity 1s ease-in-out;
+  border-radius: 0 0 1rem 1rem;
 `;
 
 const NavWrap = styled.nav`
-  width: 40rem;
+  min-width: 30rem;
+  max-width: 40rem;
   height: 4rem;
   border-radius: 1rem;
   background-color: var(--boxBg-color);
@@ -106,6 +138,7 @@ const NavWrap = styled.nav`
   justify-content: space-between;
   align-items: center;
   gap: ${({ $activeSearch }) => ($activeSearch ? "3rem" : "0")};
+  z-index: 999;
 
   & a {
     color: var(--white-color);

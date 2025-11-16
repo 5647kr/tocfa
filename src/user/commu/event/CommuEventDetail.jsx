@@ -56,7 +56,7 @@ export default function CommuEventDetail() {
       </ProductTitle>
 
       <ContentWrap>
-        <img src={event?.imgurl} alt={event?.title} />
+        <img src={event?.imgurl} alt={event?.title} loading="lazy" />
         <p>{event?.content}</p>
       </ContentWrap>
     </>

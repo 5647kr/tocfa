@@ -7,18 +7,12 @@ import { Sparkles } from "lucide-react";
 import Input from "../../../components/Input";
 import Button from "../../../components/Button";
 import { GridWrap } from "../../../components/SectionWrap";
-import AOS from "aos";
-import "aos/dist/aos.css";
 
 export default function CommuQna() {
   const { createPost } = usePostStore();
   const [errorMessage, setErrorMessage] = useState("");
   const [successReq, setSuccessReq] = useState(false);
   const formRef = useRef(null);
-
-  useEffect(() => {
-    AOS.init();
-  }, []);
 
   const handleQnaSubmit = async (e) => {
     e.preventDefault();
@@ -66,6 +60,17 @@ export default function CommuQna() {
     }
   };
 
+  useEffect(() => {
+    const items = document.querySelectorAll(".qna-items");
+
+    items.forEach((item, index) => {
+      item.style.transitionDelay = `${index * 0.2}s`;
+      setTimeout(() => {
+        item.classList.add("show");
+      }, 50);
+    });
+  }, []);
+
   return (
     <>
       <title>StarScope 문의</title>
@@ -79,11 +84,7 @@ export default function CommuQna() {
 
       <QnaWrap>
         <QnaForm ref={formRef} onSubmit={handleQnaSubmit}>
-          <div
-            data-aos="fade-right"
-            data-aos-delay="100"
-            data-aos-duration="800"
-          >
+          <div className="qna-items">
             <InputTitleWrap>
               <Sparkles />
               <label htmlFor="name">고객명</label>
@@ -96,11 +97,7 @@ export default function CommuQna() {
               placeholder="이름을 입력해주세요."
             />
           </div>
-          <div
-            data-aos="fade-right"
-            data-aos-delay="200"
-            data-aos-duration="800"
-          >
+          <div className="qna-items">
             <InputTitleWrap>
               <Sparkles />
               <label htmlFor="contact">연락처</label>
@@ -113,11 +110,7 @@ export default function CommuQna() {
               placeholder="연락처를 입력해주세요."
             />
           </div>
-          <div
-            data-aos="fade-right"
-            data-aos-delay="300"
-            data-aos-duration="800"
-          >
+          <div className="qna-items">
             <InputTitleWrap>
               <Sparkles />
               <label htmlFor="email">이메일</label>
@@ -130,11 +123,7 @@ export default function CommuQna() {
               placeholder="이메일을 입력해주세요."
             />
           </div>
-          <div
-            data-aos="fade-right"
-            data-aos-delay="400"
-            data-aos-duration="800"
-          >
+          <div className="qna-items">
             <InputTitleWrap>
               <Sparkles />
               <label htmlFor="content">문의 내용</label>
@@ -183,6 +172,17 @@ const QnaForm = styled.form`
     border-radius: 1rem;
     display: flex;
     background-color: var(--white-color);
+  }
+
+  & .qna-items {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  & .qna-items.show {
+    opacity: 1;
+    transform: translateX(0);
   }
 
   & div ~ div {

@@ -2,10 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import usePostStore from "../../store/postStore";
 import { Link } from "react-router-dom";
-import Loading from "../../components/Loading";
 import { FullWrap, GridWrap } from "../../components/SectionWrap";
-import AOS from "aos";
-import "aos/dist/aos.css";
 
 export default function UserProduct() {
   const [activeProduct, setActiveProduct] = useState(
@@ -13,10 +10,6 @@ export default function UserProduct() {
   );
   const { product_product, readPost } = usePostStore();
   const [productList, setProductList] = useState([]);
-
-  useEffect(() => {
-    AOS.init();
-  }, []);
 
   useEffect(() => {
     if (product_product.length === 0) {
@@ -42,7 +35,24 @@ export default function UserProduct() {
     setProductList(filtered);
   };
 
-  if (productList.length === 0) return <Loading />;
+  useEffect(() => {
+    if (product_product.length > 0) {
+      const items = document.querySelectorAll(".product-items");
+
+      items.forEach((item) => {
+        item.classList.remove("show");
+        item.style.transitionDelay = "0s";
+      });
+
+      items.forEach((item, index) => {
+        item.style.transitionDelay = `${index * 0.2}s`;
+
+        setTimeout(() => {
+          item.classList.add("show");
+        }, 50);
+      });
+    }
+  }, [product_product, productList]);
 
   return (
     <>
@@ -89,15 +99,10 @@ export default function UserProduct() {
 
       <ProductList>
         <ul>
-          {productList?.map((product, index) => (
-            <li
-              key={product.id}
-              data-aos="fade-up"
-              data-aos-delay={200 * index}
-              data-aos-duration={productList.length * 100}
-            >
+          {productList?.map((product) => (
+            <li className="product-items" key={product.id}>
               <Link to={`/product/${product.id}`}>
-                <img src={product.imgurl} alt={product.title} />
+                <img src={product.imgurl} alt={product.title} loading="lazy" />
                 <h2>{product.title}</h2>
               </Link>
             </li>
@@ -173,6 +178,17 @@ const ProductList = styled(GridWrap)`
     padding: 1rem;
     background-color: var(--white-color);
     transition: background-color 1s ease;
+  }
+
+  & .product-items {
+    opacity: 0;
+    transform: translateY(-30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  & .product-items.show {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   & img {
