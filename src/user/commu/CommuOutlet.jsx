@@ -55,7 +55,7 @@ export default function CommuOutlet() {
         </ul>
       </BtnWrap>
 
-      {activeMenu === "event" && <CommuEvent />}
+      {activeMenu === "event" && <CommuEvent activeMenu={activeMenu} />}
       {activeMenu === "faq" && <CommuFaq />}
       {activeMenu === "qna" && <CommuQna />}
     </>

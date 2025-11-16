@@ -30,11 +30,11 @@ export default function UserHome() {
   }, [product_product]);
 
   const productSorting = () => {
-    const popularItem = product_product
+    const popularItem = [...product_product]
       .sort((a, b) => b.popular - a.popular)
       .slice(0, 4);
 
-    const promoteItem = product_product
+    const promoteItem = [...product_product]
       .sort((a, b) => a.popular - b.popular)
       .slice(0, 4);
 
@@ -50,7 +50,7 @@ export default function UserHome() {
       <IntroWrap
         data-aos="fade-down"
         data-aos-delay="200"
-        data-aos-duration="800"
+        data-aos-duration="400"
       >
         <h2>
           눈앞의 별을, 손끝에서 만나다. <br />
@@ -65,19 +65,27 @@ export default function UserHome() {
 
       <ImgContentWrap>
         <ImgItem
-          data-aos="fade-right"
+          data-aos="fade-down"
           data-aos-delay="200"
           data-aos-duration="800"
         >
-          <img src={homeImgContent2} alt="" />
+          <img
+            src={homeImgContent2}
+            alt="망원경으로 하늘을 바라보는 남자"
+            loading="lazy"
+          />
         </ImgItem>
         <ImgContentItem
           className="right"
-          data-aos="fade-left"
+          data-aos="fade-down"
           data-aos-delay="200"
           data-aos-duration="800"
         >
-          <img src={promoteProduct[0]?.imgurl} alt={promoteProduct[0]?.title} />
+          <img
+            src={promoteProduct[0]?.imgurl}
+            alt={promoteProduct[0]?.title}
+            loading="lazy"
+          />
           <div>
             <h2>{promoteProduct[0]?.title}</h2>
             <p>
@@ -89,11 +97,15 @@ export default function UserHome() {
         </ImgContentItem>
         <ImgContentItem
           className="left"
-          data-aos="fade-right"
+          data-aos="fade-down"
           data-aos-delay="400"
           data-aos-duration="800"
         >
-          <img src={promoteProduct[1]?.imgurl} alt={promoteProduct[1]?.title} />
+          <img
+            src={promoteProduct[1]?.imgurl}
+            alt={promoteProduct[1]?.title}
+            loading="lazy"
+          />
           <div>
             <h2>{promoteProduct[1]?.title}</h2>
             <p>
@@ -104,11 +116,11 @@ export default function UserHome() {
           </div>
         </ImgContentItem>
         <ImgItem
-          data-aos="fade-left"
+          data-aos="fade-down"
           data-aos-delay="400"
           data-aos-duration="800"
         >
-          <img src={homeImgContent4} alt="" />
+          <img src={homeImgContent4} alt="망원경 렌즈" loading="lazy" />
         </ImgItem>
       </ImgContentWrap>
 
@@ -134,7 +146,7 @@ export default function UserHome() {
             >
               <Link to={`/product/${item?.id}`}>
                 <div>
-                  <img src={item?.imgurl} alt={item?.title} />
+                  <img src={item?.imgurl} alt={item?.title} loading="lazy" />
                   <h3>{item?.title}</h3>
                 </div>
               </Link>
@@ -146,11 +158,15 @@ export default function UserHome() {
       <ImgContentWrap>
         <ImgContentItem
           className="left"
-          data-aos="fade-right"
+          data-aos="fade-down"
           data-aos-delay="200"
           data-aos-duration="800"
         >
-          <img src={promoteProduct[2]?.imgurl} alt={promoteProduct[2]?.title} />
+          <img
+            src={promoteProduct[2]?.imgurl}
+            alt={promoteProduct[2]?.title}
+            loading="lazy"
+          />
           <div>
             <h2>{promoteProduct[2]?.title}</h2>
             <p>
@@ -161,26 +177,34 @@ export default function UserHome() {
           </div>
         </ImgContentItem>
         <ImgItem
-          data-aos="fade-left"
+          data-aos="fade-down"
           data-aos-delay="200"
           data-aos-duration="800"
         >
-          <img src={homeImgContent1} alt="" />
+          <img src={homeImgContent1} alt="은하를 담은 사진" loading="lazy" />
         </ImgItem>
         <ImgItem
-          data-aos="fade-right"
+          data-aos="fade-down"
           data-aos-delay="400"
           data-aos-duration="800"
         >
-          <img src={homeImgContent3} alt="" />
+          <img
+            src={homeImgContent3}
+            alt="망원경과 호환되는 카메라 렌즈"
+            loading="lazy"
+          />
         </ImgItem>
         <ImgContentItem
           className="right"
-          data-aos="fade-left"
+          data-aos="fade-down"
           data-aos-delay="400"
           data-aos-duration="800"
         >
-          <img src={promoteProduct[3]?.imgurl} alt={promoteProduct[3]?.title} />
+          <img
+            src={promoteProduct[3]?.imgurl}
+            alt={promoteProduct[3]?.title}
+            loading="lazy"
+          />
           <div>
             <h2>{promoteProduct[3]?.title}</h2>
             <p>
@@ -193,18 +217,18 @@ export default function UserHome() {
       </ImgContentWrap>
 
       <NoticeContentWrap>
-        <img src={homeNoticeContent} alt="" />
+        <img src={homeNoticeContent} alt="은하를 담은 사진" />
         <div>
           <img
             src={homeNoticeProduct}
             alt="새 출시 제품"
-            data-aos="fade-down"
+            data-aos="fade-up"
             data-aos-delay="200"
             data-aos-duration="800"
           />
           <NoticeContent
-            data-aos="fade-right"
-            data-aos-delay="200"
+            data-aos="fade-down"
+            data-aos-delay="400"
             data-aos-duration="800"
           >
             <h3>Skyliner N 254/1200 Classic 출시</h3>
@@ -241,36 +265,62 @@ const ImgContentWrap = styled(GridWrap)`
     border-radius: 1rem;
     box-shadow: 0 5px 15px var(--stroke-color);
   }
+  @media screen and (max-width: 768px) {
+    & > div {
+      aspect-ratio: 1 / 0.8;
+    }
+  }
 `;
 
 const ImgContentItem = styled.div`
   background-color: var(--white-color);
-  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-content: flex-end;
+  padding: 1rem;
   & > img {
     width: 50%;
     vertical-align: top;
-  }
-  &.right > img {
-    display: block;
-    margin-left: auto;
-    transform: scaleX(-1);
-  }
-
-  &.right > div {
-    left: 1rem;
-    text-align: left;
-  }
-  &.left > div {
-    right: 1rem;
-    text-align: right;
+    z-index: 1;
   }
   & > div {
-    position: absolute;
-    bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  &.right {
+    flex-direction: row-reverse;
+  }
+  &.right > img {
+    transform: scaleX(-1);
+  }
+  &.left h2 {
+    text-align: right;
+  }
+  &.left p {
+    text-align: right;
+  }
+
+  & h2 {
+    font-size: var(--font-smz);
+    font-weight: var(--font-mw);
   }
   & span {
     color: var(--stroke-color);
     font-size: var(--font-sz);
+  }
+
+  @media screen and (max-width: 768px) {
+    & > img {
+      aspect-ratio: 1 / 0.8;
+      object-fit: cover;
+    }
+  }
+
+  @media screen and (min-width: 1025px) {
+    & h2 {
+      font-size: var(--font-lz);
+    }
   }
 `;
 
@@ -280,6 +330,12 @@ const ImgItem = styled.div`
     width: 100%;
     aspect-ratio: 1 / 0.5;
     vertical-align: top;
+  }
+  @media screen and (max-width: 768px) {
+    & > img {
+      aspect-ratio: 1 / 0.8;
+      object-fit: cover;
+    }
   }
 `;
 
@@ -350,15 +406,6 @@ const NoticeContentWrap = styled(FullWrap)`
     right: 0;
     bottom: 0;
   }
-
-  & > div h3 {
-    font-size: var(--font-2xlz);
-    font-weight: var(--font-bw);
-  }
-
-  & > div p {
-    font-size: var(--font-mz);
-  }
 `;
 
 const NoticeContent = styled.div`
@@ -371,11 +418,33 @@ const NoticeContent = styled.div`
   }
 
   & h3 {
-    font-size: var(--font-2xlz);
+    font-size: var(--font-mz);
     font-weight: var(--font-bw);
   }
 
   & p {
     font-size: var(--font-mz);
+  }
+
+  @media screen and (min-width: 481px) and (max-width: 768px) {
+    & h3 {
+      font-size: var(--font-mlz);
+    }
+  }
+
+  @media screen and (min-width: 769px) and (max-width: 1024px) {
+    & h3 {
+      font-size: var(--font-lz);
+    }
+  }
+  @media screen and (min-width: 1025px) and (max-width: 1440px) {
+    & h3 {
+      font-size: var(--font-xlz);
+    }
+  }
+  @media screen and (min-width: 1441px) {
+    & h3 {
+      font-size: var(--font-2xlz);
+    }
   }
 `;
